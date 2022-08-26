@@ -7,10 +7,25 @@ use Illuminate\Support\Str;
 
 class Apartment extends Model
 {
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 
-    // public function services() {
-    //     return $this->belongsToMany('App\')
-    // }
+    public function messages() {
+        return $this->hasMany('App\Message');
+    }
+
+    public function services() {
+        return $this->belongsToMany('App\ExtraService');
+    }
+
+    public function views() {
+        return $this->hasMany('App\View');
+    }
+
+    public function sponsorTypes() {
+        return $this->hasMany('App\SponsorType');
+    }
 
     protected $fillable = [
         'slug',
