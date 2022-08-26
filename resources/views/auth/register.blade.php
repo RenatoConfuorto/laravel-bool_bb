@@ -1,3 +1,17 @@
+<?php
+    function birthdateValidation() {
+        $month = date("m");
+
+        $day = date("d");
+
+        $year = date("Y") - 18;
+
+        $date = $year.'-'.$month.'-'.$day;
+
+        return $date;
+    }
+
+?>
 @extends('layouts.app')
 
 @section('content')
@@ -7,15 +21,17 @@
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
+                {{-- REGISTRATION FORM --}}
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        {{-- NAME FIELD --}}
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" pattern="[a-zA-Z]{2,}" value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -24,9 +40,44 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- /NAME FIELD --}}
 
+                        {{-- LASTNAME FIELD --}}
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="Lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="Lastname" type="text" class="form-control @error('Lastname') is-invalid @enderror" name="Lastname" pattern="[a-zA-Z]{2,}" value="{{ old('Lastname') }}" autocomplete="Lastname" autofocus>
+
+                                @error('Lastname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- /LASTNAME FIELD --}}
+
+                        {{-- BIRTHDATE FIELD --}}
+                        <div class="form-group row">
+                            <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
+
+                            <div class="col-md-6">
+                            
+                                <input id="birthdate" type="date" class="form-control @error('birthdate') is-invalid @enderror" name="birthdate" max="<? birthdateValidation(); ?>" value="{{ old('birthdate') }}" autocomplete="birthdate" autofocus>
+
+                                @error('birthdate')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        {{-- /BIRTHDATE FIELD --}}
+
+                        {{-- EMAIL FIELD --}}
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -38,9 +89,11 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- /EMAIL FIELD --}}
 
+                        {{-- PASSWORD FIELD --}}
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -52,15 +105,19 @@
                                 @enderror
                             </div>
                         </div>
+                        {{-- /PASSWORD FIELD --}}
 
+                        {{-- CONFIRM PASSWORD FIELD --}}
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        {{-- /CONFIRM PASSWORD FIELD --}}
 
+                        {{-- SUBMIT BUTTON --}}
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -68,8 +125,10 @@
                                 </button>
                             </div>
                         </div>
+                        {{-- /SUBMIT BUTTON --}}
                     </form>
                 </div>
+                {{-- /REGISTRATION FORM --}}
             </div>
         </div>
     </div>

@@ -41,6 +41,18 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function birthdateValidation() {
+        $month = date("m");
+
+        $day = date("d");
+
+        $year = date("Y") - 18;
+
+        $date = $year.'-'.$month.'-'.$day;
+
+        return $date;
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -50,7 +62,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['nullable', 'string','min:2', 'max:255'],
+            'surname' => ['nullable', 'string','min:2', 'max:255'],
+            'birthdate' => ['nullable', 'date', 'before:' . $this->birthdateValidation()],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -66,6 +80,8 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
+            'birthdate' => $data['birthdate'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
