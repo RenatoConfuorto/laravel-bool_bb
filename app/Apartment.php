@@ -32,10 +32,10 @@ class Apartment extends Model
         $base_slug = Str::slug($title, '-');
         $slug = $base_slug;
         $count = 1;
-        $slug_found = Apartment::where('slug', '=', $slug)->withTrashed()->first();
+        $slug_found = Apartment::where('slug', '=', $slug)->first();
         while($slug_found) {
             $slug = $base_slug . '-' . $count;
-            $slug_found = Apartment::where('slug', '=', $slug)->withTrashed()->first();
+            $slug_found = Apartment::where('slug', '=', $slug)->first();
             $count++;
         }
         return $slug;
