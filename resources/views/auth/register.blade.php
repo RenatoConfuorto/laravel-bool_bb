@@ -44,10 +44,10 @@
 
                         {{-- LASTNAME FIELD --}}
                         <div class="form-group row">
-                            <label for="Lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
+                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="Lastname" type="text" class="form-control @error('Lastname') is-invalid @enderror" name="Lastname" pattern="[a-zA-Z]{2,}" value="{{ old('Lastname') }}" autocomplete="Lastname" autofocus>
+                                <input id="lastname" type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" pattern="[a-zA-Z]{2,}" value="{{ old('lastname') }}" autocomplete="lastname" autofocus>
 
                                 @error('Lastname')
                                     <span class="invalid-feedback" role="alert">

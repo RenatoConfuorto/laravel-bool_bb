@@ -63,7 +63,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['nullable', 'string','min:2', 'max:255'],
-            'surname' => ['nullable', 'string','min:2', 'max:255'],
+            'lastname' => ['nullable', 'string','min:2', 'max:255'],
             'birthdate' => ['nullable', 'date', 'before:' . $this->birthdateValidation()],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -80,7 +80,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'surname' => $data['surname'],
+            'lastname' => $data['lastname'],
             'birthdate' => $data['birthdate'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
