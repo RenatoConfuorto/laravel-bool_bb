@@ -65,53 +65,53 @@
     </head>
     <body>
         <?php
-        use App\Apartment;
-        use App\ApartmentSponsorType;
-        use App\SponsorType;
-        use Faker\Generator as Faker;
+        // use App\Apartment;
+        // use App\ApartmentSponsorType;
+        // use App\SponsorType;
+        // use Faker\Generator as Faker;
 
-        $apartments = Apartment::all();
-        $sponsor_types = SponsorType::all();
+        // $apartments = Apartment::all();
+        // $sponsor_types = SponsorType::all();
 
 
-        $apartment_sponsor = new ApartmentSponsorType();
+        // $apartment_sponsor = new ApartmentSponsorType();
 
-        $apartment = $apartments[0];
-        $sponsor_type = $sponsor_types[rand(0, $sponsor_types->count() - 1)];
+        // $apartment = $apartments[0];
+        // $sponsor_type = $sponsor_types[rand(0, $sponsor_types->count() - 1)];
 
-        $apartment_sponsor->apartment_id = $apartment->id;
-        $apartment_sponsor->sponsor_type_id = $sponsor_type->id;
+        // $apartment_sponsor->apartment_id = $apartment->id;
+        // $apartment_sponsor->sponsor_type_id = $sponsor_type->id;
 
         
-        // generiamo una data unix
-        $date_start_unix = strtotime('1980-10-23 16:35:23'); //1980-10-24 16:35:23
-        $date_start = date('Y-m-d H:i:s', $date_start_unix);
-        $date_end_unix = strtotime($date_start) + ($sponsor_type->duration_h * 60 * 60);
-        $date_end = date('Y-m-d H:i:s', $date_end_unix);
+        // // generiamo una data unix
+        // $date_start_unix = strtotime('1980-10-23 16:35:23'); //1980-10-24 16:35:23
+        // $date_start = date('Y-m-d H:i:s', $date_start_unix);
+        // $date_end_unix = strtotime($date_start) + ($sponsor_type->duration_h * 60 * 60);
+        // $date_end = date('Y-m-d H:i:s', $date_end_unix);
 
-        $apartment_sponsor->sponsor_start = $date_start;
-        $apartment_sponsor->sponsor_end = $date_end;
+        // $apartment_sponsor->sponsor_start = $date_start;
+        // $apartment_sponsor->sponsor_end = $date_end;
 
-        $relative = ApartmentSponsorType::where('id', $apartment_sponsor->apartment_id)
-            // ->whereBetween('sponsor_end', [$date_start, $date_end])
-            ->whereDate('sponsor_end', '>=', $date_start)
-            ->whereDate('sponsor_end', '<=', $date_end)
-            ->first();
-        dd($relative, $apartment_sponsor);
-        // $relative = ApartmentSponsorType::where('id', $apartment_sponsor->apartment_id)->where('sponsor_end', '>', $date_start)->first();
-        // $relative = ApartmentSponsorType::where('id', $apartment_sponsor->apartment_id)->where('sponsor_end', '>', date('Y-m-d H:i:s'))->first();
-        if($relative){
-            dd('trovato un risultato', $relative);
-            $date_start_unix = strtotime($relative->sponsor_end) + 1;
-            $date_start = date('Y-m-d H:i:s', $date_start_unix);
-            $date_end_unix = strtotime($date_start) + ($sponsor_type->duration_h * 60 * 60);
-            $date_end = date('Y-m-d H:i:s', $date_end_unix);
+        // $relative = ApartmentSponsorType::where('id', $apartment_sponsor->apartment_id)
+        //     // ->whereBetween('sponsor_end', [$date_start, $date_end])
+        //     ->whereDate('sponsor_end', '>=', $date_start)
+        //     ->whereDate('sponsor_end', '<=', $date_end)
+        //     ->first();
+        // dd($relative, $apartment_sponsor);
+        // // $relative = ApartmentSponsorType::where('id', $apartment_sponsor->apartment_id)->where('sponsor_end', '>', $date_start)->first();
+        // // $relative = ApartmentSponsorType::where('id', $apartment_sponsor->apartment_id)->where('sponsor_end', '>', date('Y-m-d H:i:s'))->first();
+        // if($relative){
+        //     dd('trovato un risultato', $relative);
+        //     $date_start_unix = strtotime($relative->sponsor_end) + 1;
+        //     $date_start = date('Y-m-d H:i:s', $date_start_unix);
+        //     $date_end_unix = strtotime($date_start) + ($sponsor_type->duration_h * 60 * 60);
+        //     $date_end = date('Y-m-d H:i:s', $date_end_unix);
 
-            $apartment_sponsor->sponsor_start = $date_start;
-            $apartment_sponsor->sponsor_end = $date_end;
-        }else{
-            dd('non trovato', $sponsor_type->duration_h);
-        }
+        //     $apartment_sponsor->sponsor_start = $date_start;
+        //     $apartment_sponsor->sponsor_end = $date_end;
+        // }else{
+        //     dd('non trovato', $sponsor_type->duration_h);
+        // }
 
 
         // $apartment_sponsor->save();
