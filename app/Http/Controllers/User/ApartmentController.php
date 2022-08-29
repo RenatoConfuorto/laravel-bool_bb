@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Apartment;
+use App\ApartmentSponsorType;
 use App\ExtraService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -142,6 +143,10 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::findOrFail($id);
         $apartment->services()->sync([]);
+
+        $apartment->messages()->delete();
+        $apartment->sponsorTypes()->delete();
+        $apartment->views()->delete();
         $apartment->delete();
 
         return redirect()->route('user.apartment.index');

@@ -24,7 +24,7 @@ class Apartment extends Model
     }
 
     public function sponsorTypes() {
-        return $this->hasMany('App\SponsorType');
+        return $this->hasMany('App\ApartmentSponsorType');
     }
 
     protected $fillable = [
