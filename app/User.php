@@ -11,7 +11,15 @@ class User extends Authenticatable
     use Notifiable;
 
     public function apartments() {
-        return $this->hasMany('App\Apartments');
+        return $this->hasMany('App\Apartment');
+    }
+
+    public function hasApartments(){
+        $apartments = $this->apartments();
+        if($apartments->count() == 0)return false;
+        else{
+            return true;
+        }
     }
 
     /**

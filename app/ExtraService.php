@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExtraService extends Model
 {
-    public function extraServices() {
-        return $this->belongToMany('App\ExtraService');
+    public function apartments() {
+        return $this->belongToMany('App\Apartments');
     }
 
     protected $fillable = [
