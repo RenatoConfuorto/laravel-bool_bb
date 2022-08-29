@@ -27,7 +27,7 @@
     {{-- PRICE --}}
     <div class="mb-3">
       <label for="price" class="form-label">Prezzo</label>
-      <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}" required min="0" max="9999">
+      <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}" required min="0" max="9999.99" step="0.01">
     </div>
     {{-- /PRICE --}}
 
@@ -35,7 +35,7 @@
     <div class="mb-3">
       <label for="description" class="form-label">Descrizione</label>
       {{-- TEXT area non ha attributo value quindi old() va all'interno del tag --}}
-      <textarea type="text" class="form-control" id="description" name="description" rows="5" required minlength="10" maxlength="10000">{{ old('description') }}</textarea>
+      <textarea type="text" class="form-control" id="description" name="description" rows="5" maxlength="20000">{{ old('description') }}</textarea>
     </div>
     {{-- /DESCRIPTION --}}
 
@@ -63,7 +63,7 @@
     {{-- MQS --}}
     <div class="mb-3">
       <label for="mqs" class="form-label">Metri quadrati</label>
-      <input type="number" class="form-control" id="mqs" name="mqs" value="{{ old('mqs') }}" required min="1" max="65535">
+      <input type="number" class="form-control" id="mqs" name="mqs" value="{{ old('mqs') }}" required min="10" max="65535">
     </div>
     {{-- /MQS --}}
 
@@ -76,8 +76,8 @@
 
     {{-- COVER IMAGE --}}
     <div class="mb-3">
-      <label for="image">Aggiungi un immagine</label>
-      <input type="file" id="image" name="image" accept="image/*">
+      <label for="image-cover">Aggiungi un immagine</label>
+      <input type="file" id="image-cover" name="image-cover" accept=".jpg, .jpeg, .png, .bmp, .gif, .svg, .webp">
     </div>
     {{-- /COVER IMAGE --}}
 
@@ -93,9 +93,9 @@
 
     {{-- VISIBILITY --}}
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Vuoi rendere questo appartemento visibile?
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+      <label class="form-check-label" for="flexCheckChecked">
+        Vuoi rendere questo appartamento visibile?
       </label>
     </div>
     {{-- /VISIBILITY --}}

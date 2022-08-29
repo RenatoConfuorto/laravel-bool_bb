@@ -28,7 +28,7 @@
     {{-- PRICE --}}
     <div class="mb-3">
       <label for="price" class="form-label">Prezzo</label>
-      <input type="number" class="form-control" id="price" name="price" value="{{ old('price') ? old('price') : $apartment->price }}" required min="0" max="9999">
+      <input type="number" class="form-control" id="price" name="price" value="{{ old('price') ? old('price') : $apartment->price }}" required min="0" max="9999" step="0.01">
     </div>
     {{-- /PRICE --}}
 
@@ -77,8 +77,8 @@
 
     {{-- COVER IMAGE --}}
     <div class="mb-3">
-      <label for="image">Aggiungi un immagine</label>
-      <input type="file" id="image" name="image" accept="image/*">
+      <label for="image-cover">Aggiungi un immagine</label>
+      <input type="file" id="image-cover" name="image-cover" accept=".jpg, .jpeg, .png, .bmp, .gif, .svg, .webp">
     </div>
     {{-- /COVER IMAGE --}}
 

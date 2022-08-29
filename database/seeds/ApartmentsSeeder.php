@@ -4,6 +4,7 @@ use App\Apartment;
 use App\User;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\DB;
 
 class ApartmentsSeeder extends Seeder
 {
@@ -14,6 +15,9 @@ class ApartmentsSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        DB::table('apartments')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         $users = User::all();
 
@@ -35,7 +39,7 @@ class ApartmentsSeeder extends Seeder
             $apartment->address = $faker->address();
             $apartment->latitude = $faker->latitude(35, 47);
             $apartment->longitude = $faker->longitude(6, 18);
-            $apartment->image = 'https://picsum.photos/'. $rndImg . '/237/200/300';
+            $apartment->image = 'https://picsum.photos/id/'. $rndImg . '/200/300';
             $apartment->visibility = $faker->boolean();
 
             $apartment->save();

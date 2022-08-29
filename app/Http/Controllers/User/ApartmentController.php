@@ -7,12 +7,13 @@ use App\ExtraService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('has_apartments')->except('create');
+        $this->middleware('has_apartments')->except('create', 'store');
     }
 
     /**
@@ -50,10 +51,13 @@ class ApartmentController extends Controller
 
         $data = $request->all();
 
+        $request->validate($this->getValidationRules());
+
         $new_apartment = new Apartment();
         $new_apartment->user_id = $user->id;
         $new_apartment->latitude = 15; //ricavare con TomTom
         $new_apartment->longitude = 15;//ricavare con TomTom
+        $data['image'] = Storage::put('img', $data['image-cover']);
         $new_apartment->fill($data);
         $new_apartment->slug = Apartment::generateUniqueSlug($new_apartment->title);
 
@@ -102,11 +106,20 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate($this->getValidationRules());
+
         $data = $request->all();
 
         $apartment = Apartment::findOrFail($id);
 
         $data['slug'] = Apartment::generateUniqueSlug($data['title']);
+
+        if(isset($data['image-cover'])){
+            if($apartment->image){
+                Storage::delete($apartment->image);
+            }
+            $data['image'] = Storage::put('img', $data['image-cover']);
+        }
 
         $apartment->update($data);
 
@@ -127,6 +140,26 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $apartment = Apartment::findOrFail($id);
+        $apartment->services()->sync([]);
+        $apartment->delete();
+
+        return redirect()->route('user.apartment.index');
+    }
+
+    private function getValidationRules() {
+        return [
+            'title' => 'required|min:4|max:255',
+            'price' => 'required|min:0|max:9999.99',
+            'description' => 'nullable|max:20000',
+            'rooms_number' => 'required|min:1|max:255',
+            'bathrooms_number' => 'required|min:1|max:255',
+            'beds_number' => 'required|min:1|max:255',
+            'mqs' => 'required|integer|min:10|max:65535',
+            'address' => 'required|min:4|max:255',
+            'image' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp|max:1024',
+            'extra_services' => 'nullable|exists:extra_services,id',
+            'visibility' => 'nullable'
+        ];
     }
 }

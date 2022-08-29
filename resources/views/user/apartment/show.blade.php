@@ -11,8 +11,20 @@
   @empty
     Vuoto  
   @endforelse
-    </p>
-  <li>
-    <a href="{{ route('user.apartment.edit', ['apartment' => $apartment->id]) }}">Modifica</a>
-  </li>
+  </p>
+
+  <div>
+    <a class="btn btn-primary" href="{{ route('user.apartment.index') }}">Torna alla lista dei tuoi appartamenti</a>
+  </div>
+
+  <div>
+    <a class="btn btn-primary" href="{{ route('user.apartment.edit', ['apartment' => $apartment->id]) }}">Modifica i dettagli di questo appartamento</a>
+  </div>
+
+  <form action="{{ route('user.apartment.destroy', ['apartment' => $apartment->id]) }}" method="POST">
+    @method('DELETE')
+    @csrf
+      <button type="submit" class="btn btn-danger" onclick="return confirm('Vuoi davvero cancellare questo appartamento?')">Cancella questo appartamento</button>
+  </form>
+
 @endsection
