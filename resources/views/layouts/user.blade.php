@@ -9,7 +9,9 @@
 </head>
 <body>
   @yield('content')
-
+    <div>
+      
+    </div>
   @stack('script')
 </body>
 </html>
