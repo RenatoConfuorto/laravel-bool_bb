@@ -157,7 +157,7 @@ class ApartmentController extends Controller
     private function getValidationRules() {
         return [
             'title' => 'required|min:4|max:255',
-            'price' => 'required|min:0|max:9999.99',
+            'price' => 'required|min:0.01|max:9999.99',
             'description' => 'nullable|max:20000',
             'rooms_number' => 'required|min:1|max:255',
             'bathrooms_number' => 'required|min:1|max:255',
