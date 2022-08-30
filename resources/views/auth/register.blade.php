@@ -27,7 +27,7 @@
                         @csrf
 
                         {{-- NAME FIELD --}}
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -43,7 +43,7 @@
                         {{-- /NAME FIELD --}}
 
                         {{-- LASTNAME FIELD --}}
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Lastname') }}</label>
 
                             <div class="col-md-6">
@@ -59,7 +59,7 @@
                         {{-- /LASTNAME FIELD --}}
 
                         {{-- BIRTHDATE FIELD --}}
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
 
                             <div class="col-md-6">
@@ -76,7 +76,7 @@
                         {{-- /BIRTHDATE FIELD --}}
 
                         {{-- EMAIL FIELD --}}
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
 
                             <div class="col-md-6">
@@ -92,7 +92,7 @@
                         {{-- /EMAIL FIELD --}}
 
                         {{-- PASSWORD FIELD --}}
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
 
                             <div class="col-md-6">
@@ -108,11 +108,12 @@
                         {{-- /PASSWORD FIELD --}}
 
                         {{-- CONFIRM PASSWORD FIELD --}}
-                        <div class="form-group row">
+                        <div class="form-group row mb-2">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <div id="message" class="text-danger"></div>
                             </div>
                         </div>
                         {{-- /CONFIRM PASSWORD FIELD --}}
@@ -120,7 +121,7 @@
                         {{-- SUBMIT BUTTON --}}
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="submit-button" type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
