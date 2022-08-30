@@ -85,10 +85,12 @@
     {{-- EXTRA SERVICES --}}
     <p>Servizi Extra</p>
     @foreach ($extra_services as $extra_service)
+    <div class="form-check">
       <input class="form-check-input" type="checkbox" value="{{ $extra_service->id }}" id="extra_service-{{ $extra_service->id }}" name="extra_services[]" {{ ($apartment->services->contains($extra_service) || in_array($extra_service->id, old('extra_services', []))) ? 'checked' : '' }}>
       <label class="form-check-label" for="extra_service-{{ $extra_service->id }}">
         {{ $extra_service->name }}
       </label>
+    </div>
     @endforeach
     {{-- EXTRA SERVICES --}}
 
