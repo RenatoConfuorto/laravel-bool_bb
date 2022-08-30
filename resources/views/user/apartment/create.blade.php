@@ -88,7 +88,7 @@
         @foreach ($extra_services as $extra_service)
         <li>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="{{ $extra_service->id }}" id="extra_service-{{ $extra_service->id }}" name="extra_services[]" {{ in_array($extra_service->id, old('extra_services', [])) ? 'checked' : '' }}>
+            <input class="form-check-input extra_services" type="checkbox" value="{{ $extra_service->id }}" id="extra_service-{{ $extra_service->id }}" name="extra_services[]" {{ in_array($extra_service->id, old('extra_services', [])) ? 'checked' : '' }}>
             <label class="form-check-label" for="extra_service-{{ $extra_service->id }}">
               {{ $extra_service->name }}
             </label>
@@ -101,14 +101,18 @@
 
     {{-- VISIBILITY --}}
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-      <label class="form-check-label" for="flexCheckChecked">
-        Vuoi rendere questo appartamento visibile? *
+      <input class="form-check-input" name="visibility" type="checkbox" value="true" id="visibility" checked>
+      <label class="form-check-label" for="visibility">
+        Visibilità appartmento Si/No *
       </label>
     </div>
     {{-- /VISIBILITY --}}
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="#" class="btn btn-primary">Submit</a>
   </form>
 </div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('js/apartmentFormValidation.js') }}" defer></script>
+@endpush

@@ -134,3 +134,7 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('js/passwordValidation.js') }}" defer></script>
+@endpush

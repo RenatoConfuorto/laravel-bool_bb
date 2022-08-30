@@ -36,7 +36,7 @@
     <div class="mb-3">
       <label for="description" class="form-label">Descrizione</label>
       {{-- TEXT area non ha attributo value quindi old() va all'interno del tag --}}
-      <textarea type="text" class="form-control" id="description" name="description" rows="5" required minlength="10" maxlength="10000">{{ old('description') ? old('description') : $apartment->description }}</textarea>
+      <textarea type="text" class="form-control" id="description" name="description" rows="5" minlength="10" maxlength="10000">{{ old('description') ? old('description') : $apartment->description }}</textarea>
     </div>
     {{-- /DESCRIPTION --}}
 
@@ -96,9 +96,9 @@
 
     {{-- VISIBILITY --}}
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+      <input class="form-check-input" name="visibility"  type="checkbox" value="true" id="flexCheckChecked" {{ $apartment->visibility ? 'checked' : '' }}>
       <label class="form-check-label" for="flexCheckChecked">
-        Vuoi rendere questo appartemento visibile? *
+        Visibilità appartmento Si/No *
       </label>
     </div>
     {{-- /VISIBILITY --}}

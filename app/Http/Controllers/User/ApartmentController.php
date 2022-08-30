@@ -51,22 +51,23 @@ class ApartmentController extends Controller
         $user = Auth::user();
 
         $data = $request->all();
-
+        
         $request->validate($this->getValidationRules());
+        dd($request->all());
+        $data['visibility'] = isset($data['visibility']) ? 1 : 0;
 
         $new_apartment = new Apartment();
         $new_apartment->user_id = $user->id;
         $new_apartment->latitude = 15; //ricavare con TomTom
         $new_apartment->longitude = 15;//ricavare con TomTom
+        $new_apartment->visibility = $data['visibility'];
         $data['image'] = Storage::put('img', $data['image-cover']);
         $new_apartment->fill($data);
         $new_apartment->slug = Apartment::generateUniqueSlug($new_apartment->title);
 
         $new_apartment->save();
 
-        if (isset($data['extra_services'])) {
-            $new_apartment->services()->sync($data['extra_services']);
-        }
+        $new_apartment->services()->sync($data['extra_services']);
         
         return redirect()->route('user.apartment.show', ['apartment' => $new_apartment->id]);
     }
@@ -110,24 +111,25 @@ class ApartmentController extends Controller
         $request->validate($this->getValidationRules());
 
         $data = $request->all();
+        $data['visibility'] = isset($data['visibility']) ? 1 : 0;
 
+        
         $apartment = Apartment::findOrFail($id);
-
+        
         $data['slug'] = Apartment::generateUniqueSlug($data['title']);
-
+        
         if(isset($data['image-cover'])){
             if($apartment->image){
                 Storage::delete($apartment->image);
             }
             $data['image'] = Storage::put('img', $data['image-cover']);
         }
-
+        
+        $apartment->visibility = $data['visibility'];
         $apartment->update($data);
 
         if (isset($data['extra_services'])) {
             $apartment->services()->sync($data['extra_services']);
-        } else {
-            $apartment->services()->sync([]);
         }
 
         return redirect()->route('user.apartment.show', ['apartment' => $apartment->id]);
@@ -163,7 +165,7 @@ class ApartmentController extends Controller
             'mqs' => 'required|integer|min:10|max:65535',
             'address' => 'required|min:4|max:255',
             'image' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp|max:1024',
-            'extra_services' => 'nullable|exists:extra_services,id',
+            'extra_services' => 'required|exists:extra_services,id',
             'visibility' => 'nullable'
         ];
     }
