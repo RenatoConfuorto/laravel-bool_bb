@@ -3,6 +3,7 @@
 use App\Apartment;
 use App\User;
 use Illuminate\Database\Seeder;
+use App\Http\Controllers\Api\ApartmentsAddressController;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,6 @@ class ApartmentsSeeder extends Seeder
         for ( $i=0; $i < 50; $i++) {
             $rndImg = rand(1, 1000);
             $user = $users[rand(0, $users->count() - 1)];
-
             $apartment = new Apartment();
             $apartment->user_id = $user->id;
             $apartment->title = $faker->sentence();
@@ -37,8 +37,9 @@ class ApartmentsSeeder extends Seeder
             $apartment->mqs = $faker->numberBetween(40, 300);
             // $apartment->address = $faker->townState();
             $apartment->address = $faker->address();
-            $apartment->latitude = $faker->latitude(35, 47);
-            $apartment->longitude = $faker->longitude(6, 18);
+            $coordinates = ApartmentsAddressController::index($apartment->address);
+            $apartment->latitude = $coordinates['lat'];
+            $apartment->longitude = $coordinates['lon'];
             $apartment->image = 'https://picsum.photos/id/'. $rndImg . '/200/300';
             $apartment->visibility = $faker->boolean();
 
