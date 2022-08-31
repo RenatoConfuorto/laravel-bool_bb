@@ -100,15 +100,25 @@
     {{-- EXTRA SERVICES --}}
 
     {{-- VISIBILITY --}}
-    <div class="form-check">
-      <input class="form-check-input" name="visibility" type="checkbox" value="true" id="visibility" checked>
-      <label class="form-check-label" for="visibility">
-        Visibilità appartmento Si/No *
-      </label>
+    <div class="mb-3">
+      Vuoi rendere questo appartamento visibile nelle ricerche degli utenti?
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="visibility" id="visibilty-true" value="1" checked>
+        <label class="form-check-label" for="visibility-true">
+          Si
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="visibility" id="visibilty-false" value="0">
+        <label class="form-check-label" for="visibility-false">
+          No
+        </label>
+      </div>
     </div>
     {{-- /VISIBILITY --}}
 
-    <a href="#/" class="btn btn-primary">Submit</a>
+    {{-- <a href="#/" class="btn btn-primary">Submit</a> --}}
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
 @endsection

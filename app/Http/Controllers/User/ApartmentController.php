@@ -51,16 +51,15 @@ class ApartmentController extends Controller
         $user = Auth::user();
 
         $data = $request->all();
+        // dd($data);
         
         $request->validate($this->getValidationRules());
         // dd($request->all());
-        $data['visibility'] = isset($data['visibility']) ? 1 : 0;
 
         $new_apartment = new Apartment();
         $new_apartment->user_id = $user->id;
         $new_apartment->latitude = 15; //ricavare con TomTom
         $new_apartment->longitude = 15;//ricavare con TomTom
-        $new_apartment->visibility = $data['visibility'];
         $data['image'] = Storage::put('img', $data['image-cover']);
         $new_apartment->fill($data);
         $new_apartment->slug = Apartment::generateUniqueSlug($new_apartment->title);
@@ -117,8 +116,6 @@ class ApartmentController extends Controller
         $request->validate($this->getValidationRules());
 
         $data = $request->all();
-        $data['visibility'] = isset($data['visibility']) ? 1 : 0;
-
         
         $apartment = Apartment::findOrFail($id);
 
@@ -133,7 +130,6 @@ class ApartmentController extends Controller
             $data['image'] = Storage::put('img', $data['image-cover']);
         }
         
-        $apartment->visibility = $data['visibility'];
         $apartment->update($data);
 
         if (isset($data['extra_services'])) {

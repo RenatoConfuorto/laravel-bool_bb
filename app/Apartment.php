@@ -40,7 +40,7 @@ class Apartment extends Model
         'longitude',
         'address',
         'image',
-        'visibilty'
+        'visibility'
     ];
 
     public static function generateUniqueSlug($title) {
