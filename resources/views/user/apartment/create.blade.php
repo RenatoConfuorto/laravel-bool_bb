@@ -20,7 +20,7 @@
     {{-- TITLE --}}
     <div class="mb-3">
       <label for="title" class="form-label">Titolo *</label>
-      <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required minlength="4" maxlength="255">
+      <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
     </div>
     {{-- /TITLE --}}
 
@@ -108,7 +108,7 @@
     </div>
     {{-- /VISIBILITY --}}
 
-    <a href="#" class="btn btn-primary">Submit</a>
+    <a href="#/" class="btn btn-primary">Submit</a>
   </form>
 </div>
 @endsection
