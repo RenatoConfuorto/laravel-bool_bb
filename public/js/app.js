@@ -6294,7 +6294,7 @@ const SelectorEngine = {
 
     while (next) {
       if (next.matches(selector)) {
-        return [nex,t];
+        return [next];
       }
 
       next = next.nextElementSibling;
@@ -40730,7 +40730,7 @@ var modifiers = {
     /** @prop {number} order=500 - Index used to define the order of execution */
     order: 500,
     /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-    ena,bled: true,
+    enabled: true,
     /** @prop {ModifierFn} */
     fn: arrow,
     /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
@@ -48508,7 +48508,7 @@ function createPatchFunction(backend) {
             // clone reused vnode
             vnode = ownerArray[index] = cloneVNode(vnode);
         }
-        const elm = (vnode.elm =, oldVnode.elm);
+        const elm = (vnode.elm = oldVnode.elm);
         if (isTrue(oldVnode.isAsyncPlaceholder)) {
             if (isDef(vnode.asyncFactory.resolved)) {
                 hydrate(oldVnode.elm, vnode, insertedVnodeQueue);
@@ -53756,13 +53756,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! C:\boolean\laravel-bool_bb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\boolean\laravel-bool_bb\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
 __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> modifica-campo-visibilità-create-edit
 
 
 /***/ })
