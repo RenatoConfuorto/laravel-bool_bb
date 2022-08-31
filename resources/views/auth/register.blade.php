@@ -139,5 +139,5 @@
 @endsection
 
 @push('script')
-    <script src="{{ asset('js/passwordValidation.js') }}" defer></script>
+    <script src="{{ asset('js/registerFormValidation.js') }}" defer></script>
 @endpush

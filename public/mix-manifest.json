@@ -2,5 +2,5 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/apartmentFormValidation.js": "/js/apartmentFormValidation.js",
-    "/js/passwordValidation.js": "/js/passwordValidation.js"
+    "/js/registerFormValidation.js": "/js/registerFormValidation.js"
 }
