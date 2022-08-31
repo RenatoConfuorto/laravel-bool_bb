@@ -2,6 +2,7 @@
 
 @section('content')
   <div>
+    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="">
     <img src="{{ $apartment->image }}" alt="">
   </div>
   <h1>{{ $apartment->title }}</h1>
