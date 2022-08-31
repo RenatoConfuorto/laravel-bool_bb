@@ -53,7 +53,7 @@ class ApartmentController extends Controller
         $data = $request->all();
         
         $request->validate($this->getValidationRules());
-        dd($request->all());
+        // dd($request->all());
         $data['visibility'] = isset($data['visibility']) ? 1 : 0;
 
         $new_apartment = new Apartment();

@@ -79,19 +79,26 @@
     <div class="mb-3">
       <label for="image-cover">Aggiungi un immagine *</label>
       <input type="file" id="image-cover" name="image-cover" accept=".jpg, .jpeg, .png, .bmp, .gif, .svg, .webp">
+      <img src="{{ $apartment->image }}" id="image" alt="">
     </div>
     {{-- /COVER IMAGE --}}
 
     {{-- EXTRA SERVICES --}}
-    <p>Servizi Extra *</p>
-    @foreach ($extra_services as $extra_service)
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="{{ $extra_service->id }}" id="extra_service-{{ $extra_service->id }}" name="extra_services[]" {{ ($apartment->services->contains($extra_service) || in_array($extra_service->id, old('extra_services', []))) ? 'checked' : '' }}>
-      <label class="form-check-label" for="extra_service-{{ $extra_service->id }}">
-        {{ $extra_service->name }}
-      </label>
+    <div class="extra-service">
+      <p>Servizi Extra *</p>
+      <ul>
+        @foreach ($extra_services as $extra_service)
+        <li>
+          <div class="form-check">
+            <input class="form-check-input extra_services" type="checkbox" value="{{ $extra_service->id }}" id="extra_service-{{ $extra_service->id }}" name="extra_services[]" {{ ($apartment->services->contains($extra_service) || in_array($extra_service->id, old('extra_services', []))) ? 'checked' : '' }}>
+            <label class="form-check-label" for="extra_service-{{ $extra_service->id }}">
+              {{ $extra_service->name }}
+            </label>
+          </div>
+        </li>
+        @endforeach
+      </ul>
     </div>
-    @endforeach
     {{-- EXTRA SERVICES --}}
 
     {{-- VISIBILITY --}}
@@ -103,7 +110,11 @@
     </div>
     {{-- /VISIBILITY --}}
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="#/" class="btn btn-primary">Submit</a>
   </form>
 <div>
 @endsection
+
+@push('script')
+    <script src="{{ asset('js/apartmentFormValidation.js') }}" defer></script>
+@endpush

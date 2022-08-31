@@ -8,15 +8,17 @@ const bathrooms_number = document.getElementById('bathrooms_number');
 const beds_number = document.getElementById('beds_number');
 const mqs = document.getElementById('mqs');
 const address = document.getElementById('address');
+const previewImage = document.getElementById('image'); //solo edit
 const imageCover = document.getElementById('image-cover');
 const extraServiceContainer = document.querySelector('.extra-service');
 const extraServices = document.querySelectorAll('.extra_services');
 
-//ottenere gli id dei servizi extra
+//ottenere gli id dei servizi extra e i servizi già presenti(edit)
 const valideServices = [];
 extraServices.forEach(element => {
   valideServices.push(element.value);
 });
+
 
 const formBtn = document.querySelector('form a.btn');
 
@@ -26,22 +28,23 @@ formBtn.addEventListener('click', function(event){
 
   //rimuovere messaggi di errore se ci sono
   const errorMessages = document.querySelectorAll('.alert.alert-danger');
-  console.log(errorMessages);
+  // console.log(errorMessages);
   errorMessages.forEach(element => {
     // form.remove(element);
     element.remove();
   });
 
-  if(validateData(data))console.log('dati validi');
+  //validazione dei dati
+  if(!validateData(data))console.log('dati non validi');
   else{
-    console.log('dati non validi');
+    console.log('dati validi -> submit');
+    form.submit();
   }
 
-  console.log('submit');
 });
 
 function getData(){
-  let services = [];
+  const services = [];
   extraServices.forEach(element => {
     if(element.checked)services.push(element.value);
   });
@@ -64,7 +67,6 @@ function validateData(data){
   let validData = true;
   //controllo titolo
   if(data.title.length < 4 || data.title.length > 255){
-    console.log(data.title.length);
     errorMessage(title.parentElement, 'Titolo non valido');
     // console.log('titolo non valido')
     validData = false;
@@ -114,40 +116,52 @@ function validateData(data){
     validData = false;
   }
   //controllo immagine
-  if(!data.imageCover){
-    errorMessage(imageCover.parentElement, 'Inserire un immagine');
-    validData = false;
-  }
-
-  if(
+  const imageTypeCtrl = 
     !data.imageCover.includes('.jpg') &&
     !data.imageCover.includes('.jpeg') &&
     !data.imageCover.includes('.png') &&
     !data.imageCover.includes('.bmp') &&
     !data.imageCover.includes('.gif') &&
     !data.imageCover.includes('.svg') &&
-    !data.imageCover.includes('.webp')
-  ){
-    if(data.imageCover)errorMessage(imageCover.parentElement, 'Formato immagine non valido');
-    // console.log('indirizzo')
-    validData = false;
+    !data.imageCover.includes('.webp');
+  if(!previewImage){ //siamo in create
+
+    if(!data.imageCover){ //controllare se l'immagine è stata inserita
+      errorMessage(imageCover.parentElement, 'Inserire un immagine');
+      validData = false;
+    }
+  
+    if(imageTypeCtrl){ //controllare che il formato sia corretto
+      if(data.imageCover)errorMessage(imageCover.parentElement, 'Formato immagine non valido');
+      // console.log('indirizzo')
+      validData = false;
+    }
+  }else if(previewImage && data.imageCover){ //siamo in edit ed è stata inserita una nuova immagine
+    console.log('siamo in edit')
+    if(imageTypeCtrl){ //controllare che il formato sia corretto
+      if(data.imageCover)errorMessage(imageCover.parentElement, 'Formato immagine non valido');
+      // console.log('indirizzo')
+      validData = false;
+    }
   }
   // controllo dei servizi extra 
+  
+  let serviceMessage = null;
   if(data.extraServices.length === 0){
-    errorMessage(extraServiceContainer, 'Inserire un servizio extra');
+    // errorMessage(extraServiceContainer, 'Inserire un servizio extra');
     // console.log('inserire un servizio extra')
+    serviceMessage = 'Inserire almeno un servizio extra';
     validData = false;
   }
 
-  let serviceMessage = null;
-  for(let i = 0; i < extraServices.length; i++){
-    if(!valideServices.includes(extraServices[i])){
-      // console.log('il servizio extra non esiste')
+  for(let i = 0; i < data.extraServices.length; i++){
+    if(!valideServices.includes(data.extraServices[i])){
+      // console.log(data.extraServices[i], '->non valido');
       serviceMessage = 'Uno dei servizi inseriti non è valido, riprovare';
       validData = false;
     }
   }
-  if(serviceMessage && data.extraServices.length !== 0)errorMessage(extraServiceContainer, serviceMessage);
+  if(serviceMessage)errorMessage(extraServiceContainer, serviceMessage);
 
   return validData;
 }
