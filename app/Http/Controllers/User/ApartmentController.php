@@ -81,6 +81,8 @@ class ApartmentController extends Controller
     public function show($id)
     {
         $apartment = Apartment::findOrFail($id);
+
+        $this->authorize('show', $apartment);
         // dd($apartment);
         return view('user.apartment.show', compact('apartment'));
     }
@@ -93,8 +95,12 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
+
         $apartment = Apartment::findOrFail($id);
+        $this->authorize('edit', $apartment);
+
         $extra_services = ExtraService::all();
+
         // dd($apartment);
         return view('user.apartment.edit', compact('apartment','extra_services'));
     }
@@ -115,6 +121,8 @@ class ApartmentController extends Controller
 
         
         $apartment = Apartment::findOrFail($id);
+
+        $this->authorize('update', $apartment);
         
         $data['slug'] = Apartment::generateUniqueSlug($data['title']);
         
@@ -144,6 +152,7 @@ class ApartmentController extends Controller
     public function destroy($id)
     {
         $apartment = Apartment::findOrFail($id);
+        $this->authorize('destroy', $apartment);
         $apartment->services()->sync([]);
 
         $apartment->messages()->delete();
