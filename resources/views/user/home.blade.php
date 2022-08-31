@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div>
-        Ciao {{$user->name}}
+        Sei loggato con {{$user->email}}
     </div>
 </div>
 @endsection
