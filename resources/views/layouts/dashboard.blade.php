@@ -21,7 +21,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Bool-B&B</a>
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('user.dashboard') }}">Bool-B&B</a>
         <ul class="navbar-nav px-3 ml-auto">
             <li class="nav-item">
                 <a class="nav-link ml-auto" href="{{ route('logout') }}"
