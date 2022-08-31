@@ -110,7 +110,7 @@
     </div>
     {{-- /VISIBILITY --}}
 
-    <a href="#/" class="btn btn-primary">Submit</a>
+    <button href="#/" class="btn btn-primary">Submit</button>
   </form>
 <div>
 @endsection

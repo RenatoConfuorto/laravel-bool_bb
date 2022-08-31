@@ -20,7 +20,7 @@ extraServices.forEach(element => {
 });
 
 
-const formBtn = document.querySelector('form a.btn');
+const formBtn = document.querySelector('form button.btn');
 
 formBtn.addEventListener('click', function(event){
   const data = getData();
