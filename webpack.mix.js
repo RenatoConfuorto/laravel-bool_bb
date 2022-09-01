@@ -19,3 +19,5 @@ mix.copy([
     'resources/js/apartmentFormValidation.js',
     'resources/js/registerFormValidation.js'
 ], 'public/js');
+
+mix.js('resources/js/front.js', 'public/js');
