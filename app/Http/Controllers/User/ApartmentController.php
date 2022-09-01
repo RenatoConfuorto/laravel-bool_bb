@@ -58,8 +58,6 @@ class ApartmentController extends Controller
 
         $new_apartment = new Apartment();
         $new_apartment->user_id = $user->id;
-        $new_apartment->latitude = 15; //ricavare con TomTom
-        $new_apartment->longitude = 15;//ricavare con TomTom
         $data['image'] = Storage::put('img', $data['image-cover']);
         $new_apartment->fill($data);
         $new_apartment->slug = Apartment::generateUniqueSlug($new_apartment->title);
@@ -169,6 +167,8 @@ class ApartmentController extends Controller
             'beds_number' => 'required|min:1|max:255',
             'mqs' => 'required|integer|min:10|max:65535',
             'address' => 'required|min:4|max:255',
+            'latitude' => 'required|min:-90|max:90',
+            'longitude' => 'required|min:-180|max:180',
             'image' => 'mimes:jpg,jpeg,png,bmp,gif,svg,webp|max:1024',
             'extra_services' => 'required|exists:extra_services,id',
             'visibility' => 'nullable'
