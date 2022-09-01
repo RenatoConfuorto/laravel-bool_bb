@@ -14,7 +14,7 @@
     </div>
   @endif
 
-  <form class="mt-3" action="{{ route('user.apartment.update', ['apartment' => $apartment->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()">
+  <form class="mt-3" action="{{ route('user.apartment.update', ['apartment' => $apartment->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return false">
     @method('PUT')
     @csrf
 
