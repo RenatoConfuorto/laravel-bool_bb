@@ -237,14 +237,40 @@ function errorMessage(element, message){
 
 //ricerca indirizzi
 let results = [];
+let searchTextCtrl = ''; //controllo per far partire l'API
 
 delete axios.defaults.headers.common['X-Requested-With'];
-address.addEventListener('keyup', function(event){
-  console.log(event.target.value);
-  const query = event.target.value;
-  if(query.length > 3){
+// address.addEventListener('keyup', function(event){
+//   // console.log(event.target.value);
+//   const query = event.target.value;
+//   if(query.length > 3){
 
-    axios.get(`https://api.tomtom.com/search/2/geocode/${query}.json`, {
+//     axios.get(`https://api.tomtom.com/search/2/geocode/${query}.json`, {
+//       params : {
+//         key : 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+//         countrySet: 'IT'
+//       }
+//     }).then(resp => {
+//       results = resp.data.results;
+//       addSuggestions(results);
+//     }).catch(e => {
+//       console.error('Sorry! ' + e);
+//     });
+//   }
+// });
+
+setInterval(callApi, 500);
+
+function callApi(){
+  if(
+    address.value !== searchTextCtrl &&
+    address.value !== '' &&
+    address.value.length > 3
+    ){
+    searchTextCtrl = address.value;
+    console.log('far partire api', searchTextCtrl);
+
+    axios.get(`https://api.tomtom.com/search/2/geocode/${address.value}.json`, {
       params : {
         key : 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
         countrySet: 'IT'
@@ -256,7 +282,7 @@ address.addEventListener('keyup', function(event){
       console.error('Sorry! ' + e);
     });
   }
-});
+}
 
 function addSuggestions(data){
   addressTipsContainer.innerHTML = '';
@@ -268,7 +294,8 @@ function addSuggestions(data){
     tip.addEventListener('click', function(){
       addressTipsContainer.innerHTML = '';
       // console.log(element.position);
-      address.value = addressString;
+      address.value = addressString; //inserire indirizzo completo nell'imput
+      searchTextCtrl = addressString; //non far partire una nuova richiesta al click del tip
       latitude.value = element.position.lat;
       longitude.value = element.position.lon;
     });

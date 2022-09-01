@@ -18,7 +18,7 @@
     </div>
   @endif
 
-  <form class="mt-3" action="{{ route('user.apartment.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return false">
+  <form class="mt-3" action="{{ route('user.apartment.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return event.code !== 'Enter'">
     @csrf
 
     {{-- TITLE --}}
