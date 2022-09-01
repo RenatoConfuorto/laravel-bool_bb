@@ -1,0 +1,8 @@
+div.address-tips p {
+  cursor: pointer;
+}
+
+div.address-tips p:hover {
+  background-color: rgba(15, 188, 211, 0.3);
+}
+

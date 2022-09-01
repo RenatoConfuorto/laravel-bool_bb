@@ -21,3 +21,6 @@ mix.copy([
 ], 'public/js');
 
 mix.js('resources/js/front.js', 'public/js');
+
+// foglio di stile dei form create e edit
+mix.sass('resources/sass/form.scss', 'public/css');

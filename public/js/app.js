@@ -139,8 +139,6 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nError: ENOENT: no such file or directory, open 'C:\\boolean\\progetto-finale\\laravel-bool_bb\\resources\\sass\\form.scss'\n    at C:\\boolean\\progetto-finale\\laravel-bool_bb\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\boolean\\progetto-finale\\laravel-bool_bb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\boolean\\progetto-finale\\laravel-bool_bb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:203:19\n    at C:\\boolean\\progetto-finale\\laravel-bool_bb\\node_modules\\enhanced-resolve\\lib\\CachedInputFileSystem.js:85:15\n    at processTicksAndRejections (node:internal/process/task_queues:78:11)");
-
 /***/ }),
 
 /***/ 0:
