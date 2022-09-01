@@ -37,9 +37,12 @@ class ApartmentsSeeder extends Seeder
             $apartment->mqs = $faker->numberBetween(40, 300);
             // $apartment->address = $faker->townState();
             $apartment->address = $faker->address();
+            // dd($apartment->address);
             $coordinates = ApartmentsAddressController::index($apartment->address);
             $apartment->latitude = $coordinates['lat'];
             $apartment->longitude = $coordinates['lon'];
+            // $apartment->latitude = $faker->latitude();
+            // $apartment->longitude = $faker->longitude();
             $apartment->image = 'https://picsum.photos/id/'. $rndImg . '/200/300';
             $apartment->visibility = $faker->boolean();
 
