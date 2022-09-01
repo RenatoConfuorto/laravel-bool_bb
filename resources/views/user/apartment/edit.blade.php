@@ -14,21 +14,21 @@
     </div>
   @endif
 
-  <form class="mt-3" action="{{ route('user.apartment.update', ['apartment' => $apartment->id]) }}" method="POST" enctype="multipart/form-data">
+  <form class="mt-3" action="{{ route('user.apartment.update', ['apartment' => $apartment->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()">
     @method('PUT')
     @csrf
 
     {{-- TITLE --}}
     <div class="mb-3">
       <label for="title" class="form-label">Titolo *</label>
-      <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ? old('title') : $apartment->title }}" required minlength="4" maxlength="255">
+      <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ? old('title') : $apartment->title }}" minlength="4" maxlength="255">
     </div>
     {{-- /TITLE --}}
 
     {{-- PRICE --}}
     <div class="mb-3">
       <label for="price" class="form-label">Prezzo *</label>
-      <input type="number" class="form-control" id="price" name="price" value="{{ old('price') ? old('price') : $apartment->price }}" required min="0" max="9999" step="0.01">
+      <input type="number" class="form-control" id="price" name="price" value="{{ old('price') ? old('price') : $apartment->price }}" min="0" max="9999" step="0.01">
     </div>
     {{-- /PRICE --}}
 
@@ -43,35 +43,35 @@
     {{-- ROOMS NUMBER --}}
     <div class="mb-3">
       <label for="rooms_number" class="form-label">Numero di stanze *</label>
-      <input type="number" class="form-control" id="rooms_number" name="rooms_number" value="{{ old('rooms_number') ? old('rooms_number') : $apartment->rooms_number }}" required min="1" max="255">
+      <input type="number" class="form-control" id="rooms_number" name="rooms_number" value="{{ old('rooms_number') ? old('rooms_number') : $apartment->rooms_number }}" min="1" max="255">
     </div>
     {{-- /ROOMS NUMBER --}}
 
     {{-- BATHROOMS NUMBER --}}
     <div class="mb-3">
       <label for="bathrooms_number" class="form-label">Numero di bagni *</label>
-      <input type="number" class="form-control" id="bathrooms_number" name="bathrooms_number" value="{{ old('bathrooms_number') ? old('bathrooms_number') : $apartment->bathrooms_number }}" required min="1" max="255">
+      <input type="number" class="form-control" id="bathrooms_number" name="bathrooms_number" value="{{ old('bathrooms_number') ? old('bathrooms_number') : $apartment->bathrooms_number }}" min="1" max="255">
     </div>
     {{-- /BATHROOMS NUMBER --}}
 
     {{-- BEDS NUMBER --}}
     <div class="mb-3">
       <label for="beds_number" class="form-label">Numero di letti *</label>
-      <input type="number" class="form-control" id="beds_number" name="beds_number" value="{{ old('beds_number') ? old('beds_number') : $apartment->beds_number }}" required min="1" max="255">
+      <input type="number" class="form-control" id="beds_number" name="beds_number" value="{{ old('beds_number') ? old('beds_number') : $apartment->beds_number }}" min="1" max="255">
     </div>
     {{-- /BEDS NUMBER --}}
 
     {{-- MQS --}}
     <div class="mb-3">
       <label for="mqs" class="form-label">Metri quadrati *</label>
-      <input type="number" class="form-control" id="mqs" name="mqs" value="{{ old('mqs') ? old('mqs') : $apartment->mqs }}" required min="1" max="65535">
+      <input type="number" class="form-control" id="mqs" name="mqs" value="{{ old('mqs') ? old('mqs') : $apartment->mqs }}" min="1" max="65535">
     </div>
     {{-- /MQS --}}
 
     {{-- ADDRESS --}}
     <div class="mb-3">
       <label for="address" class="form-label">Indirizzo *</label>
-      <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : $apartment->address }}" required minlength="4" maxlength="255">
+      <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : $apartment->address }}" minlength="4" maxlength="255">
     </div>
     {{-- /ADDRESS --}}
 
@@ -102,7 +102,7 @@
     {{-- EXTRA SERVICES --}}
 
     {{-- VISIBILITY --}}
-    <div class="mb-3">
+    <div class="mb-3 visibility">
       Vuoi rendere questo appartamento visibile nelle ricerche degli utenti?
       <div class="form-check">
         <input class="form-check-input" type="radio" name="visibility" id="visibility-true" value="1" {{ ($apartment->visibility === 1) ? 'checked' : '' }}>
@@ -119,7 +119,7 @@
     </div>
     {{-- /VISIBILITY --}}
 
-    <button href="#/" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 <div>
 @endsection

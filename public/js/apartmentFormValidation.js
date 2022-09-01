@@ -12,6 +12,7 @@ const previewImage = document.getElementById('image'); //solo edit
 const imageCover = document.getElementById('image-cover');
 const extraServiceContainer = document.querySelector('.extra-service');
 const extraServices = document.querySelectorAll('.extra_services');
+const visibilityContainer = document.querySelector('div.visibility');
 
 //ottenere gli id dei servizi extra e i servizi già presenti(edit)
 const valideServices = [];
@@ -22,32 +23,47 @@ extraServices.forEach(element => {
 
 const formBtn = document.querySelector('form button.btn');
 
-formBtn.addEventListener('click', function(event){
+function formSubmit(){
   const data = getData();
-  console.log(data);
 
-  //rimuovere messaggi di errore se ci sono
+  //rimuovere i messaggi di errore se ci sono
   const errorMessages = document.querySelectorAll('.alert.alert-danger');
-  // console.log(errorMessages);
   errorMessages.forEach(element => {
-    // form.remove(element);
     element.remove();
   });
 
-  //validazione dei dati
-  if(!validateData(data))console.log('dati non validi');
-  else{
-    console.log('dati validi -> submit');
-    form.submit();
-  }
+  return validateData(data);
+  
+}
 
-});
+// formBtn.addEventListener('click', function(event){
+//   const data = getData();
+//   console.log(data);
+
+//   //rimuovere messaggi di errore se ci sono
+//   const errorMessages = document.querySelectorAll('.alert.alert-danger');
+//   // console.log(errorMessages);
+//   errorMessages.forEach(element => {
+//     // form.remove(element);
+//     element.remove();
+//   });
+
+//   //validazione dei dati
+//   if(!validateData(data))console.log('dati non validi');
+//   else{
+//     console.log('dati validi -> submit');
+//     form.submit();
+//   }
+
+// });
 
 function getData(){
   const services = [];
   extraServices.forEach(element => {
     if(element.checked)services.push(element.value);
   });
+
+  const visibilityValue = document.querySelector('input[name="visibility"]:checked').value;
 
   return {
     title: title.value,
@@ -60,6 +76,7 @@ function getData(){
     address: address.value,
     imageCover: imageCover.value,
     extraServices: services,
+    visibility: visibilityValue,
   };
 }
 
@@ -162,6 +179,21 @@ function validateData(data){
     }
   }
   if(serviceMessage)errorMessage(extraServiceContainer, serviceMessage);
+
+  //controllo valore della visibilità
+  if(
+    data.visibility !== true &&
+    data.visibility !== false &&
+    data.visibility !== 'true' &&
+    data.visibility !== 'false' &&
+    data.visibility !== '1' &&
+    data.visibility !== '0' &&
+    data.visibility !== 1 &&
+    data.visibility !== 0
+    ){
+      validData = false;
+      errorMessage(visibilityContainer, "L'elemento selezionato non è valido, riprovare");
+    }
 
   return validData;
 }
