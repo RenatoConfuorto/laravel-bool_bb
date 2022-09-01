@@ -39,27 +39,6 @@ function formSubmit(){
   
 }
 
-// formBtn.addEventListener('click', function(event){
-//   const data = getData();
-//   console.log(data);
-
-//   //rimuovere messaggi di errore se ci sono
-//   const errorMessages = document.querySelectorAll('.alert.alert-danger');
-//   // console.log(errorMessages);
-//   errorMessages.forEach(element => {
-//     // form.remove(element);
-//     element.remove();
-//   });
-
-//   //validazione dei dati
-//   if(!validateData(data))console.log('dati non validi');
-//   else{
-//     console.log('dati validi -> submit');
-//     form.submit();
-//   }
-
-// });
-
 function getData(){
   const services = [];
   extraServices.forEach(element => {
@@ -237,27 +216,9 @@ function errorMessage(element, message){
 
 //ricerca indirizzi
 let results = [];
-let searchTextCtrl = ''; //controllo per far partire l'API
+let searchTextCtrl = address.value; //controllo per far partire l'API (iniziare ad address.value per form edit)
 
 delete axios.defaults.headers.common['X-Requested-With'];
-// address.addEventListener('keyup', function(event){
-//   // console.log(event.target.value);
-//   const query = event.target.value;
-//   if(query.length > 3){
-
-//     axios.get(`https://api.tomtom.com/search/2/geocode/${query}.json`, {
-//       params : {
-//         key : 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-//         countrySet: 'IT'
-//       }
-//     }).then(resp => {
-//       results = resp.data.results;
-//       addSuggestions(results);
-//     }).catch(e => {
-//       console.error('Sorry! ' + e);
-//     });
-//   }
-// });
 
 setInterval(callApi, 500);
 

@@ -1,8 +1,12 @@
 @extends('layouts.dashboard')
 
+@push('style')
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+@endpush
+
 @section('content')
   @if(session('message'))
-      <div class="alert alert-success">
+      <div class="alert alert-success position-absolute top-50 start-50 translate-middle px-5">
           {{ session('message') }}
       </div>
   @endif
