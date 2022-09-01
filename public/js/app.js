@@ -139,8 +139,6 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-
 /***/ }),
 
 /***/ 0:
