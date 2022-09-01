@@ -18,7 +18,7 @@
     </div>
   @endif
 
-  <form class="mt-3" action="{{ route('user.apartment.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return event.code !== 'Enter'">
+  <form class="mt-3 position-relative" action="{{ route('user.apartment.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return event.code !== 'Enter'">
     @csrf
 
     {{-- TITLE --}}
@@ -72,11 +72,12 @@
     {{-- /MQS --}}
 
     {{-- ADDRESS --}}
-    <div class="mb-3">
+    <div class="mb-3 position-relative">
       <label for="address" class="form-label">Indirizzo *</label>
       <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" minlength="4" maxlength="255">
     </div>
     <div class="address-tips"></div>
+    
     {{-- /ADDRESS --}}
 
     {{-- latitude --}}
