@@ -66,7 +66,7 @@ class ApartmentController extends Controller
 
         $new_apartment->services()->sync($data['extra_services']);
         
-        return redirect()->route('user.apartment.show', ['apartment' => $new_apartment->id]);
+        return redirect()->route('user.apartment.show', ['apartment' => $new_apartment->id])->with('message', 'Appartamento salvato con success');
     }
 
     /**
@@ -134,7 +134,7 @@ class ApartmentController extends Controller
             $apartment->services()->sync($data['extra_services']);
         }
 
-        return redirect()->route('user.apartment.show', ['apartment' => $apartment->id]);
+        return redirect()->route('user.apartment.show', ['apartment' => $apartment->id])->with('message', 'Appartamento salvato con success');
     }
 
     /**

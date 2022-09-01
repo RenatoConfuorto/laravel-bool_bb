@@ -1,6 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
+  @if(session('message'))
+      <div class="alert alert-success">
+          {{ session('message') }}
+      </div>
+  @endif
   <div>
     <img src="{{ asset('storage/' . $apartment->image ) }}" alt="">
     <img src="{{ $apartment->image }}" alt="">
@@ -31,4 +36,11 @@
       <button type="submit" class="btn btn-danger" onclick="return confirm('Vuoi davvero cancellare questo appartamento?')">Cancella questo appartamento</button>
   </form>
 
+  <script>
+    const successMessage = document.querySelector('.alert.alert-success');
+
+    setTimeout(function(){
+      successMessage.remove();
+    }, 3000);
+  </script>
 @endsection
