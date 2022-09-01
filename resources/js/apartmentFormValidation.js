@@ -8,6 +8,9 @@ const bathrooms_number = document.getElementById('bathrooms_number');
 const beds_number = document.getElementById('beds_number');
 const mqs = document.getElementById('mqs');
 const address = document.getElementById('address');
+const addressTipsContainer = document.querySelector('.address-tips');
+const latitude = document.getElementById('latitude');
+const longitude = document.getElementById('longitude');
 const previewImage = document.getElementById('image'); //solo edit
 const imageCover = document.getElementById('image-cover');
 const extraServiceContainer = document.querySelector('.extra-service');
@@ -74,13 +77,17 @@ function getData(){
     beds_number: beds_number.value,
     mqs: mqs.value,
     address: address.value,
+    latitude: latitude.value,
+    longitude: longitude.value,
     imageCover: imageCover.value,
     extraServices: services,
     visibility: visibilityValue,
+
   };
 }
 
 function validateData(data){
+  // console.log(data);
   let validData = true;
   //controllo titolo
   if(data.title.length < 4 || data.title.length > 255){
@@ -130,6 +137,25 @@ function validateData(data){
   if(data.address.length < 4 || data.address.length > 255){
     errorMessage(address.parentElement, 'Indirizzo non valido');
     // console.log('indirizzo')
+    validData = false;
+  }
+  //controllo coordinate
+  if(
+    !data.latitude ||
+    data.latitude < -90 ||
+    data.latitude > 90 ||
+    !data.longitude ||
+    data.longitude < -180 ||
+    data.longitude > 180
+    ){
+    const error = document.querySelector('#address+.alert.alert-danger');
+    if(error){
+      error.remove();
+      errorMessage(address.parentElement, 'Ops, qualcosa è andato storto, riprovare');
+
+    }else{
+      errorMessage(address.parentElement, 'Ops, qualcosa è andato storto, riprovare');
+    }
     validData = false;
   }
   //controllo immagine
@@ -207,4 +233,45 @@ function errorMessage(element, message){
 
   //inserire il messaggio nell'elemento
   element.appendChild(container);
+}
+
+//ricerca indirizzi
+let results = [];
+
+delete axios.defaults.headers.common['X-Requested-With'];
+address.addEventListener('keyup', function(event){
+  console.log(event.target.value);
+  const query = event.target.value;
+  if(query.length > 3){
+
+    axios.get(`https://api.tomtom.com/search/2/geocode/${query}.json`, {
+      params : {
+        key : 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+        countrySet: 'IT'
+      }
+    }).then(resp => {
+      results = resp.data.results;
+      addSuggestions(results);
+    }).catch(e => {
+      console.error('Sorry! ' + e);
+    });
+  }
+});
+
+function addSuggestions(data){
+  addressTipsContainer.innerHTML = '';
+
+  data.forEach(element => {
+    const tip = document.createElement('div');
+    const addressString = `${element.address.freeformAddress}, ${element.address.countrySecondarySubdivision}, ${element.address.countrySubdivision}`
+    tip.innerHTML = `<p>${addressString}</p>`;
+    tip.addEventListener('click', function(){
+      addressTipsContainer.innerHTML = '';
+      // console.log(element.position);
+      address.value = addressString;
+      latitude.value = element.position.lat;
+      longitude.value = element.position.lon;
+    });
+    addressTipsContainer.appendChild(tip);
+  });
 }

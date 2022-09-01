@@ -73,7 +73,23 @@
       <label for="address" class="form-label">Indirizzo *</label>
       <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : $apartment->address }}" minlength="4" maxlength="255">
     </div>
+    <div class="address-tips">
+
+    </div>
     {{-- /ADDRESS --}}
+
+    <div class="mb-3">
+      <label for="latitude" class="form-label">Latitudine *</label>
+      <input type="number" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') ? old('latitude') : $apartment->latitude }}" step="0.000001">
+    </div>
+    {{-- /latitude --}}
+
+    {{-- longitude --}}
+    <div class="mb-3">
+      <label for="longitude" class="form-label">Longitudine *</label>
+      <input type="number" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') ? old('longitude') : $apartment->longitude }}" step="0.000001">
+    </div>
+    {{-- /longitude --}}
 
     {{-- COVER IMAGE --}}
     <div class="mb-3">
