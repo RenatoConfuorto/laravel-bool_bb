@@ -2,11 +2,12 @@
   <div class="card" style="width: 18rem;">
   <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">{{ apartment.title }}</h5>
+    <p class="card-text">{{ apartment.description }}</p>
+    <span>{{ apartment.price }}</span>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">Cras justo odio</li>
+    <li class="list-group-item">{{ apartment.address }}</li>
     <li class="list-group-item">Dapibus ac facilisis in</li>
     <li class="list-group-item">Vestibulum at eros</li>
   </ul>

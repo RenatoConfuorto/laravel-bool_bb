@@ -5219,14 +5219,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_UserLogin_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/UserLogin.vue */ "./resources/js/components/UserLogin.vue");
-/* harmony import */ var _pages_GuestHomepage_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/GuestHomepage.vue */ "./resources/js/pages/GuestHomepage.vue");
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   components: {
-    UserLogin: _components_UserLogin_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    GuestHomepage: _pages_GuestHomepage_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    UserLogin: _components_UserLogin_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -5258,34 +5255,24 @@ var render = function render() {
       src: _vm.apartment.image,
       alt: _vm.apartment.title
     }
-  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("h5", {
     staticClass: "card-title"
-  }, [_vm._v("Card title")]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.apartment.title))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's content.")])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("ul", {
+  }, [_vm._v(_vm._s(_vm.apartment.description))]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.apartment.price))])]), _vm._v(" "), _c("ul", {
     staticClass: "list-group list-group-flush"
   }, [_c("li", {
     staticClass: "list-group-item"
-  }, [_vm._v("Cras justo odio")]), _vm._v(" "), _c("li", {
+  }, [_vm._v(_vm._s(_vm.apartment.address))]), _vm._v(" "), _c("li", {
     staticClass: "list-group-item"
   }, [_vm._v("Dapibus ac facilisis in")]), _vm._v(" "), _c("li", {
     staticClass: "list-group-item"
-  }, [_vm._v("Vestibulum at eros")])]);
-}, function () {
+  }, [_vm._v("Vestibulum at eros")])]), _vm._v(" "), _vm._m(0)]);
+};
+
+var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
@@ -5393,7 +5380,7 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_c("UserLogin"), _vm._v(" "), _c("GuestHomepage"), _vm._v(" "), _c("router-view")], 1);
+  return _c("div", [_c("UserLogin"), _vm._v(" "), _c("router-view")], 1);
 };
 
 var staticRenderFns = [];
