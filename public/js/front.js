@@ -5219,7 +5219,27 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SingleApartment'
+  name: 'SingleApartment',
+  data: function data() {
+    return {
+      apartment: null
+    };
+  },
+  created: function created() {
+    this.getApartmentDetails();
+  },
+  methods: {
+    getApartmentDetails: function getApartmentDetails() {
+      var _this = this;
+
+      var slug = this.$route.params.slug;
+      axios.get("http://127.0.0.1:8000/api/apartments/".concat(slug)).then(function (resp) {
+        if (resp.data.success) {
+          _this.apartment = resp.data.results;
+        }
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -5389,13 +5409,6 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("div", {
     staticClass: "card",
     staticStyle: {
@@ -5404,16 +5417,28 @@ var staticRenderFns = [function () {
   }, [_c("img", {
     staticClass: "card-img-top",
     attrs: {
-      src: "",
-      alt: "Card image cap"
+      src: _vm.apartment.image,
+      alt: _vm.apartment.title
     }
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]);
+};
+
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
     staticClass: "card-body"
   }, [_c("h5", {
     staticClass: "card-title"
   }, [_vm._v("Card title")]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's content.")])]), _vm._v(" "), _c("ul", {
+  }, [_vm._v("Some quick example text to build on the card title and make up the bulk of the card's content.")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("ul", {
     staticClass: "list-group list-group-flush"
   }, [_c("li", {
     staticClass: "list-group-item"
@@ -5421,7 +5446,12 @@ var staticRenderFns = [function () {
     staticClass: "list-group-item"
   }, [_vm._v("Dapibus ac facilisis in")]), _vm._v(" "), _c("li", {
     staticClass: "list-group-item"
-  }, [_vm._v("Vestibulum at eros")])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Vestibulum at eros")])]);
+}, function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
     staticClass: "card-body"
   }, [_c("a", {
     staticClass: "card-link",
@@ -5433,7 +5463,7 @@ var staticRenderFns = [function () {
     attrs: {
       href: "#"
     }
-  }, [_vm._v("Another link")])])]);
+  }, [_vm._v("Another link")])]);
 }];
 render._withStripped = true;
 

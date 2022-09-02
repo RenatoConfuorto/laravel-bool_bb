@@ -1,6 +1,6 @@
 <template>
   <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="" alt="Card image cap">
+  <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -19,7 +19,27 @@
 
 <script>
 export default {
-  name: 'SingleApartment'
+  name: 'SingleApartment',
+  data() {
+    return {
+      apartment: null
+    }
+  },
+  created() {
+    this.getApartmentDetails();
+  },
+  methods: {
+    getApartmentDetails() {
+      const slug = this.$route.params.slug;
+
+      axios.get(`http://127.0.0.1:8000/api/apartments/${slug}`)
+      .then((resp) => {
+        if (resp.data.success) {
+          this.apartment = resp.data.results;
+        }
+      });
+    }
+  }
 }
 </script>
 
