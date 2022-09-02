@@ -1,6 +1,7 @@
 <template>
   <div>
     <UserLogin/>
+    <GuestHomepage />
     <router-view></router-view>
   </div>
 </template>

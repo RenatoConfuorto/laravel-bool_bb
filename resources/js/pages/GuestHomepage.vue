@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>GUEST HOMEPAGE</h1>
     <main>
       <div class="container-fluid d-flex justify-content-center flex-wrap">
         <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
@@ -9,7 +10,7 @@
 </template>
 
 <script>
-import ApartmentCard from './ApartmentCard.vue';
+import ApartmentCard from '../components/ApartmentCard.vue';
 
 export default {
   name: 'GuestHomepage',
