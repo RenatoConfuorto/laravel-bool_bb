@@ -15,13 +15,13 @@ const router = new VueRouter({
       component: GuestHomepage
     },
     {
-      path: "/*", //link non riconosciuto
-      component: GuestHomepage,
-    },
-    {
       path: "/:slug",
       name: "single-apartment",
       component: SingleApartment
+    },
+    {
+      path: "/*", //link non riconosciuto
+      component: GuestHomepage,
     },
   ]
 });
