@@ -5162,8 +5162,31 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module './ApartmentCard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'GuestHomepage'
+  name: 'GuestHomepage',
+  components: {
+    ApartmentCard: !(function webpackMissingModule() { var e = new Error("Cannot find module './ApartmentCard.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  },
+  data: function data() {
+    return {
+      apartments: []
+    };
+  },
+  created: function created() {
+    this.getApartments();
+  },
+  methods: {
+    getApartments: function getApartments() {
+      var _this = this;
+
+      axios.get('http://127.0.0.1:8000/api/apartments').then(function (resp) {
+        _this.apartments = resp.data.results;
+        console.log(resp.data.results);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -5243,7 +5266,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", [_vm._v("\n  GUEST HOMEPAGE\n")]);
+  return _c("div", [_c("main", [_c("div", {
+    staticClass: "container-fluid d-flex justify-content-center flex-wrap"
+  }, _vm._l(_vm.apartments, function (apartment) {
+    return _c("ApartmentCard", {
+      key: apartment.id,
+      attrs: {
+        apartment: apartment
+      }
+    });
+  }), 1)])]);
 };
 
 var staticRenderFns = [];
