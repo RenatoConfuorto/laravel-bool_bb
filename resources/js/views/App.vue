@@ -1,18 +1,47 @@
 <template>
   <div>
-    <UserLogin/>
+    <AppHeader
+    v-if="loggedIn"
+    :logged-in=loggedIn
+    :user-route="userRoute"
+    />
+    <AppHeader
+    v-else
+    :logged-in="loggedIn"
+    :login-route="loginRoute"
+    :registerRoute="registerRoute"
+    />
     <router-view></router-view>
   </div>
-</template>
+</template> 
 
 <script>
-import UserLogin from '../components/UserLogin.vue';
+import AppHeader from '../components/AppHeader.vue';
+import GuestHomepage from '../pages/GuestHomepage.vue';
 
 export default {
   name: 'App',
-  components: {
-    UserLogin,
+  data(){
+    return{
+      userData: null,
+    };
   },
+  components: {
+    AppHeader,
+    GuestHomepage
+  },
+  props: {
+    loggedIn: Boolean,
+    user: String,
+    userRoute: String,
+    loginRoute: String,
+    registerRoute: String,
+  },
+  created(){
+    if(this.user)this.userData = JSON.parse(this.user);
+    console.log(this.userData)
+    console.log(this.registerRoute);
+  }
 }
 </script>
 
