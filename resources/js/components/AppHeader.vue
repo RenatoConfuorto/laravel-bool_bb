@@ -35,6 +35,12 @@ export default {
           visible: this.loggedIn,
           router: false,
         },
+        {
+          text: 'Home',
+          link: '/',
+          visible: true,
+          router: true,
+        },
       ],
     }
   },

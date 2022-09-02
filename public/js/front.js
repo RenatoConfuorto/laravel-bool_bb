@@ -5187,6 +5187,11 @@ __webpack_require__.r(__webpack_exports__);
         link: this.userRoute,
         visible: this.loggedIn,
         router: false
+      }, {
+        text: 'Home',
+        link: '/',
+        visible: true,
+        router: true
       }]
     };
   },

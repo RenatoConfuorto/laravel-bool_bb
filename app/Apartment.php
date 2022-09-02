@@ -55,4 +55,21 @@ class Apartment extends Model
         }
         return $slug;
     }
+
+    //restituisce la distanza in Km da $_apartment
+    public function getDistance($_apartment){
+        $radius = 6371.0710;  //raggio terrestre in Km
+        $rLat1 = $this->latitude * ( pi()/180 ); //latitudine dell'appartamento in radianti
+        $rLat2 = $_apartment->latitude * ( pi()/180 ); //latitudine in rad del secondo appartamento
+        $diffLat = $rLat2 - $rLat1;
+
+        $rLong1 = $this->longitude * ( pi()/180 );
+        $rLong2 = $_apartment->longitude * ( pi()/180 );
+        $diffLon = $rLong2 - $rLong1;
+
+        $distance = 2 * $radius * asin( sqrt( sin($diffLat / 2) * sin($diffLat / 2) + cos(( $rLat1 )) * cos($rLat2) * sin( $diffLon / 2) * sin( $diffLon / 2 )) );
+        
+        return $distance;
+    }
+
 }
