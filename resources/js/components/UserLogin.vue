@@ -1,14 +1,15 @@
 <template>
   <div>
-    <a href="">Login</a>
-    <a href="">Register</a>
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UserLogin'
+  name: 'UserLogin',
 }
+  
 </script>
 
 <style>
