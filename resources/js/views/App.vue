@@ -1,12 +1,22 @@
 <template>
   <div>
-    <UserLogin/>
+    <AppHeader
+    v-if="loggedIn"
+    :logged-in=loggedIn
+    :user-route="userRoute"
+    />
+    <AppHeader
+    v-else
+    :logged-in="loggedIn"
+    :login-route="loginRoute"
+    :registerRoute="registerRoute"
+    />
     <router-view></router-view>
   </div>
 </template> 
 
 <script>
-import UserLogin from '../components/UserLogin.vue';
+import AppHeader from '../components/AppHeader.vue';
 import GuestHomepage from '../pages/GuestHomepage.vue';
 
 export default {
@@ -17,7 +27,7 @@ export default {
     };
   },
   components: {
-    UserLogin,
+    AppHeader,
     GuestHomepage
   },
   props: {
@@ -28,7 +38,7 @@ export default {
     registerRoute: String,
   },
   created(){
-    this.userData = JSON.parse(this.user);
+    if(this.user)this.userData = JSON.parse(this.user);
     console.log(this.userData)
     console.log(this.registerRoute);
   }
