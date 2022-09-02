@@ -5446,6 +5446,13 @@ var render = function render() {
   }, [_vm._v("Numero di letti: " + _vm._s(_vm.apartment.beds_number))]), _vm._v(" "), _c("li", {
     staticClass: "list-group-item"
   }, [_vm._v("Numero di bagni: " + _vm._s(_vm.apartment.bathrooms_number))])]), _vm._v(" "), _c("div", {
+    staticClass: "services text-center"
+  }, _vm._l(_vm.apartment.services, function (service) {
+    return _c("span", {
+      key: service.id,
+      staticClass: "badge rounded-pill bg-success"
+    }, [_vm._v(_vm._s(service.name) + " ")]);
+  }), 0), _vm._v(" "), _c("div", {
     staticClass: "card-body"
   }, [_c("router-link", {
     attrs: {

@@ -13,6 +13,9 @@
         <li class="list-group-item">Numero di letti: {{ apartment.beds_number }}</li>
         <li class="list-group-item">Numero di bagni: {{ apartment.bathrooms_number }}</li>
       </ul>
+      <div class="services text-center">
+        <span class="badge rounded-pill bg-success" v-for="service in apartment.services" :key="service.id">{{ service.name }} </span>
+      </div>
       <div class="card-body">
         <router-link :to="{ name: 'homepage'  }">HOME</router-link>
       </div>
