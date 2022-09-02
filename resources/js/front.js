@@ -31,3 +31,12 @@
      el: '#root',
      router
  });
+
+
+// tom tom map
+import tt from '@tomtom-international/web-sdk-maps';
+
+var map = tt.map({
+    key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+    container: 'map'
+});
