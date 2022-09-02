@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import GuestHomepage from "./pages/GuestHomepage.vue";
+import SingleApartment from "./pages/SingleApartment.vue";
 
 const router = new VueRouter({
   mode: "history",
@@ -16,7 +17,12 @@ const router = new VueRouter({
     {
       path: "/*", //link non riconosciuto
       component: GuestHomepage,
-    }
+    },
+    {
+      path: "/:slug",
+      name: "single-apartment",
+      component: SingleApartment
+    },
   ]
 });
 
