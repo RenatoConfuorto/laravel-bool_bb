@@ -9,7 +9,22 @@
 </head>
 <body>
   <div id="root">
+    @if (Auth::check())
+      <mainapp
+      :logged-in= "true"
+      user="{{ Auth::user() }}"
+      user-route="{{ route('user.dashboard') }}"
+      >
+      </mainapp>
+      @else
+      <mainapp
+      :logged-in= "false"
+      login-route="{{ route('login') }}"
+      register-route="{{ route('register') }}"
+      >
 
+      </mainapp>
+    @endif
   </div>
 
   <script src="{{ asset('js/front.js') }}"></script>

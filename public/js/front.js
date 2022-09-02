@@ -5183,9 +5183,26 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
+  data: function data() {
+    return {
+      userData: null
+    };
+  },
   components: {
     UserLogin: _components_UserLogin_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     GuestHomepage: _pages_GuestHomepage_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    loggedIn: Boolean,
+    user: String,
+    userRoute: String,
+    loginRoute: String,
+    registerRoute: String
+  },
+  created: function created() {
+    this.userData = JSON.parse(this.user);
+    console.log(this.userData);
+    console.log(this.registerRoute);
   }
 });
 
@@ -56266,8 +56283,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _views_App_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56287,19 +56303,16 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('mainapp', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue")["default"]);
 var app = new Vue({
   el: '#root',
-  render: function render(h) {
-    return h(_views_App_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
-  },
-  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 
 /***/ }),
@@ -56482,7 +56495,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Boolean\laravel-bool_bb\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
