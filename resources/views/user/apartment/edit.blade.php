@@ -97,7 +97,7 @@
     <div class="mb-3">
       <label for="image-cover">Aggiungi un immagine *</label>
       <input type="file" id="image-cover" name="image-cover" accept=".jpg, .jpeg, .png, .bmp, .gif, .svg, .webp">
-      <img src="{{ $apartment->image }}" id="image" alt="">
+      <img src="{{ asset('storage/' . $apartment->image) }}" id="image" alt="{{ $apartment->title }}">
     </div>
     {{-- /COVER IMAGE --}}
 

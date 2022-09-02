@@ -11,8 +11,8 @@
       </div>
   @endif
   <div>
-    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="">
-    <img src="{{ $apartment->image }}" alt="">
+    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="{{ $apartment->title }}">
+    <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
   </div>
   <h1>{{ $apartment->title }}</h1>
   <h2>{{ $apartment->slug }}</h2>
