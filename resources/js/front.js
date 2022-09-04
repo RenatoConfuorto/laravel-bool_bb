@@ -34,9 +34,9 @@
 
 
 // tom tom map
-import tt from '@tomtom-international/web-sdk-maps';
+// import tt from '@tomtom-international/web-sdk-maps';
 
-const map = tt.map({
-    key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-    container: 'map'
-});
+// const map = tt.map({
+//     key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+//     container: 'map'
+// });

@@ -5227,7 +5227,21 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'ContactForm'
+  name: 'ContactForm',
+  data: function data() {
+    return {
+      email: '',
+      text: ''
+    };
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var message = {
+        email: this.email,
+        text: this.text
+      };
+    }
+  }
 });
 
 /***/ }),
@@ -5483,42 +5497,84 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm._m(0);
-};
-
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
   return _c("div", {
     staticClass: "container"
-  }, [_vm._v("\n  FORM CONTATTO\n  "), _c("form", [_c("div", {
+  }, [_vm._v("\n  FORM CONTATTO\n  "), _c("form", {
+    staticClass: "mt-3 position-relative",
+    attrs: {
+      action: "",
+      method: "POST",
+      enctype: "multipart/form-data"
+    }
+  }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "exampleFormControlInput1"
+      "for": "email"
     }
   }, [_vm._v("Inserisci la tua email per essere ricontattato")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.email,
+      expression: "email"
+    }],
     staticClass: "form-control",
     attrs: {
       type: "email",
-      id: "exampleFormControlInput1",
-      placeholder: "name@example.com"
+      id: "email",
+      name: "email",
+      placeholder: "name@example.com",
+      required: ""
+    },
+    domProps: {
+      value: _vm.email
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.email = $event.target.value;
+      }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
     attrs: {
-      "for": "exampleFormControlTextarea1"
+      "for": "text"
     }
   }, [_vm._v("Il tuo messaggio")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.text,
+      expression: "text"
+    }],
     staticClass: "form-control",
     attrs: {
-      id: "exampleFormControlTextarea1",
-      rows: "3"
+      type: "text",
+      id: "text",
+      rows: "5",
+      name: "text",
+      required: ""
+    },
+    domProps: {
+      value: _vm.text
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.text = $event.target.value;
+      }
     }
-  })])])]);
-}];
+  })]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Submit")])])]);
+};
+
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -57389,8 +57445,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
-/* harmony import */ var _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @tomtom-international/web-sdk-maps */ "./node_modules/@tomtom-international/web-sdk-maps/dist/maps.min.js");
-/* harmony import */ var _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -57421,12 +57475,11 @@ var app = new Vue({
   el: '#root',
   router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
 }); // tom tom map
-
-
-var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default.a.map({
-  key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-  container: 'map'
-});
+// import tt from '@tomtom-international/web-sdk-maps';
+// const map = tt.map({
+//     key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+//     container: 'map'
+// });
 
 /***/ }),
 
