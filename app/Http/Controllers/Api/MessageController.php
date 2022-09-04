@@ -13,9 +13,9 @@ class MessageController extends Controller
         $data = $request->all();
         // dd($request);
         $request->validate([
-            'apartment_id' => 'required',
-            'email' => 'required',
-            'text' => 'required'
+            'apartment_id' => 'required|integer',
+            'email' => 'required|string|email|max:255',
+            'text' => 'required|string|max:20000'
         ]);
 
 

@@ -5235,11 +5235,15 @@ __webpack_require__.r(__webpack_exports__);
         apartment_id: 0,
         email: '',
         text: ''
-      }
+      },
+      emailMessage: '',
+      textMessage: ''
     };
   },
   created: function created() {
     this.getApartmentDetails();
+    this.validateEmail();
+    this.validateText();
   },
   methods: {
     getApartmentDetails: function getApartmentDetails() {
@@ -5257,6 +5261,24 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    validateEmail: function validateEmail() {
+      var validRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!this.form.email.match(validRegex)) {
+        this.emailMessage = "L'email deve rispettare il formato example@host.it";
+      } else {
+        this.emailMessage = "";
+      }
+    },
+    validateText: function validateText() {
+      var textLength = this.form.text.length;
+
+      if (textLength < 30) {
+        this.textMessage = "Lascia un messaggio per il proprietario..";
+      } else {
+        this.textMessage = "";
+      }
     },
     submitForm: function submitForm() {
       axios.post('http://127.0.0.1:8000/api/message', this.form).then(function (resp) {
@@ -5504,10 +5526,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5554,12 +5576,12 @@ var render = function render() {
       }
     }
   }, [_c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-3"
   }, [_c("label", {
     attrs: {
       "for": "email"
     }
-  }, [_vm._v("Inserisci la tua email per essere ricontattato")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Inserisci la tua email per essere ricontattato *")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5578,6 +5600,7 @@ var render = function render() {
       value: _vm.form.email
     },
     on: {
+      keyup: _vm.validateEmail,
       input: function input($event) {
         if ($event.target.composing) return;
 
@@ -5585,12 +5608,17 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "text-danger",
+    attrs: {
+      "v-model": _vm.emailMessage
+    }
+  }, [_vm._v(_vm._s(_vm.emailMessage))]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mt-3"
   }, [_c("label", {
     attrs: {
       "for": "text"
     }
-  }, [_vm._v("Il tuo messaggio")]), _vm._v(" "), _c("textarea", {
+  }, [_vm._v("Il tuo messaggio *")]), _vm._v(" "), _c("textarea", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5609,14 +5637,20 @@ var render = function render() {
       value: _vm.form.text
     },
     on: {
+      keyup: _vm.validateText,
       input: function input($event) {
         if ($event.target.composing) return;
 
         _vm.$set(_vm.form, "text", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary",
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "text-danger",
+    attrs: {
+      "v-model": _vm.textMessage
+    }
+  }, [_vm._v(_vm._s(_vm.textMessage))]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary mt-3",
     attrs: {
       type: "submit"
     }
@@ -57553,7 +57587,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ContactForm_vue_vue_type_template_id_90ca07ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContactForm.vue?vue&type=template&id=90ca07ea& */ "./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&");
+/* harmony import */ var _ContactForm_vue_vue_type_template_id_90ca07ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true& */ "./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true&");
 /* harmony import */ var _ContactForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ContactForm.vue?vue&type=script&lang=js& */ "./resources/js/pages/ContactForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -57565,11 +57599,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _ContactForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ContactForm_vue_vue_type_template_id_90ca07ea___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ContactForm_vue_vue_type_template_id_90ca07ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ContactForm_vue_vue_type_template_id_90ca07ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ContactForm_vue_vue_type_template_id_90ca07ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "90ca07ea",
   null
   
 )
@@ -57595,19 +57629,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea& ***!
-  \***************************************************************************/
+/***/ "./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactForm_vue_vue_type_template_id_90ca07ea___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./ContactForm.vue?vue&type=template&id=90ca07ea& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactForm_vue_vue_type_template_id_90ca07ea___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactForm_vue_vue_type_template_id_90ca07ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/pages/ContactForm.vue?vue&type=template&id=90ca07ea&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactForm_vue_vue_type_template_id_90ca07ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactForm_vue_vue_type_template_id_90ca07ea___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_ContactForm_vue_vue_type_template_id_90ca07ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

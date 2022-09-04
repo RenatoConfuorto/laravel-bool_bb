@@ -22,17 +22,19 @@
       <!-- CONTACT FORM -->
       <form class="mt-3 position-relative" @submit.prevent="submitForm" enctype="multipart/form-data">
 
-        <div class="form-group">
-          <label for="email">Inserisci la tua email per essere ricontattato</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required v-model="form.email">
+        <div class="form-group mt-3">
+          <label for="email">Inserisci la tua email per essere ricontattato *</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required v-model="form.email" @keyup="validateEmail">
         </div>
+        <div class="text-danger" :v-model="emailMessage">{{ emailMessage }}</div>
         
-        <div class="form-group">
-          <label for="text">Il tuo messaggio</label>
-          <textarea type="text" class="form-control" id="text" rows="5" name="text" required v-model="form.text"></textarea>
+        <div class="form-group mt-3">
+          <label for="text">Il tuo messaggio *</label>
+          <textarea type="text" class="form-control" id="text" rows="5" name="text" required v-model="form.text" @keyup="validateText"></textarea>
         </div>
+        <div class="text-danger" :v-model="textMessage">{{ textMessage }}</div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
       </form>
       <!-- /CONTACT FORM -->
     </div>
@@ -51,11 +53,15 @@ export default {
         apartment_id: 0,
         email: '',
         text: '',
-      }
+      },
+      emailMessage: '',
+      textMessage: '',
     }
   },
   created() {
     this.getApartmentDetails();
+    this.validateEmail();
+    this.validateText();
   },
   methods: {
     getApartmentDetails() {
@@ -72,6 +78,24 @@ export default {
         }
       });
     },
+    validateEmail() {
+      const validRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!this.form.email.match(validRegex)) {
+        this.emailMessage = "L'email deve rispettare il formato example@host.it";
+      } else {
+        this.emailMessage = "";
+      }
+    },
+    validateText() {
+      let textLength = this.form.text.length;
+
+      if (textLength < 30 ) {
+        this.textMessage = "Lascia un messaggio per il proprietario..";
+      } else {
+        this.textMessage = "";
+      }
+    },
     submitForm() {
       axios.post('http://127.0.0.1:8000/api/message', this.form)
       .then((resp) => {
@@ -82,6 +106,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sccss" scoped>
 
 </style>
