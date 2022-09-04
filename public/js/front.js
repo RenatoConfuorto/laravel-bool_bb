@@ -5259,27 +5259,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitForm: function submitForm() {
-      // delete axios.defaults.headers.common['X-Requested-With'];
       axios.post('http://127.0.0.1:8000/api/message', this.form).then(function (resp) {
         console.log(resp);
-      }); // -------------------------------------------------------------
-      // const slug = this.$route.params.slug;
-      // delete axios.defaults.headers.common['X-Requested-With'];
-      // axios({
-      //   method: 'post',
-      //   url: 'http://127.0.0.1:8000/api/message',
-      //   data: {
-      //     apartment_id: this.form.apartment_id,
-      //     email: this.form.email,
-      //     text: this.form.text
-      //   },
-      // headers: { 'Content-Type': 'application/json' }
-      // }).then((resp) => {
-      //   console.log(resp);
-      // }).catch((error) => {
-      //   console.log(error);
-      // });
-      // -----------------------------------------------------------------
+      });
     }
   }
 });
@@ -57520,7 +57502,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -57536,7 +57520,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-// const files = require.context('./', true, /\.vue$/i)
+
+ // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
@@ -57546,10 +57531,10 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('mainapp', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue")["default"]);
-var app = new Vue({
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('mainapp', __webpack_require__(/*! ./views/App.vue */ "./resources/js/views/App.vue")["default"]);
+var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#root',
-  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_1__["default"]
 }); // tom tom map
 // import tt from '@tomtom-international/web-sdk-maps';
 // const map = tt.map({

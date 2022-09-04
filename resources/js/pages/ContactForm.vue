@@ -53,7 +53,6 @@ export default {
         text: '',
       }
     }
-
   },
   created() {
     this.getApartmentDetails();
@@ -74,31 +73,10 @@ export default {
       });
     },
     submitForm() {
-
-      // delete axios.defaults.headers.common['X-Requested-With'];
       axios.post('http://127.0.0.1:8000/api/message', this.form)
       .then((resp) => {
         console.log(resp);
       });
-
-      // -------------------------------------------------------------
-      // const slug = this.$route.params.slug;
-      // delete axios.defaults.headers.common['X-Requested-With'];
-      // axios({
-      //   method: 'post',
-      //   url: 'http://127.0.0.1:8000/api/message',
-      //   data: {
-      //     apartment_id: this.form.apartment_id,
-      //     email: this.form.email,
-      //     text: this.form.text
-      //   },
-      // headers: { 'Content-Type': 'application/json' }
-      // }).then((resp) => {
-      //   console.log(resp);
-      // }).catch((error) => {
-      //   console.log(error);
-      // });
-// -----------------------------------------------------------------
     }
   }
 }
