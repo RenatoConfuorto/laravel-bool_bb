@@ -5268,8 +5268,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SingleApartment',
   data: function data() {
     return {
-      apartment: {},
-      marker: {} // con null da un'errore in console perchè cerca di leggere i dati prima che arrivino
+      apartment: {} // con null da un'errore in console perchè cerca di leggere i dati prima che arrivino
       // apartment: null
 
     };
@@ -5277,8 +5276,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getApartmentDetails();
   },
-  mounted: function mounted() {
-    this.addMarker(map);
+  mounted: function mounted() {// this.addMarker(map);
   },
   methods: {
     getApartmentDetails: function getApartmentDetails() {
@@ -5295,20 +5293,18 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
-    },
-    addMarker: function addMarker(map) {
-      var tt = window.tt; // console.log(window);
+    } // addMarker(map) {
+    //   const tt = window.tt;
+    //   // console.log(window);
+    //   let location = [-121.91595, 37.36729];
+    //   console.log(location);
+    //   let popupOffset = 25;
+    //   let marker = new tt.Marker().setLngLat(location).addTo(map);
+    //   let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
+    //   marker.setPopup(popup).togglePopup();
+    //   console.log(marker);
+    // },
 
-      var location = [-121.91595, 37.36729];
-      console.log(location);
-      var popupOffset = 25;
-      var marker = new tt.Marker().setLngLat(location).addTo(map);
-      var popup = new tt.Popup({
-        offset: popupOffset
-      }).setHTML("Your address!");
-      marker.setPopup(popup).togglePopup();
-      console.log(marker);
-    }
   }
 });
 

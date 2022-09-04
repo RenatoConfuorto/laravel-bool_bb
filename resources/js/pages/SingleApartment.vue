@@ -38,7 +38,6 @@ export default {
   data() {
     return {
       apartment: {},
-      marker: {}
       // con null da un'errore in console perchè cerca di leggere i dati prima che arrivino
       // apartment: null
     }
@@ -47,7 +46,7 @@ export default {
     this.getApartmentDetails();
   },
   mounted() {
-    this.addMarker(map);
+    // this.addMarker(map);
   },
   methods: {
     getApartmentDetails() {
@@ -63,22 +62,22 @@ export default {
         }
       });
     },
-    addMarker(map) {
-      const tt = window.tt;
-      // console.log(window);
+    // addMarker(map) {
+    //   const tt = window.tt;
+    //   // console.log(window);
 
-      let location = [-121.91595, 37.36729];
-      console.log(location);
+    //   let location = [-121.91595, 37.36729];
+    //   console.log(location);
 
-      let popupOffset = 25;
+    //   let popupOffset = 25;
 
-      let marker = new tt.Marker().setLngLat(location).addTo(map);
+    //   let marker = new tt.Marker().setLngLat(location).addTo(map);
       
 
-      let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
-      marker.setPopup(popup).togglePopup();
-      console.log(marker);
-    },
+    //   let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
+    //   marker.setPopup(popup).togglePopup();
+    //   console.log(marker);
+    // },
   }
 }
 
