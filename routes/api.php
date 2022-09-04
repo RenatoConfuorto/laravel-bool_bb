@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/apartments', 'Api\ApartmentController@index')->name('api.apartments.index');
 Route::get('/apartments/{slug}', 'Api\ApartmentController@show')->name('api.apartments.show');
+Route::get('/message/{slug}/contact', 'Api\MessageController@create')->name('api.message.create');

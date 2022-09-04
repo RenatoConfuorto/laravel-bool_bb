@@ -1,37 +1,44 @@
 <template>
   <!-- CONTAINER E ROOT ELEMENT -->
-  <div class="container-fluid d-flex justify-content-center flex-wrap">
-    <!-- BOOTSTRAP CARD -->
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
-      <div class="card-body">
-        <h5 class="card-title">{{ apartment.title }}</h5>
-        <p class="card-text">{{ apartment.description }}</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Prezzo: {{ apartment.price }} &euro;</li>
-        <li class="list-group-item">Indirizzo: {{ apartment.address }}</li>
-        <li class="list-group-item">Numero di stanze: {{ apartment.rooms_number }}</li>
-        <li class="list-group-item">Numero di letti: {{ apartment.beds_number }}</li>
-        <li class="list-group-item">Numero di bagni: {{ apartment.bathrooms_number }}</li>
-      </ul>
-      <div class="services text-center">
-        <span class="badge rounded-pill bg-success" v-for="service in apartment.services" :key="service.id">{{ service.name }} </span>
-      </div>
-      <div class="card-body">
-        <router-link :to="{ name: 'homepage'  }">HOME</router-link>
-      </div>
-    </div>
-    <!-- BOOTSTRAP CARD -->
+  <div class="container d-flex justify-content-center flex-wrap">
 
-    <!-- TOM TOM MAP -->
-    <div id="map"></div>
-    <!-- /TOM TOM MAP -->
+    <div class="container-fluid d-flex justify-content-center">
+      <!-- BOOTSTRAP CARD -->
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
+        <div class="card-body">
+          <h5 class="card-title">{{ apartment.title }}</h5>
+          <p class="card-text">{{ apartment.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Prezzo: {{ apartment.price }} &euro;</li>
+          <li class="list-group-item">Indirizzo: {{ apartment.address }}</li>
+          <li class="list-group-item">Numero di stanze: {{ apartment.rooms_number }}</li>
+          <li class="list-group-item">Numero di letti: {{ apartment.beds_number }}</li>
+          <li class="list-group-item">Numero di bagni: {{ apartment.bathrooms_number }}</li>
+        </ul>
+        <div class="services text-center">
+          <span class="badge rounded-pill bg-success" v-for="service in apartment.services" :key="service.id">{{ service.name }} </span>
+        </div>
+        <div class="card-body">
+          <router-link :to="{ name: 'homepage' }">HOME</router-link>
+          <router-link :to="{ name: 'contact-form', params: {slug: apartment.slug} }">Contatta il proprietario dell'appartamento</router-link>
+        </div>
+      </div>
+      <!-- BOOTSTRAP CARD -->
+    </div>
+
+    <div class="container-fluid">
+      <!-- TOM TOM MAP -->
+      <div id="map"></div>
+      <!-- /TOM TOM MAP -->
+    </div>
   </div>
   <!-- /CONTAINER E ROOT ELEMENT -->
 </template>
 
 <script>
+import tt from '@tomtom-international/web-sdk-maps';
 
 export default {
   name: 'SingleApartment',
@@ -46,6 +53,7 @@ export default {
     this.getApartmentDetails();
   },
   mounted() {
+    this.createMap();
     // this.addMarker(map);
   },
   methods: {
@@ -62,8 +70,14 @@ export default {
         }
       });
     },
-    // addMarker(map) {
-    //   const tt = window.tt;
+    createMap() {
+      const map = tt.map({
+        key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+        container: 'map'
+      });
+    },
+    addMarker(map) {
+      // const tt = window.tt;
     //   // console.log(window);
 
     //   let location = [-121.91595, 37.36729];
@@ -77,7 +91,7 @@ export default {
     //   let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
     //   marker.setPopup(popup).togglePopup();
     //   console.log(marker);
-    // },
+    },
   }
 }
 
@@ -86,7 +100,7 @@ export default {
 <style lang="scss" scoped>
 
 #map {
-  width: 500px;
+  width: 100%;
   height: 500px;
 }
 
