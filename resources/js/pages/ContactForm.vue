@@ -20,16 +20,16 @@
     <!-- CONTAINER FLUID -->
     <div class="container-fluid">
       <!-- CONTACT FORM -->
-      <form class="mt-3 position-relative" @submit.prevent="submitForm" method="POST" enctype="multipart/form-data">
+      <form class="mt-3 position-relative" @submit.prevent="submitForm" enctype="multipart/form-data">
 
         <div class="form-group">
           <label for="email">Inserisci la tua email per essere ricontattato</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required v-model="email">
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required v-model="form.email">
         </div>
         
         <div class="form-group">
           <label for="text">Il tuo messaggio</label>
-          <textarea type="text" class="form-control" id="text" rows="5" name="text" required v-model="text"></textarea>
+          <textarea type="text" class="form-control" id="text" rows="5" name="text" required v-model="form.text"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -47,9 +47,11 @@ export default {
   data() {
     return {
       apartment: {},
-      apartmentId: 0,
-      email: '',
-      text: '',
+      form: {
+        apartment_id: 0,
+        email: '',
+        text: '',
+      }
     }
 
   },
@@ -64,7 +66,7 @@ export default {
       .then((resp) => {
         if (resp.data.success) {
           this.apartment = resp.data.results;
-          this.apartmentId = resp.data.results.id;
+          this.form.apartment_id = resp.data.results.id;
         } else {
           // per adesso reindirizza alla homepage, da gestire meglio
           this.$router.push({ name: 'homepage' });
@@ -72,15 +74,9 @@ export default {
       });
     },
     submitForm() {
-      let data = {
-        apartment_id: this.apartmentId,
-        email: this.email,
-        text: this.text,
-      };
 
-
-      delete axios.defaults.headers.common['X-Requested-With'];
-      axios.post('https://127.0.0.1:8000/message', data)
+      // delete axios.defaults.headers.common['X-Requested-With'];
+      axios.post('http://127.0.0.1:8000/api/message', this.form)
       .then((resp) => {
         console.log(resp);
       });
@@ -90,15 +86,13 @@ export default {
       // delete axios.defaults.headers.common['X-Requested-With'];
       // axios({
       //   method: 'post',
-      //   url: 'https://127.0.0.1:8000/message',
-      //   data : {
-      //   apartment_id: this.apartmentId,
-      //   email: this.email,
-      //   text: this.text,
-      // },
-      //   headers: {
-      //   'Content-Type': 'Application/json',
+      //   url: 'http://127.0.0.1:8000/api/message',
+      //   data: {
+      //     apartment_id: this.form.apartment_id,
+      //     email: this.form.email,
+      //     text: this.form.text
       //   },
+      // headers: { 'Content-Type': 'application/json' }
       // }).then((resp) => {
       //   console.log(resp);
       // }).catch((error) => {

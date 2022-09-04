@@ -6,12 +6,23 @@ use App\Message;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MessaageController extends Controller
+class MessageController extends Controller
 {
-    public function post($data) {
-        return response()->json([
-            'success' => true ,
-            'results' => $data,
+    public function store(Request $request) {
+
+        $data = $request->all();
+        // dd($request);
+        $request->validate([
+            'apartment_id' => 'required',
+            'email' => 'required',
+            'text' => 'required'
         ]);
+
+
+        $message = new Message();
+
+        $message->fill($data);
+
+        $message->save();
     }
 }

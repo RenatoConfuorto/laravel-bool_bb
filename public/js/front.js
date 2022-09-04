@@ -5231,9 +5231,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       apartment: {},
-      apartmentId: 0,
-      email: '',
-      text: ''
+      form: {
+        apartment_id: 0,
+        email: '',
+        text: ''
+      }
     };
   },
   created: function created() {
@@ -5247,7 +5249,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get("http://127.0.0.1:8000/api/apartments/".concat(slug)).then(function (resp) {
         if (resp.data.success) {
           _this.apartment = resp.data.results;
-          _this.apartmentId = resp.data.results.id;
+          _this.form.apartment_id = resp.data.results.id;
         } else {
           // per adesso reindirizza alla homepage, da gestire meglio
           _this.$router.push({
@@ -5257,28 +5259,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     submitForm: function submitForm() {
-      var data = {
-        apartment_id: this.apartmentId,
-        email: this.email,
-        text: this.text
-      };
-      delete axios.defaults.headers.common['X-Requested-With'];
-      axios.post('https://127.0.0.1:8000/message', data).then(function (resp) {
+      // delete axios.defaults.headers.common['X-Requested-With'];
+      axios.post('http://127.0.0.1:8000/api/message', this.form).then(function (resp) {
         console.log(resp);
       }); // -------------------------------------------------------------
       // const slug = this.$route.params.slug;
       // delete axios.defaults.headers.common['X-Requested-With'];
       // axios({
       //   method: 'post',
-      //   url: 'https://127.0.0.1:8000/message',
-      //   data : {
-      //   apartment_id: this.apartmentId,
-      //   email: this.email,
-      //   text: this.text,
-      // },
-      //   headers: {
-      //   'Content-Type': 'Application/json',
+      //   url: 'http://127.0.0.1:8000/api/message',
+      //   data: {
+      //     apartment_id: this.form.apartment_id,
+      //     email: this.form.email,
+      //     text: this.form.text
       //   },
+      // headers: { 'Content-Type': 'application/json' }
       // }).then((resp) => {
       //   console.log(resp);
       // }).catch((error) => {
@@ -5568,7 +5563,6 @@ var render = function render() {
   }, [_c("form", {
     staticClass: "mt-3 position-relative",
     attrs: {
-      method: "POST",
       enctype: "multipart/form-data"
     },
     on: {
@@ -5587,8 +5581,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.email,
-      expression: "email"
+      value: _vm.form.email,
+      expression: "form.email"
     }],
     staticClass: "form-control",
     attrs: {
@@ -5599,12 +5593,13 @@ var render = function render() {
       required: ""
     },
     domProps: {
-      value: _vm.email
+      value: _vm.form.email
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.email = $event.target.value;
+
+        _vm.$set(_vm.form, "email", $event.target.value);
       }
     }
   })]), _vm._v(" "), _c("div", {
@@ -5617,8 +5612,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.text,
-      expression: "text"
+      value: _vm.form.text,
+      expression: "form.text"
     }],
     staticClass: "form-control",
     attrs: {
@@ -5629,12 +5624,13 @@ var render = function render() {
       required: ""
     },
     domProps: {
-      value: _vm.text
+      value: _vm.form.text
     },
     on: {
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.text = $event.target.value;
+
+        _vm.$set(_vm.form, "text", $event.target.value);
       }
     }
   })]), _vm._v(" "), _c("button", {
