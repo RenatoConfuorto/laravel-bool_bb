@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
+use App\Message;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MessageController extends Controller
+class MessaageController extends Controller
 {
-    public function store(Request $request) {
-        $data = $request->all();
-        dd($data);
+    public function post($data) {
+        return response()->json([
+            'success' => true ,
+            'results' => $data,
+        ]);
     }
 }

@@ -5230,16 +5230,61 @@ __webpack_require__.r(__webpack_exports__);
   name: 'ContactForm',
   data: function data() {
     return {
+      apartment: {},
+      apartmentId: 0,
       email: '',
       text: ''
     };
   },
+  created: function created() {
+    this.getApartmentDetails();
+  },
   methods: {
+    getApartmentDetails: function getApartmentDetails() {
+      var _this = this;
+
+      var slug = this.$route.params.slug;
+      axios.get("http://127.0.0.1:8000/api/apartments/".concat(slug)).then(function (resp) {
+        if (resp.data.success) {
+          _this.apartment = resp.data.results;
+          _this.apartmentId = resp.data.results.id;
+        } else {
+          // per adesso reindirizza alla homepage, da gestire meglio
+          _this.$router.push({
+            name: 'homepage'
+          });
+        }
+      });
+    },
     submitForm: function submitForm() {
-      var message = {
+      var data = {
+        apartment_id: this.apartmentId,
         email: this.email,
         text: this.text
       };
+      delete axios.defaults.headers.common['X-Requested-With'];
+      axios.post('https://127.0.0.1:8000/message', data).then(function (resp) {
+        console.log(resp);
+      }); // -------------------------------------------------------------
+      // const slug = this.$route.params.slug;
+      // delete axios.defaults.headers.common['X-Requested-With'];
+      // axios({
+      //   method: 'post',
+      //   url: 'https://127.0.0.1:8000/message',
+      //   data : {
+      //   apartment_id: this.apartmentId,
+      //   email: this.email,
+      //   text: this.text,
+      // },
+      //   headers: {
+      //   'Content-Type': 'Application/json',
+      //   },
+      // }).then((resp) => {
+      //   console.log(resp);
+      // }).catch((error) => {
+      //   console.log(error);
+      // });
+      // -----------------------------------------------------------------
     }
   }
 });
@@ -5499,12 +5544,38 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container"
-  }, [_vm._v("\n  FORM CONTATTO\n  "), _c("form", {
+  }, [_c("div", {
+    staticClass: "container-fluid d-flex flex-column align-items-center"
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "card",
+    staticStyle: {
+      width: "18rem"
+    }
+  }, [_c("img", {
+    staticClass: "card-img-top",
+    attrs: {
+      src: _vm.apartment.image,
+      alt: _vm.apartment.title
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "card-body"
+  }, [_c("h5", {
+    staticClass: "card-title"
+  }, [_vm._v(_vm._s(_vm.apartment.title))]), _vm._v(" "), _c("p", {
+    staticClass: "card-text"
+  }, [_vm._v(_vm._s(_vm.apartment.address))])])])]), _vm._v(" "), _c("div", {
+    staticClass: "container-fluid"
+  }, [_c("form", {
     staticClass: "mt-3 position-relative",
     attrs: {
-      action: "",
       method: "POST",
       enctype: "multipart/form-data"
+    },
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.submitForm.apply(null, arguments);
+      }
     }
   }, [_c("div", {
     staticClass: "form-group"
@@ -5571,10 +5642,19 @@ var render = function render() {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Submit")])])]);
+  }, [_vm._v("Submit")])])])]);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "text-center"
+  }, [_c("h4", {
+    staticClass: "bg-info p-1 rounded-top rounded-bottom"
+  }, [_vm._v("Stai inviando un messaggio al proprietario di questo appartmento")])]);
+}];
 render._withStripped = true;
 
 
