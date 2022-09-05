@@ -1,8 +1,12 @@
 <template>
   <!-- CONTAINER E ROOT ELEMENT -->
-  <div class="container d-flex justify-content-center flex-wrap">
+  <div class="container d-flex justify-content-center alig-items-center flex-wrap">
 
-    <div class="container-fluid d-flex justify-content-center">
+    <div v-if="loading">
+      <LoadingComponent/>
+    </div>
+
+    <div v-else class="container-fluid d-flex justify-content-center">
       <!-- BOOTSTRAP CARD -->
       <div class="card" style="width: 18rem;">
         <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
@@ -26,35 +30,34 @@
         </div>
       </div>
       <!-- BOOTSTRAP CARD -->
-    </div>
 
-    <div class="container-fluid">
-      <!-- TOM TOM MAP -->
-      <div id="map"></div>
-      <!-- /TOM TOM MAP -->
+      <div class="container-fluid">
+        <!-- TOM TOM MAP -->
+        <div id="map"></div>
+        <!-- /TOM TOM MAP -->
+      </div>
     </div>
   </div>
   <!-- /CONTAINER E ROOT ELEMENT -->
 </template>
 
 <script>
+import LoadingComponent from'../components/LoadingComponent.vue';
 import tt from '@tomtom-international/web-sdk-maps';
 
 export default {
   name: 'SingleApartment',
+  components: {
+    LoadingComponent
+  },
   data() {
     return {
       apartment: {},
-      // con null da un'errore in console perchè cerca di leggere i dati prima che arrivino
-      // apartment: null
+      loading: true
     }
   },
   created() {
     this.getApartmentDetails();
-  },
-  mounted() {
-    this.createMap();
-    // this.addMarker(map);
   },
   methods: {
     getApartmentDetails() {
@@ -64,20 +67,23 @@ export default {
       .then((resp) => {
         if (resp.data.success) {
           this.apartment = resp.data.results;
+          this.loading = false;
         } else {
           // per adesso reindirizza alla homepage, da gestire meglio
           this.$router.push({ name: 'homepage' });
         }
       });
     },
-    createMap() {
-      const map = tt.map({
-        key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-        container: 'map'
-      });
-    },
-    addMarker(map) {
-      // const tt = window.tt;
+    // createMap() {
+    //   if (this.loading === false) {
+    //     const map = tt.map({
+    //       key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+    //       container: 'map'
+    //     });
+    //   }
+    // },
+    // addMarker(map) {
+    //   const tt = window.tt;
     //   // console.log(window);
 
     //   let location = [-121.91595, 37.36729];
@@ -91,7 +97,17 @@ export default {
     //   let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
     //   marker.setPopup(popup).togglePopup();
     //   console.log(marker);
-    },
+    // },
+  },
+  computed: {
+    createMap() {
+      if (this.loading === false) {
+        const map = tt.map({
+          key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+          container: 'map'
+        });
+      }
+    }
   }
 }
 

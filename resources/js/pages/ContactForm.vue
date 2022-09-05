@@ -1,56 +1,67 @@
 <template>
   <!-- GENERAL CONTAINER -->
-  <div class="container">
-    <!-- CONTAINER FLUID -->
-    <div class="container-fluid d-flex flex-column align-items-center">
-      <div class="text-center">
-        <h4 class="bg-info p-1 rounded-top rounded-bottom">Stai inviando un messaggio al proprietario di questo appartmento</h4>
-      </div>
-      <!-- APARTMENT DETAILS -->
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
-        <div class="card-body">
-          <h5 class="card-title">{{ apartment.title }}</h5>
-          <p class="card-text">{{ apartment.address }}</p>
-        </div>
-      </div>
-      <!-- /APARTMENT DETAILS -->
+  <div class="container d-flex justify-content-center">
+    <div v-if="loading">
+      <LoadingComponent/>
     </div>
 
-    <!-- CONTAINER FLUID -->
-    <div class="container-fluid">
-      <!-- MESSAGGI ERRORE - SUCCESSO -->
-      <div class="fail-message alert alert-danger mt-3 p-2" :v-model="failMessage" v-show="failMessage !== '' ">{{ failMessage }}</div>
-      <div class="success-message alert alert-success mt-3 p-2" :v-model="successMessage" v-show="successMessage !== '' ">{{ successMessage }}</div>
-      <!-- /MESSAGGI ERRORE - SUCCESSO -->
-
-      <!-- CONTACT FORM -->
-      <form class="mt-3 position-relative" enctype="multipart/form-data" @submit.prevent="submitForm">
-
-        <div class="form-group mt-3">
-          <label for="email">Inserisci la tua email per essere ricontattato *</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required v-model="form.email" @keyup="validateEmail">
+    <div v-else>
+      <!-- CONTAINER FLUID -->
+      <div class="container-fluid d-flex flex-column align-items-center">
+        <div class="text-center">
+          <h4 class="bg-info p-1 rounded-top rounded-bottom">Stai inviando un messaggio al proprietario di questo appartmento</h4>
         </div>
-        <div class="text-danger" :v-model="emailMessage">{{ emailMessage }}</div>
-        
-        <div class="form-group mt-3">
-          <label for="text">Il tuo messaggio *</label>
-          <textarea type="text" class="form-control" id="text" rows="5" name="text" required v-model="form.text" @keyup="validateText"></textarea>
+        <!-- APARTMENT DETAILS -->
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
+          <div class="card-body">
+            <h5 class="card-title">{{ apartment.title }}</h5>
+            <p class="card-text">{{ apartment.address }}</p>
+          </div>
         </div>
-        <div class="text-danger" :v-model="textMessage">{{ textMessage }}</div>
+        <!-- /APARTMENT DETAILS -->
+      </div>
 
-        <button type="submit" class="btn btn-primary mt-3" :disabled="(emailValid && textValid) !== true">Submit</button>
-      </form>
-      <!-- /CONTACT FORM -->
+      <!-- CONTAINER FLUID -->
+      <div class="container-fluid">
+        <!-- MESSAGGI ERRORE - SUCCESSO -->
+        <div class="fail-message alert alert-danger mt-3 p-2" :v-model="failMessage" v-show="failMessage !== '' ">{{ failMessage }}</div>
+        <div class="success-message alert alert-success mt-3 p-2" :v-model="successMessage" v-show="successMessage !== '' ">{{ successMessage }}</div>
+        <!-- /MESSAGGI ERRORE - SUCCESSO -->
+
+        <!-- CONTACT FORM -->
+        <form class="mt-3 position-relative" enctype="multipart/form-data" @submit.prevent="submitForm">
+
+          <div class="form-group mt-3">
+            <label for="email">Inserisci la tua email per essere ricontattato *</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required v-model="form.email" @keyup="validateEmail">
+          </div>
+          <div class="text-danger" :v-model="emailMessage">{{ emailMessage }}</div>
+          
+          <div class="form-group mt-3">
+            <label for="text">Il tuo messaggio *</label>
+            <textarea type="text" class="form-control" id="text" rows="5" name="text" required v-model="form.text" @keyup="validateText"></textarea>
+          </div>
+          <div class="text-danger" :v-model="textMessage">{{ textMessage }}</div>
+
+          <button type="submit" class="btn btn-primary mt-3" :disabled="(emailValid && textValid) !== true">Submit</button>
+        </form>
+        <!-- /CONTACT FORM -->
+      </div>
+      <!-- /CONTAINER FLUID -->
     </div>
-    <!-- /CONTAINER FLUID -->
   </div>
   <!-- /GENERAL CONTAINER -->
 </template>
 
 <script>
+import LoadingComponent from'../components/LoadingComponent.vue';
+
 export default {
   name: 'ContactForm',
+  components: {
+    LoadingComponent
+  },
   data() {
     return {
       apartment: {},
@@ -65,6 +76,7 @@ export default {
       textValid: false,
       failMessage: '',
       successMessage: '',
+      loading: true,
     }
   },
   created() {
@@ -81,6 +93,7 @@ export default {
         if (resp.data.success) {
           this.apartment = resp.data.results;
           this.form.apartment_id = resp.data.results.id;
+          this.loading = false;
         } else {
           // per adesso reindirizza alla homepage, da gestire meglio
           this.$router.push({ name: 'homepage' });

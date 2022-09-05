@@ -1,9 +1,16 @@
 <template>
-  <div>
-    <h1>GUEST HOMEPAGE</h1>
+  <div class="test">
     <main>
-      <div class="container-fluid d-flex justify-content-center flex-wrap">
-        <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
+      <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
+
+        <div v-if="loading">
+          <LoadingComponent/>
+        </div>
+
+        <div v-else class="container-fluid d-flex justify-content-center flex-wrap"> 
+          <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
+        </div>
+
       </div>
     </main>
   </div>
@@ -11,15 +18,18 @@
 
 <script>
 import ApartmentCard from '../components/ApartmentCard.vue';
+import LoadingComponent from'../components/LoadingComponent.vue';
 
 export default {
   name: 'GuestHomepage',
   components: {
-    ApartmentCard
+    ApartmentCard,
+    LoadingComponent
   },
   data() {
     return {
-      apartments: []
+      apartments: [],
+      loading: true,
     }
   },
   created() {
@@ -31,7 +41,7 @@ export default {
       .then((resp) => {
 
         this.apartments = resp.data.results;
-        console.log(resp.data.results);
+        this.loading = false;
       })
     }
   }
@@ -39,5 +49,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.test {
+  height: 100vh;
+
+  main {
+    height: 100%;
+
+    .container-fluid {
+      height: 100%;
+    }
+  }
+}
 
 </style>
