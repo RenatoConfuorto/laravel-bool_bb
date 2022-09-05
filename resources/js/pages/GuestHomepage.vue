@@ -3,7 +3,7 @@
     <main>
       <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
 
-        <SearchBar/>
+        <SearchBar @searchResults="getResults"/>
         <div v-if="loading">
           <LoadingComponent/>
         </div>
@@ -46,6 +46,10 @@ export default {
         this.apartments = resp.data.results;
         this.loading = false;
       })
+    },
+    getResults(event){
+      console.log(event);
+      this.apartments = event;
     }
   }
 }

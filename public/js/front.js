@@ -5245,18 +5245,99 @@ __webpack_require__.r(__webpack_exports__);
   name: 'SearchBar',
   data: function data() {
     return {
+      address: '',
+      addressResults: [],
+      searchTextCtrl: '',
       radius: 20,
-      rooms: 1,
-      beds: 1,
-      extraServices: []
+      rooms: '',
+      beds: '',
+      extraServices: [],
+      latitude: null,
+      longitude: null,
+      error: null
     };
   },
+  methods: {
+    callApi: function callApi() {
+      var _this = this;
+
+      if (this.address !== this.searchTextCtrl && this.address !== '' && this.address.length > 3) {
+        this.searchTextCtrl = this.address; // console.log('far partire api', this.searchTextCtrl);
+
+        axios.get("https://api.tomtom.com/search/2/geocode/".concat(this.address, ".json"), {
+          params: {
+            key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+            countrySet: 'IT'
+          }
+        }).then(function (resp) {
+          _this.addressResults = resp.data.results; // this.addSuggestions(resp.data.results);
+        })["catch"](function (e) {
+          console.error('Sorry! ' + e);
+        });
+      }
+    },
+    getAddressString: function getAddressString(address) {
+      return "".concat(address.address.freeformAddress, ", ").concat(address.address.countrySecondarySubdivision, ", ").concat(address.address.countrySubdivision);
+    },
+    addressClick: function addressClick(address) {
+      this.addressResults = []; // console.log(address)
+
+      var addressString = this.getAddressString(address); // console.log(this)
+
+      this.address = addressString; //inserire indirizzo completo nell'imput
+
+      this.searchTextCtrl = addressString; //non far partire una nuova richiesta al click del tip
+
+      this.latitude = address.position.lat;
+      this.longitude = address.position.lon;
+    },
+    search: function search() {
+      var _this2 = this;
+
+      var checkedServices = [];
+      document.querySelectorAll('.extra_services').forEach(function (element) {
+        if (element.checked) checkedServices.push(element.value);
+      }); // console.log(checkedServices);
+
+      var params = {
+        latitude: this.latitude,
+        longitude: this.longitude,
+        beds: this.beds ? this.beds : 1,
+        rooms: this.rooms ? this.rooms : 1,
+        radius: this.radius ? this.radius : 20,
+        services: JSON.stringify(checkedServices)
+      }; //parametri di validazione
+
+      var validation = !params.longitude || !params.latitude || params.latitude < -90 || params.latitude > 90 || params.longitude > 180 || params.longitude < -180 || params.beds < 1 || params.rooms < 1 || params.radius < 1; // console.log(params);
+
+      if (!validation) {
+        this.error = null; // console.log('cerca')
+
+        axios.get('http://127.0.0.1:8000/api/search/apartments', {
+          params: params
+        }).then(function (resp) {
+          // console.log(resp.data.data);
+          if (resp.data.success) {
+            _this2.$emit('searchResults', resp.data.data);
+          } else {
+            _this2.error = resp.data.error;
+          }
+        });
+      } else {
+        this.error = 'Qualcosa è andato storto, riprovare';
+      }
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this3 = this;
+
+    delete axios.defaults.headers.common['X-Requested-With']; //impostare l'api
+
+    setInterval(this.callApi, 500); //ottenere i servizi extra
 
     axios.get('http://127.0.0.1:8000/api/extra_services').then(function (resp) {
       // console.log(resp.data);
-      _this.extraServices = resp.data;
+      _this3.extraServices = resp.data;
     });
   }
 });
@@ -5415,6 +5496,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.apartments = resp.data.results;
         _this.loading = false;
       });
+    },
+    getResults: function getResults(event) {
+      console.log(event);
+      this.apartments = event;
     }
   }
 });
@@ -5677,7 +5762,48 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "search-bar"
-  }, [_vm._m(0), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "input-wrapper"
+  }, [_c("div", {
+    staticClass: "search"
+  }, [_c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.address,
+      expression: "address"
+    }],
+    attrs: {
+      type: "text",
+      placeholder: "Search"
+    },
+    domProps: {
+      value: _vm.address
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.address = $event.target.value;
+      }
+    }
+  }), _vm._v(" "), _c("button", {
+    on: {
+      click: _vm.search
+    }
+  }, [_vm._v("Cerca")])]), _vm._v(" "), _vm.error ? _c("div", {
+    staticClass: "alert alert-danger"
+  }, [_vm._v(_vm._s(_vm.error))]) : _vm._e(), _vm._v(" "), _vm.addressResults ? _c("div", {
+    staticClass: "address-tips mb-3"
+  }, _vm._l(_vm.addressResults, function (address, index) {
+    return _c("div", {
+      key: index,
+      on: {
+        click: function click($event) {
+          return _vm.addressClick(address);
+        }
+      }
+    }, [_vm._v("\n        " + _vm._s(_vm.getAddressString(address)) + "\n      ")]);
+  }), 0) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "filters"
   }, [_c("div", {
     staticClass: "mb-3"
@@ -5790,19 +5916,7 @@ var render = function render() {
   }), 0) : _vm._e()])]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "input-wrapper"
-  }, [_c("input", {
-    attrs: {
-      type: "text",
-      placeholder: "Search"
-    }
-  }), _vm._v(" "), _c("button", [_vm._v("Cerca")])]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -5996,7 +6110,11 @@ var render = function render() {
     staticClass: "test"
   }, [_c("main", [_c("div", {
     staticClass: "container-fluid d-flex justify-content-center align-items-center flex-wrap"
-  }, [_c("SearchBar"), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
+  }, [_c("SearchBar", {
+    on: {
+      searchResults: _vm.getResults
+    }
+  }), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
     staticClass: "container-fluid d-flex justify-content-center flex-wrap"
   }, _vm._l(_vm.apartments, function (apartment) {
     return _c("ApartmentCard", {
@@ -11402,7 +11520,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 60%;\n}\n.search-bar .input-wrapper[data-v-6849e9f0] {\n  width: 100%;\n  display: flex;\n}\n.search-bar .input-wrapper input[data-v-6849e9f0] {\n  flex-grow: 1;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 60%;\n}\n.search-bar .search[data-v-6849e9f0] {\n  width: 100%;\n  display: flex;\n}\n.search-bar .search input[data-v-6849e9f0] {\n  flex-grow: 1;\n}", ""]);
 
 // exports
 
