@@ -11,6 +11,12 @@ class ApartmentController extends Controller
     public function index(Request $request) {
         $apartments = Apartment::all()->where('visibility', '=', 1);
 
+        foreach ($apartments as $apartment) {
+            if (!str_contains($apartment->image, 'picsum')) {
+                $apartment->image = url('storage/' . $apartment->image);
+            }
+        }
+
         return response()->json([
             'success' => true,
             'results' => $apartments,
