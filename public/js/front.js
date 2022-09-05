@@ -5237,7 +5237,11 @@ __webpack_require__.r(__webpack_exports__);
         text: ''
       },
       emailMessage: '',
-      textMessage: ''
+      emailValid: false,
+      textMessage: '',
+      textValid: false,
+      failMessage: '',
+      successMessage: ''
     };
   },
   created: function created() {
@@ -5269,21 +5273,41 @@ __webpack_require__.r(__webpack_exports__);
         this.emailMessage = "L'email deve rispettare il formato example@host.it";
       } else {
         this.emailMessage = "";
+        this.emailValid = true;
       }
     },
     validateText: function validateText() {
       var textLength = this.form.text.length;
 
-      if (textLength < 30) {
+      if (textLength < 20) {
         this.textMessage = "Lascia un messaggio per il proprietario..";
       } else {
         this.textMessage = "";
+        this.textValid = true;
       }
     },
     submitForm: function submitForm() {
-      axios.post('http://127.0.0.1:8000/api/message', this.form).then(function (resp) {
-        console.log(resp);
-      });
+      var _this2 = this;
+
+      if ((this.emailValid && this.textValid) === true) {
+        axios.post('http://127.0.0.1:8000/api/message', this.form).then(function (resp) {
+          console.log(resp);
+
+          if (resp.status === 200) {
+            _this2.successMessage = "Messaggio inviato correttamente, verrai riportato al dettaglio dell'appartamento."; // this.$router.push({ name: 'single-apartment' });
+
+            setTimeout(function () {
+              return _this2.$router.push({
+                name: 'single-apartment'
+              });
+            }, 3000);
+          } else {
+            _this2.failMessagge = 'Ops, qualcosa è andato storto. Per favore riprova..';
+          }
+        });
+      } else {
+        this.failMessage = 'Compila correttamente i campi';
+      }
     }
   }
 });
@@ -5564,7 +5588,29 @@ var render = function render() {
     staticClass: "card-text"
   }, [_vm._v(_vm._s(_vm.apartment.address))])])])]), _vm._v(" "), _c("div", {
     staticClass: "container-fluid"
-  }, [_c("form", {
+  }, [_c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.failMessage !== "",
+      expression: "failMessage !== '' "
+    }],
+    staticClass: "fail-message alert alert-danger mt-3 p-2",
+    attrs: {
+      "v-model": _vm.failMessage
+    }
+  }, [_vm._v(_vm._s(_vm.failMessage))]), _vm._v(" "), _c("div", {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: _vm.successMessage !== "",
+      expression: "successMessage !== '' "
+    }],
+    staticClass: "success-message alert alert-success mt-3 p-2",
+    attrs: {
+      "v-model": _vm.successMessage
+    }
+  }, [_vm._v(_vm._s(_vm.successMessage))]), _vm._v(" "), _c("form", {
     staticClass: "mt-3 position-relative",
     attrs: {
       enctype: "multipart/form-data"
@@ -5652,7 +5698,8 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.textMessage))]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary mt-3",
     attrs: {
-      type: "submit"
+      type: "submit",
+      disabled: (_vm.emailValid && _vm.textValid) !== true
     }
   }, [_vm._v("Submit")])])])]);
 };

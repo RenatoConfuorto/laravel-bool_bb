@@ -11,12 +11,13 @@ class MessageController extends Controller
     public function store(Request $request) {
 
         $data = $request->all();
-        // dd($request);
+        
         $request->validate([
             'apartment_id' => 'required|integer',
             'email' => 'required|string|email|max:255',
             'text' => 'required|string|max:20000'
         ]);
+
 
 
         $message = new Message();

@@ -19,8 +19,13 @@
 
     <!-- CONTAINER FLUID -->
     <div class="container-fluid">
+      <!-- MESSAGGI ERRORE - SUCCESSO -->
+      <div class="fail-message alert alert-danger mt-3 p-2" :v-model="failMessage" v-show="failMessage !== '' ">{{ failMessage }}</div>
+      <div class="success-message alert alert-success mt-3 p-2" :v-model="successMessage" v-show="successMessage !== '' ">{{ successMessage }}</div>
+      <!-- /MESSAGGI ERRORE - SUCCESSO -->
+
       <!-- CONTACT FORM -->
-      <form class="mt-3 position-relative" @submit.prevent="submitForm" enctype="multipart/form-data">
+      <form class="mt-3 position-relative" enctype="multipart/form-data" @submit.prevent="submitForm">
 
         <div class="form-group mt-3">
           <label for="email">Inserisci la tua email per essere ricontattato *</label>
@@ -34,7 +39,7 @@
         </div>
         <div class="text-danger" :v-model="textMessage">{{ textMessage }}</div>
 
-        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3" :disabled="(emailValid && textValid) !== true">Submit</button>
       </form>
       <!-- /CONTACT FORM -->
     </div>
@@ -55,7 +60,11 @@ export default {
         text: '',
       },
       emailMessage: '',
+      emailValid: false,
       textMessage: '',
+      textValid: false,
+      failMessage: '',
+      successMessage: '',
     }
   },
   created() {
@@ -85,24 +94,37 @@ export default {
         this.emailMessage = "L'email deve rispettare il formato example@host.it";
       } else {
         this.emailMessage = "";
+        this.emailValid = true;
       }
     },
     validateText() {
       let textLength = this.form.text.length;
 
-      if (textLength < 30 ) {
+      if (textLength < 20 ) {
         this.textMessage = "Lascia un messaggio per il proprietario..";
       } else {
         this.textMessage = "";
+        this.textValid = true;
       }
     },
     submitForm() {
-      axios.post('http://127.0.0.1:8000/api/message', this.form)
+      if ((this.emailValid && this.textValid) === true) {
+        axios.post('http://127.0.0.1:8000/api/message', this.form)
       .then((resp) => {
         console.log(resp);
+        if (resp.status === 200) {
+          this.successMessage = "Messaggio inviato correttamente, verrai riportato al dettaglio dell'appartamento.";
+          // this.$router.push({ name: 'single-apartment' });
+          setTimeout( () => this.$router.push({name: 'single-apartment'}), 3000);
+        } else {
+          this.failMessagge = 'Ops, qualcosa è andato storto. Per favore riprova..'
+        }
       });
-    }
-  }
+      } else {
+        this.failMessage = 'Compila correttamente i campi';
+      }
+    },
+  },
 }
 </script>
 
