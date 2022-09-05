@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ApartmentController extends Controller
 {
     public function index(Request $request) {
-        $apartments = Apartment::all();
+        $apartments = Apartment::all()->where('visibility', '=', 1);
 
         return response()->json([
             'success' => true,

@@ -77,14 +77,23 @@ export default {
       failMessage: '',
       successMessage: '',
       loading: true,
+      userData: this.$parent.userData,
     }
   },
   created() {
     this.getApartmentDetails();
+  },
+  mounted() {
+    this.addRegisteredUserEmail();
     this.validateEmail();
     this.validateText();
   },
   methods: {
+    addRegisteredUserEmail() {
+      if (this.userData !== null ) {
+        this.form.email = this.userData.email;
+      }
+    },
     getApartmentDetails() {
       const slug = this.$route.params.slug;
 

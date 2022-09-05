@@ -5262,15 +5262,24 @@ __webpack_require__.r(__webpack_exports__);
       textValid: false,
       failMessage: '',
       successMessage: '',
-      loading: true
+      loading: true,
+      userData: this.$parent.userData
     };
   },
   created: function created() {
     this.getApartmentDetails();
+  },
+  mounted: function mounted() {
+    this.addRegisteredUserEmail();
     this.validateEmail();
     this.validateText();
   },
   methods: {
+    addRegisteredUserEmail: function addRegisteredUserEmail() {
+      if (this.userData !== null) {
+        this.form.email = this.userData.email;
+      }
+    },
     getApartmentDetails: function getApartmentDetails() {
       var _this = this;
 

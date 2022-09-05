@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       apartment: {},
-      loading: true
+      loading: true,
     }
   },
   created() {
