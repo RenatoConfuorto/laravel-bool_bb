@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Apartment;
 use App\ExtraService;
 use App\Http\Controllers\Controller;
+use Dotenv\Result\Success;
 use Illuminate\Http\Request;
 
 class ApartmentController extends Controller
@@ -85,6 +86,12 @@ class ApartmentController extends Controller
         foreach ($keys as $key) {
             if(isset($data[$key]))$params[$key] = $data[$key];
         }
+
+        //controllare che i valori siano validi
+        if($params['radius'] < 1 || $params['beds'] < 1 || $params['rooms'] < 1)return response()->json([
+            'success' => false,
+            'error' => "C'è stato un errore nella ricerca, riprovare",
+        ]);
         
         //ricerca appartamenti per camere e posti letto
         $apartments = Apartment::where('rooms_number', '>', $params['rooms'])
@@ -134,6 +141,9 @@ class ApartmentController extends Controller
             $filteredApartments = $distanceFiltered;
         }
 
-        return $filteredApartments;
+        return response()->json([
+            'success' => true,
+            'data'=> $filteredApartments,
+        ]);
     }
 }
