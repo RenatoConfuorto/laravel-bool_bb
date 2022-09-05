@@ -92,26 +92,6 @@ export default {
         }
       });
     },
-    // createMap() {
-    //   if (this.loading === false) {
-    //     const map = tt.map({
-    //       key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-    //       container: 'map'
-    //     });
-    //   }
-    // },
-    // addMarker(map) {
-    //   const tt = window.tt;
-    //   // console.log(window);
-    //   let location = [-121.91595, 37.36729];
-    //   console.log(location);
-    //   let popupOffset = 25;
-    //   let marker = new tt.Marker().setLngLat(location).addTo(map);
-      
-    //   let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
-    //   marker.setPopup(popup).togglePopup();
-    //   console.log(marker);
-    // },
   },
 }
 </script>
