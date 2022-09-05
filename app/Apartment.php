@@ -72,4 +72,12 @@ class Apartment extends Model
         return $distance;
     }
 
+    public function getServicesId(){
+        $services = $this->services;
+        $ids = [];
+        foreach($services as $service){
+            $ids[] = strval($service->id);
+        }
+        return $ids;
+    }
 }
