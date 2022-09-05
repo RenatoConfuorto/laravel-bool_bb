@@ -5409,16 +5409,24 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       apartment: {},
-      loading: true
+      loading: true,
+      map: {}
     };
   },
   computed: {
     createMap: function createMap() {
       if (this.loading === false) {
-        var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default.a.map({
+        this.map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default.a.map({
           key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-          container: 'map'
+          container: 'map',
+          center: [this.apartment.longitude, this.apartment.latitude],
+          zoom: 10
         });
+      }
+    },
+    addMarker: function addMarker() {
+      if (this.loading === false) {
+        var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default.a.Marker().setLngLat([this.apartment.longitude, this.apartment.latitude]).addTo(this.map);
       }
     }
   },

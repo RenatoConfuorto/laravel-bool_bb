@@ -52,16 +52,26 @@ export default {
   data() {
     return {
       apartment: {},
-      loading: true
+      loading: true,
+      map: {}
     }
   },
   computed: {
     createMap() {
       if (this.loading === false) {
-        const map = tt.map({
+        this.map = tt.map({
           key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-          container: 'map'
+          container: 'map',
+          center: [this.apartment.longitude, this.apartment.latitude],
+          zoom: 10
         });
+      }
+    },
+    addMarker() {
+      if (this.loading === false) {
+        const marker = new tt.Marker()
+        .setLngLat([this.apartment.longitude, this.apartment.latitude])
+        .addTo(this.map);
       }
     }
   },
