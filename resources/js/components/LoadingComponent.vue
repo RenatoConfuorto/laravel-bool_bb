@@ -21,8 +21,8 @@ export default {
     }
 
   .orbit-spinner {
-    height: 100px;
-    width: 100px;
+    height: 250px;
+    width: 250px;
     border-radius: 50%;
     perspective: 800px;
   }
