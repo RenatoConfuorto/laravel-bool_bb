@@ -5412,6 +5412,16 @@ __webpack_require__.r(__webpack_exports__);
       loading: true
     };
   },
+  computed: {
+    createMap: function createMap() {
+      if (this.loading === false) {
+        var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default.a.map({
+          key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+          container: 'map'
+        });
+      }
+    }
+  },
   created: function created() {
     this.getApartmentDetails();
   },
@@ -5451,16 +5461,6 @@ __webpack_require__.r(__webpack_exports__);
     //   console.log(marker);
     // },
 
-  },
-  computed: {
-    createMap: function createMap() {
-      if (this.loading === false) {
-        var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_1___default.a.map({
-          key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-          container: 'map'
-        });
-      }
-    }
   }
 });
 

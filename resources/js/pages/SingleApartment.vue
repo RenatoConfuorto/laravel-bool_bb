@@ -55,6 +55,16 @@ export default {
       loading: true
     }
   },
+  computed: {
+    createMap() {
+      if (this.loading === false) {
+        const map = tt.map({
+          key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+          container: 'map'
+        });
+      }
+    }
+  },
   created() {
     this.getApartmentDetails();
   },
@@ -93,16 +103,6 @@ export default {
     //   console.log(marker);
     // },
   },
-  computed: {
-    createMap() {
-      if (this.loading === false) {
-        const map = tt.map({
-          key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
-          container: 'map'
-        });
-      }
-    }
-  }
 }
 </script>
 
