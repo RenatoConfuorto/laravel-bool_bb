@@ -44,7 +44,6 @@
 <script>
 import LoadingComponent from'../components/LoadingComponent.vue';
 import tt from '@tomtom-international/web-sdk-maps';
-
 export default {
   name: 'SingleApartment',
   components: {
@@ -53,7 +52,7 @@ export default {
   data() {
     return {
       apartment: {},
-      loading: true,
+      loading: true
     }
   },
   created() {
@@ -62,7 +61,6 @@ export default {
   methods: {
     getApartmentDetails() {
       const slug = this.$route.params.slug;
-
       axios.get(`http://127.0.0.1:8000/api/apartments/${slug}`)
       .then((resp) => {
         if (resp.data.success) {
@@ -85,15 +83,11 @@ export default {
     // addMarker(map) {
     //   const tt = window.tt;
     //   // console.log(window);
-
     //   let location = [-121.91595, 37.36729];
     //   console.log(location);
-
     //   let popupOffset = 25;
-
     //   let marker = new tt.Marker().setLngLat(location).addTo(map);
       
-
     //   let popup = new tt.Popup({ offset: popupOffset }).setHTML("Your address!");
     //   marker.setPopup(popup).togglePopup();
     //   console.log(marker);
@@ -110,14 +104,11 @@ export default {
     }
   }
 }
-
 </script>
 
 <style lang="scss" scoped>
-
 #map {
   width: 100%;
   height: 500px;
 }
-
 </style>
