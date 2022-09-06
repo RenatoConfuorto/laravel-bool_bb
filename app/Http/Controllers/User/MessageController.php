@@ -62,6 +62,8 @@ class MessageController extends Controller
     {
         $message = Message::findOrFail($id);
 
+        $this->authorize('show', $message);
+
         return view('user.message.show', compact('message'));
     }
 

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Policies\ApartmentPolicy;
 use App\Apartment;
 use App\Message;
+use App\Policies\MessagePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 

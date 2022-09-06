@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Apartment;
 use App\Message;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class MessagePolicy
 {
@@ -29,9 +29,11 @@ class MessagePolicy
      * @param  \App\Message  $message
      * @return mixed
      */
-    public function view(User $user, Message $message, Apartment $apartment)
+    public function show(User $user, Message $message)
     {
-        //
+        return $user->id === $message->apartment->user_id
+                ? Response::allow()
+                : Response::deny('Questo non è un tuo messaggio!');
     }
 
     /**
