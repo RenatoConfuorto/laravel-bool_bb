@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MessageController extends Controller
 {
@@ -18,11 +19,12 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $apartments = Apartment::where('user_id', $user->id)->get();
-        // dd($apartments);
-        
-        
-        return view('user.message.index', compact('messages'));
+        $user_apartments_id = DB::table('apartments')->where('user_id', $user->id)->pluck('id');
+        // dd($user_apartments_id);
+        $user_messages = Message::where('apartment_id', [$user_apartments_id])->get();
+        // dd($user_messages);
+
+        return view('user.message.index', compact('user_messages'));
     }
 
     /**
