@@ -70,7 +70,7 @@ export default {
     // },
     getResults(event){
       // console.log(event);
-      this.apartments = event;
+      this.searchResults = event;
     }
   }
 }

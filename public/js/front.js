@@ -5463,7 +5463,7 @@ __webpack_require__.r(__webpack_exports__);
     // },
     getResults: function getResults(event) {
       // console.log(event);
-      this.apartments = event;
+      this.searchResults = event;
     }
   }
 });
