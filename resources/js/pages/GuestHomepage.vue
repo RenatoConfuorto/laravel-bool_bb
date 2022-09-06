@@ -3,7 +3,7 @@
     <main>
       <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
 
-        <SearchBar @searchResults="getResults"/>
+        <SimpleSearchBar @searchResults="getResults"/>
         <div v-if="loading">
           <LoadingComponent/>
         </div>
@@ -51,14 +51,14 @@
 <script>
 import ApartmentCard from '../components/ApartmentCard.vue';
 import LoadingComponent from'../components/LoadingComponent.vue';
-import SearchBar from'../components/SearchBar.vue';
+import SimpleSearchBar from'../components/SimpleSearchBar.vue';
 
 export default {
   name: 'GuestHomepage',
   components: {
     ApartmentCard,
     LoadingComponent,
-    SearchBar,
+    SimpleSearchBar
   },
   data() {
     return {
@@ -88,7 +88,7 @@ export default {
       })
     },
     getResults(event){
-      console.log(event);
+      // console.log(event);
       this.apartments = event;
     }
   }
