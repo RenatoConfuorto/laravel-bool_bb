@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Apartment;
 use App\Http\Controllers\Controller;
+use App\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -14,7 +17,12 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('user.message.index');
+        $user = Auth::user();
+        $apartments = Apartment::where('user_id', $user->id)->get();
+        // dd($apartments);
+        
+        
+        return view('user.message.index', compact('messages'));
     }
 
     /**
