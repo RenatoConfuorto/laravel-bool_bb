@@ -5250,113 +5250,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SimpleSearchBar.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../userApiSearch.js */ "./resources/js/userApiSearch.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SearchBar',
+  name: 'SimpleSearchBar',
   data: function data() {
     return {
       address: '',
       addressResults: [],
       searchTextCtrl: '',
-      radius: 20,
-      rooms: '',
-      beds: '',
-      extraServices: [],
       latitude: null,
       longitude: null,
       error: null
     };
   },
   methods: {
-    callApi: function callApi() {
-      var _this = this;
-
-      if (this.address !== this.searchTextCtrl && this.address !== '' && this.address.length > 3) {
-        this.searchTextCtrl = this.address; // console.log('far partire api', this.searchTextCtrl);
-
-        axios.get("https://api.tomtom.com/search/2/geocode/".concat(this.address, ".json"), {
-          params: {
-            key: 'H97FXaSDT7RHiYR8ApDuoF894E4WPAXv',
-            countrySet: 'IT'
-          }
-        }).then(function (resp) {
-          _this.addressResults = resp.data.results; // this.addSuggestions(resp.data.results);
-        })["catch"](function (e) {
-          console.error('Sorry! ' + e);
-        });
-      }
-    },
-    getAddressString: function getAddressString(address) {
-      return "".concat(address.address.freeformAddress, ", ").concat(address.address.countrySecondarySubdivision, ", ").concat(address.address.countrySubdivision);
-    },
-    addressClick: function addressClick(address) {
-      this.addressResults = []; // console.log(address)
-
-      var addressString = this.getAddressString(address); // console.log(this)
-
-      this.address = addressString; //inserire indirizzo completo nell'imput
-
-      this.searchTextCtrl = addressString; //non far partire una nuova richiesta al click del tip
-
-      this.latitude = address.position.lat;
-      this.longitude = address.position.lon;
-    },
-    search: function search() {
-      var _this2 = this;
-
-      var checkedServices = [];
-      document.querySelectorAll('.extra_services').forEach(function (element) {
-        if (element.checked) checkedServices.push(element.value);
-      }); // console.log(checkedServices);
-
-      var params = {
-        latitude: this.latitude,
-        longitude: this.longitude,
-        beds: this.beds ? this.beds : 1,
-        rooms: this.rooms ? this.rooms : 1,
-        radius: this.radius ? this.radius : 20,
-        services: JSON.stringify(checkedServices)
-      }; //parametri di validazione
-
-      var validation = !params.longitude || !params.latitude || params.latitude < -90 || params.latitude > 90 || params.longitude > 180 || params.longitude < -180 || params.beds < 1 || params.rooms < 1 || params.radius < 1; // console.log(params);
-
-      if (!validation) {
-        this.error = null; // console.log('cerca')
-
-        axios.get('http://127.0.0.1:8000/api/search/apartments', {
-          params: params
-        }).then(function (resp) {
-          // console.log(resp.data.data);
-          if (resp.data.success) {
-            _this2.$emit('searchResults', resp.data.data);
-          } else {
-            _this2.error = resp.data.error;
-          }
-        });
-      } else {
-        this.error = 'Qualcosa è andato storto, riprovare';
-      }
-    }
+    callApi: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["callApi"],
+    getAddressString: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["getAddressString"],
+    addressClick: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["addressClick"],
+    search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["search"]
   },
   created: function created() {
-    var _this3 = this;
-
-    delete axios.defaults.headers.common['X-Requested-With']; //impostare l'api
-
-    setInterval(this.callApi, 500); //ottenere i servizi extra
-
-    axios.get('http://127.0.0.1:8000/api/extra_services').then(function (resp) {
-      // console.log(resp.data);
-      _this3.extraServices = resp.data;
-    });
+    delete axios.defaults.headers.common['X-Requested-With'];
+    setInterval(this.callApi, 500);
   }
 });
 
@@ -5529,7 +5454,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ApartmentCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ApartmentCard.vue */ "./resources/js/components/ApartmentCard.vue");
 /* harmony import */ var _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/LoadingComponent.vue */ "./resources/js/components/LoadingComponent.vue");
-/* harmony import */ var _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SearchBar.vue */ "./resources/js/components/SearchBar.vue");
+/* harmony import */ var _components_SimpleSearchBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SimpleSearchBar.vue */ "./resources/js/components/SimpleSearchBar.vue");
 
 
 
@@ -5538,7 +5463,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ApartmentCard: _components_ApartmentCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     LoadingComponent: _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SearchBar: _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SimpleSearchBar: _components_SimpleSearchBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -5868,10 +5793,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true&":
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true& ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5926,116 +5851,6 @@ var render = function render() {
         }
       }
     }, [_vm._v("\n        " + _vm._s(_vm.getAddressString(address)) + "\n      ")]);
-  }), 0) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "filters"
-  }, [_c("div", {
-    staticClass: "mb-3"
-  }, [_c("label", {
-    staticClass: "form-label",
-    attrs: {
-      "for": "number"
-    }
-  }, [_vm._v("Distanza:")]), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.radius,
-      expression: "radius"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      id: "number",
-      type: "number",
-      name: "radius"
-    },
-    domProps: {
-      value: _vm.radius
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.radius = $event.target.value;
-      }
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "mb-3"
-  }, [_c("label", {
-    staticClass: "form-label",
-    attrs: {
-      "for": "number"
-    }
-  }, [_vm._v("Numero minimo di stanze:")]), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.rooms,
-      expression: "rooms"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      id: "number",
-      type: "number",
-      name: "radius"
-    },
-    domProps: {
-      value: _vm.rooms
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.rooms = $event.target.value;
-      }
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "mb-3"
-  }, [_c("label", {
-    staticClass: "form-label",
-    attrs: {
-      "for": "number"
-    }
-  }, [_vm._v("Numero minimo di posti letto:")]), _vm._v(" "), _c("input", {
-    directives: [{
-      name: "model",
-      rawName: "v-model",
-      value: _vm.beds,
-      expression: "beds"
-    }],
-    staticClass: "form-control",
-    attrs: {
-      id: "number",
-      type: "number",
-      name: "radius"
-    },
-    domProps: {
-      value: _vm.beds
-    },
-    on: {
-      input: function input($event) {
-        if ($event.target.composing) return;
-        _vm.beds = $event.target.value;
-      }
-    }
-  })]), _vm._v(" "), _vm.extraServices ? _c("div", {
-    staticClass: "services"
-  }, _vm._l(_vm.extraServices, function (service) {
-    return _c("div", {
-      key: service.id,
-      staticClass: "form-checked"
-    }, [_c("input", {
-      staticClass: "form-check-input extra_services",
-      attrs: {
-        type: "checkbox",
-        id: "extra_service-".concat(service.id)
-      },
-      domProps: {
-        value: service.id
-      }
-    }), _vm._v(" "), _c("label", {
-      staticClass: "form-check-label",
-      attrs: {
-        "for": "extra_service-".concat(service.id)
-      }
-    }, [_vm._v("\n          " + _vm._s(service.name) + "\n        ")])]);
   }), 0) : _vm._e()])]);
 };
 
@@ -6268,7 +6083,7 @@ var render = function render() {
     staticClass: "test"
   }, [_c("main", [_c("div", {
     staticClass: "container-fluid d-flex justify-content-center align-items-center flex-wrap"
-  }, [_c("SearchBar", {
+  }, [_c("SimpleSearchBar", {
     on: {
       searchResults: _vm.getResults
     }
@@ -11610,10 +11425,10 @@ exports.push([module.i, ".orbit-spinner[data-v-8aebcde8], .orbit-spinner *[data-
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11622,7 +11437,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 60%;\n}\n.search-bar .search[data-v-6849e9f0] {\n  width: 100%;\n  display: flex;\n}\n.search-bar .search input[data-v-6849e9f0] {\n  flex-grow: 1;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-2a381b9e] {\n  width: 60%;\n}\n.search-bar .search[data-v-2a381b9e] {\n  width: 100%;\n  display: flex;\n}\n.search-bar .search input[data-v-2a381b9e] {\n  flex-grow: 1;\n}", ""]);
 
 // exports
 
@@ -42913,15 +42728,15 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-2!./node_modules/sass-loader/dist/cjs.js??ref--8-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--8-2!../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&");
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--8-2!../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true&");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -58359,18 +58174,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/SearchBar.vue":
-/*!***********************************************!*\
-  !*** ./resources/js/components/SearchBar.vue ***!
-  \***********************************************/
+/***/ "./resources/js/components/SimpleSearchBar.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/SimpleSearchBar.vue ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& */ "./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&");
-/* harmony import */ var _SearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=script&lang=js& */ "./resources/js/components/SearchBar.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& */ "./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&");
+/* harmony import */ var _SimpleSearchBar_vue_vue_type_template_id_2a381b9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true& */ "./resources/js/components/SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true&");
+/* harmony import */ var _SimpleSearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SimpleSearchBar.vue?vue&type=script&lang=js& */ "./resources/js/components/SimpleSearchBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _SimpleSearchBar_vue_vue_type_style_index_0_id_2a381b9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true& */ "./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -58381,66 +58196,66 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _SearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SimpleSearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SimpleSearchBar_vue_vue_type_template_id_2a381b9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SimpleSearchBar_vue_vue_type_template_id_2a381b9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "6849e9f0",
+  "2a381b9e",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/SearchBar.vue"
+component.options.__file = "resources/js/components/SimpleSearchBar.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/SearchBar.vue?vue&type=script&lang=js&":
-/*!************************************************************************!*\
-  !*** ./resources/js/components/SearchBar.vue?vue&type=script&lang=js& ***!
-  \************************************************************************/
+/***/ "./resources/js/components/SimpleSearchBar.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/SimpleSearchBar.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SimpleSearchBar.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--8-2!../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_style_index_0_id_2a381b9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--8-2!../../../node_modules/sass-loader/dist/cjs.js??ref--8-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=style&index=0&id=2a381b9e&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_style_index_0_id_2a381b9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_style_index_0_id_2a381b9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_style_index_0_id_2a381b9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_2_node_modules_sass_loader_dist_cjs_js_ref_8_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_style_index_0_id_2a381b9e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
 
-/***/ "./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& ***!
-  \******************************************************************************************/
+/***/ "./resources/js/components/SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true& ***!
+  \************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_template_id_2a381b9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SimpleSearchBar.vue?vue&type=template&id=2a381b9e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_template_id_2a381b9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SimpleSearchBar_vue_vue_type_template_id_2a381b9e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -58851,6 +58666,95 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
+
+/***/ }),
+
+/***/ "./resources/js/userApiSearch.js":
+/*!***************************************!*\
+  !*** ./resources/js/userApiSearch.js ***!
+  \***************************************/
+/*! exports provided: callApi, getAddressString, addressClick, search */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "callApi", function() { return callApi; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAddressString", function() { return getAddressString; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addressClick", function() { return addressClick; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "search", function() { return search; });
+function callApi() {
+  var _this = this;
+
+  if (this.address !== this.searchTextCtrl && this.address !== '' && this.address.length > 3) {
+    this.searchTextCtrl = this.address; // console.log('far partire api', this.searchTextCtrl);
+
+    axios.get("https://api.tomtom.com/search/2/geocode/".concat(this.address, ".json"), {
+      params: {
+        key: 'H97FXaSDT7RHiYR8ApDuoF894E4WPAXv',
+        countrySet: 'IT'
+      }
+    }).then(function (resp) {
+      _this.addressResults = resp.data.results; // this.addSuggestions(resp.data.results);
+    })["catch"](function (e) {
+      console.error('Sorry! ' + e);
+    });
+  }
+}
+;
+function getAddressString(address) {
+  return "".concat(address.address.freeformAddress, ", ").concat(address.address.countrySecondarySubdivision, ", ").concat(address.address.countrySubdivision);
+}
+;
+function addressClick(address) {
+  this.addressResults = []; // console.log(address)
+
+  var addressString = this.getAddressString(address); // console.log(this)
+
+  this.address = addressString; //inserire indirizzo completo nell'imput
+
+  this.searchTextCtrl = addressString; //non far partire una nuova richiesta al click del tip
+
+  this.latitude = address.position.lat;
+  this.longitude = address.position.lon;
+}
+;
+function search() {
+  var _this2 = this;
+
+  var checkedServices = [];
+  document.querySelectorAll('.extra_services').forEach(function (element) {
+    if (element.checked) checkedServices.push(element.value);
+  }); // console.log(checkedServices);
+
+  var params = {
+    latitude: this.latitude,
+    longitude: this.longitude,
+    beds: this.beds ? this.beds : 1,
+    rooms: this.rooms ? this.rooms : 1,
+    radius: this.radius ? this.radius : 20,
+    services: JSON.stringify(checkedServices)
+  }; //parametri di validazione
+
+  var validation = !params.longitude || !params.latitude || params.latitude < -90 || params.latitude > 90 || params.longitude > 180 || params.longitude < -180 || params.beds < 1 || params.rooms < 1 || params.radius < 1; // console.log(params);
+
+  if (!validation) {
+    this.error = null; // console.log('cerca')
+
+    axios.get('http://127.0.0.1:8000/api/search/apartments', {
+      params: params
+    }).then(function (resp) {
+      // console.log(resp.data.data);
+      if (resp.data.success) {
+        _this2.$emit('searchResults', resp.data.data);
+      } else {
+        _this2.error = resp.data.error;
+      }
+    });
+  } else {
+    this.error = 'Qualcosa è andato storto, riprovare';
+  }
+}
+;
 
 /***/ }),
 

@@ -17,7 +17,8 @@ mix.js('resources/js/app.js', 'public/js')
 //script validazione dei form create-update e delle password di registrazione
 mix.copy([
     'resources/js/apartmentFormValidation.js',
-    'resources/js/registerFormValidation.js'
+    'resources/js/registerFormValidation.js',
+    'resources/js/userApiSearch.js',
 ], 'public/js');
 
 mix.js('resources/js/front.js', 'public/js');
