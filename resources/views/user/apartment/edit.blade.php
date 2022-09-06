@@ -1,5 +1,9 @@
 @extends('layouts.dashboard')
 
+@push('css')
+  <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+@endpush
+
 @section('content')
 <div class="container-fluid">
   <h1>Modifica l'appartamento</h1>
@@ -14,7 +18,7 @@
     </div>
   @endif
 
-  <form class="mt-3" action="{{ route('user.apartment.update', ['apartment' => $apartment->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return false">
+  <form class="mt-3 position-relative" action="{{ route('user.apartment.update', ['apartment' => $apartment->id]) }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return event.code !== 'Enter'">
     @method('PUT')
     @csrf
 
@@ -73,13 +77,27 @@
       <label for="address" class="form-label">Indirizzo *</label>
       <input type="text" class="form-control" id="address" name="address" value="{{ old('address') ? old('address') : $apartment->address }}" minlength="4" maxlength="255">
     </div>
+    <div class="address-tips"></div>
     {{-- /ADDRESS --}}
+
+    <div class="mb-3 d-none">
+      <label for="latitude" class="form-label">Latitudine *</label>
+      <input type="number" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') ? old('latitude') : $apartment->latitude }}" step="0.000001">
+    </div>
+    {{-- /latitude --}}
+
+    {{-- longitude --}}
+    <div class="mb-3 d-none">
+      <label for="longitude" class="form-label">Longitudine *</label>
+      <input type="number" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') ? old('longitude') : $apartment->longitude }}" step="0.000001">
+    </div>
+    {{-- /longitude --}}
 
     {{-- COVER IMAGE --}}
     <div class="mb-3">
       <label for="image-cover">Aggiungi un immagine *</label>
       <input type="file" id="image-cover" name="image-cover" accept=".jpg, .jpeg, .png, .bmp, .gif, .svg, .webp">
-      <img src="{{ $apartment->image }}" id="image" alt="">
+      <img src="{{ asset('storage/' . $apartment->image) }}" id="image" alt="{{ $apartment->title }}">
     </div>
     {{-- /COVER IMAGE --}}
 

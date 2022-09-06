@@ -1,0 +1,19 @@
+div.address-tips {
+  width: 100%;
+  margin-right: 1.5rem;
+  position: absolute;
+  z-index: 2;
+  background-color: #f8f9fa;
+
+  p {
+    cursor: pointer;
+    background-color: rgba(0, 123, 255, 0.1);
+    padding: .1rem .8rem;
+    margin: .2rem 0;
+    border-radius: 10px;
+  }
+  
+  p:hover {
+    background-color: rgba($color: #0fbcd3, $alpha: 0.3);
+  }
+}

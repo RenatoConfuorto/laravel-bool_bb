@@ -1,9 +1,18 @@
 @extends('layouts.dashboard')
 
+@push('style')
+    <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+@endpush
+
 @section('content')
+  @if(session('message'))
+      <div class="alert alert-success position-absolute top-50 start-50 translate-middle px-5">
+          {{ session('message') }}
+      </div>
+  @endif
   <div>
-    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="">
-    <img src="{{ $apartment->image }}" alt="">
+    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="{{ $apartment->title }}">
+    <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
   </div>
   <h1>{{ $apartment->title }}</h1>
   <h2>{{ $apartment->slug }}</h2>
@@ -31,4 +40,11 @@
       <button type="submit" class="btn btn-danger" onclick="return confirm('Vuoi davvero cancellare questo appartamento?')">Cancella questo appartamento</button>
   </form>
 
+  <script>
+    const successMessage = document.querySelector('.alert.alert-success');
+
+    setTimeout(function(){
+      successMessage.remove();
+    }, 3000);
+  </script>
 @endsection

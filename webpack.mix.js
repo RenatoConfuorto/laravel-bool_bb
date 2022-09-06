@@ -13,9 +13,3 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
-
-//script validazione dei form create-update e delle password di registrazione
-mix.copy([
-    'resources/js/apartmentFormValidation.js',
-    'resources/js/registerFormValidation.js'
-], 'public/js');

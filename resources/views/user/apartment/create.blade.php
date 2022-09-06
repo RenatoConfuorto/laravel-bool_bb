@@ -1,5 +1,9 @@
 @extends('layouts.dashboard')
 
+@push('css')
+  <link rel="stylesheet" href="{{ asset('css/form.css') }}">
+@endpush
+
 @section('content')
 <div class="container-fluid">
   <h1>Aggiungi un nuovo appartamento</h1>
@@ -14,7 +18,7 @@
     </div>
   @endif
 
-  <form class="mt-3" action="{{ route('user.apartment.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return false">
+  <form class="mt-3 position-relative" action="{{ route('user.apartment.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return formSubmit()" onkeydown="return event.code !== 'Enter'">
     @csrf
 
     {{-- TITLE --}}
@@ -68,11 +72,27 @@
     {{-- /MQS --}}
 
     {{-- ADDRESS --}}
-    <div class="mb-3">
+    <div class="mb-3 position-relative">
       <label for="address" class="form-label">Indirizzo *</label>
       <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" minlength="4" maxlength="255">
     </div>
+    <div class="address-tips"></div>
+    
     {{-- /ADDRESS --}}
+
+    {{-- latitude --}}
+    <div class="mb-3 d-none">
+      <label for="latitude" class="form-label">Latitudine *</label>
+      <input type="number" class="form-control" id="latitude" name="latitude" value="{{ old('latitude') }}" step="0.000001">
+    </div>
+    {{-- /latitude --}}
+
+    {{-- longitude --}}
+    <div class="mb-3 d-none">
+      <label for="longitude" class="form-label">Longitudine *</label>
+      <input type="number" class="form-control" id="longitude" name="longitude" value="{{ old('longitude') }}" step="0.000001">
+    </div>
+    {{-- /longitude --}}
 
     {{-- COVER IMAGE --}}
     <div class="mb-3">

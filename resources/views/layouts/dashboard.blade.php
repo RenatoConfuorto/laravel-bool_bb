@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('css')
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary flex-md-nowrap p-0">
@@ -40,6 +41,12 @@
             <nav class="col-md-1 d-none d-md-block bg-light sidebar py-4">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url('/') }}">
+                                <i class="fa-solid fa-house-user"></i>
+                                Home
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="{{ route('user.dashboard') }}">
                                 <i class="fa-solid fa-house-user"></i>
