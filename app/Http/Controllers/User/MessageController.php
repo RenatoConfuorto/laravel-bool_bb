@@ -19,7 +19,6 @@ class MessageController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // $user_apartments = Apartment::where('user_id', $user->id)->get();
         $user_apartments_id = DB::table('apartments')->where('user_id', $user->id)->pluck('id')->toArray();
         // dd($user_apartments_id);
 
