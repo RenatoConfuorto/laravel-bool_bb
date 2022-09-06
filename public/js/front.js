@@ -5498,8 +5498,9 @@ __webpack_require__.r(__webpack_exports__);
           console.log(resp);
 
           if (resp.status === 200) {
-            _this2.successMessage = "Messaggio inviato correttamente, verrai riportato al dettaglio dell'appartamento."; // this.$router.push({ name: 'single-apartment' });
-
+            _this2.successMessage = "Messaggio inviato correttamente, verrai riportato al dettaglio dell'appartamento.";
+            _this2.form.email = '';
+            _this2.form.text = '';
             setTimeout(function () {
               return _this2.$router.push({
                 name: 'single-apartment'
@@ -58930,7 +58931,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Boolean\laravel-bool_bb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

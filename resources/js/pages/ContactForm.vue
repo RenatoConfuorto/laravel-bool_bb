@@ -136,8 +136,10 @@ export default {
         console.log(resp);
         if (resp.status === 200) {
           this.successMessage = "Messaggio inviato correttamente, verrai riportato al dettaglio dell'appartamento.";
-          // this.$router.push({ name: 'single-apartment' });
+          this.form.email = '';
+          this.form.text = '';
           setTimeout( () => this.$router.push({name: 'single-apartment'}), 3000);
+          
         } else {
           this.failMessagge = 'Ops, qualcosa è andato storto. Per favore riprova..'
         }
