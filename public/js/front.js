@@ -5545,8 +5545,7 @@ __webpack_require__.r(__webpack_exports__);
       apartments: [],
       loading: true,
       currentPage: 1,
-      lastPage: 0,
-      apartmentsPerPage: 100
+      lastPage: 0
     };
   },
   created: function created() {
@@ -5558,8 +5557,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('http://127.0.0.1:8000/api/apartments', {
         params: {
-          page: pageNumber // apartments_per_page: this.apartmentsPerPage,
-
+          page: pageNumber
         }
       }).then(function (resp) {
         _this.apartments = resp.data.results.data;

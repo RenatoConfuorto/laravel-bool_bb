@@ -66,7 +66,6 @@ export default {
       loading: true,
       currentPage: 1,
       lastPage: 0,
-      apartmentsPerPage: 100
     }
   },
   created() {
@@ -77,7 +76,6 @@ export default {
       axios.get('http://127.0.0.1:8000/api/apartments', {
         params: {
           page: pageNumber,
-          // apartments_per_page: this.apartmentsPerPage,
         }
       })
       .then((resp) => {
