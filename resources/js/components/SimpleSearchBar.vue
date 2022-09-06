@@ -3,7 +3,7 @@
     <div class="input-wrapper">
       <div class="search">
         <input type="text" placeholder="Search" v-model="address">
-        <button @click="() => {search(), redirect()}">Cerca</button>
+        <button @click="() => {redirect()}">Cerca</button>
       </div>
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <div class="address-tips mb-3" v-if="addressResults">
@@ -39,7 +39,11 @@ export default {
     redirect(){
       if(!this.error){
         // console.log('redirect');
-        this.$router.push({name: 'advanced-search', params: {apartments: this.searchResults}});
+        this.$router.push({name: 'advanced-search', params: {
+          address: this.address,
+          latitude: this.latitude,
+          longitude: this.longitude,
+          }});
       }
     }
   },

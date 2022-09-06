@@ -5278,6 +5278,11 @@ __webpack_require__.r(__webpack_exports__);
       error: null
     };
   },
+  props: {
+    givenAddress: String,
+    givenLatitude: Number,
+    givenLongitude: Number
+  },
   methods: {
     callApi: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["callApi"],
     getAddressString: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["getAddressString"],
@@ -5287,6 +5292,11 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
+    //salvare i dati che arrivano nelle variabili
+    this.address = this.givenAddress;
+    this.searchTextCtrl = this.givenAddress;
+    this.latitude = this.givenLatitude;
+    this.longitude = this.givenLongitude;
     delete axios.defaults.headers.common['X-Requested-With']; //impostare l'api
 
     setInterval(this.callApi, 500); //ottenere i servizi extra
@@ -5335,7 +5345,9 @@ __webpack_require__.r(__webpack_exports__);
         this.$router.push({
           name: 'advanced-search',
           params: {
-            apartments: this.searchResults
+            address: this.address,
+            latitude: this.latitude,
+            longitude: this.longitude
           }
         });
       }
@@ -5404,6 +5416,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ApartmentCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ApartmentCard.vue */ "./resources/js/components/ApartmentCard.vue");
 /* harmony import */ var _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/LoadingComponent.vue */ "./resources/js/components/LoadingComponent.vue");
 /* harmony import */ var _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SearchBar.vue */ "./resources/js/components/SearchBar.vue");
+/* harmony import */ var _userApiSearch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../userApiSearch.js */ "./resources/js/userApiSearch.js");
+
 
 
 
@@ -5416,15 +5430,32 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      apartments: [],
+      address: '',
+      latitude: null,
+      longitude: null,
+      searchResults: [],
       loading: true
     };
   },
-  created: function created() {// this.getApartments();
+  created: function created() {
+    console.log(this.$route);
+    this.address = this.$route.params.address;
+    this.latitude = this.$route.params.latitude;
+    this.longitude = this.$route.params.longitude;
+    this.apartments = this.$route.params.apartments;
+  },
+  mounted: function mounted() {
+    this.search();
+  },
+  watch: {
+    searchResults: function searchResults() {
+      this.loading = false;
+    }
   },
   methods: {
+    search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_3__["search"],
     // getApartments() {
-    //   axios.get('http://127.0.0.1:8000/api/apartments')
+    //   axios.get('http://127.0.0.1:8000/api/search/apartments' )
     //   .then((resp) => {
     //     this.apartments = resp.data.results;
     //     this.loading = false;
@@ -6123,7 +6154,7 @@ var render = function render() {
   }), _vm._v(" "), _c("button", {
     on: {
       click: function click() {
-        _vm.search(), _vm.redirect();
+        _vm.redirect();
       }
     }
   }, [_vm._v("Cerca")])]), _vm._v(" "), _vm.error ? _c("div", {
@@ -6203,12 +6234,17 @@ var render = function render() {
   }, [_c("main", [_c("div", {
     staticClass: "container-fluid d-flex justify-content-center align-items-center flex-wrap"
   }, [_c("SearchBar", {
+    attrs: {
+      "given-address": _vm.address,
+      "given-latitude": _vm.latitude,
+      "given-longitude": _vm.longitude
+    },
     on: {
       searchResults: _vm.getResults
     }
   }), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
     staticClass: "container-fluid d-flex justify-content-center flex-wrap"
-  }, _vm._l(_vm.apartments, function (apartment) {
+  }, _vm._l(_vm.searchResults, function (apartment) {
     return _c("ApartmentCard", {
       key: apartment.id,
       attrs: {

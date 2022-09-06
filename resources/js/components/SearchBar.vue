@@ -59,6 +59,11 @@ export default {
       error: null,
     }
   },
+  props: {
+    givenAddress: String,
+    givenLatitude: Number,
+    givenLongitude: Number,
+  },
   methods: {
     callApi,
     getAddressString,
@@ -66,6 +71,12 @@ export default {
     search,
   },
   created(){
+    //salvare i dati che arrivano nelle variabili
+    this.address = this.givenAddress;
+    this.searchTextCtrl = this.givenAddress;
+    this.latitude = this.givenLatitude;
+    this.longitude = this.givenLongitude;
+
     delete axios.defaults.headers.common['X-Requested-With'];
     //impostare l'api
     setInterval(this.callApi, 500);
