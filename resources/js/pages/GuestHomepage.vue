@@ -8,10 +8,41 @@
           <LoadingComponent/>
         </div>
 
-        <div v-else class="container-fluid d-flex justify-content-center flex-wrap"> 
-          <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
-        </div>
+        <!-- V-ELSE CONTAINER -->
+        <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
+          <div class="container-fluid d-flex justify-content-center flex-wrap">
+            <!-- PAGINATION NAV -->
+            <nav aria-label="...">
+              <ul class="pagination">
+                <!-- PREVIUOS PAGE -->
+                <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                  <a class="page-link" href="#" @click="getApartments(currentPage - 1)">Previous</a>
+                </li>
+                <!-- /PREVIUOS PAGE -->
 
+                <!-- PAGES NUMBER -->
+                <li class="page-item" :class="{ active: currentPage === n }" v-for="n in lastPage" :key="n">
+                  <a class="page-link" href="#" @click="getApartments(currentPage = n)">{{ n }}</a>
+                </li>
+                <!-- /PAGES NUMBER -->
+
+                <!-- NEXT PAGE -->
+                <li class="page-item" :class="{ disabled: currentPage === lastPage }">
+                  <a class="page-link" href="#" @click="getApartments(currentPage + 1)">Next</a>
+                </li>
+                <!-- /NEXT PAGE -->
+              </ul>
+            </nav>
+            <!-- /PAGINATION NAV -->
+          </div>
+        
+          <!-- APARTMENTS CONTAINER -->
+          <div class="container-fluid d-flex justify-content-center flex-wrap">
+          <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
+          </div>
+          <!-- /APARTMENTS CONTAINER -->
+        </div>
+        <!-- /V-ELSE CONTAINER -->
       </div>
     </main>
   </div>
@@ -27,23 +58,34 @@ export default {
   components: {
     ApartmentCard,
     LoadingComponent,
-    SearchBar
+    SearchBar,
   },
   data() {
     return {
       apartments: [],
       loading: true,
+      currentPage: 1,
+      lastPage: 0,
+      apartmentsPerPage: 100
     }
   },
   created() {
-    this.getApartments();
+    this.getApartments(1);
   },
   methods: {
-    getApartments() {
-      axios.get('http://127.0.0.1:8000/api/apartments')
+    getApartments(pageNumber) {
+      axios.get('http://127.0.0.1:8000/api/apartments', {
+        params: {
+          page: pageNumber,
+          // apartments_per_page: this.apartmentsPerPage,
+        }
+      })
       .then((resp) => {
 
-        this.apartments = resp.data.results;
+        this.apartments = resp.data.results.data;
+        this.currentPage = resp.data.results.current_page;
+        this.lastPage = resp.data.results.last_page;
+        this.totalApartments = resp.data.results.total;
         this.loading = false;
       })
     },
@@ -56,16 +98,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test {
-  height: 100vh;
-
-  main {
-    height: 100%;
-
-    .container-fluid {
-      height: 100%;
-    }
-  }
-}
 
 </style>

@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 class ApartmentController extends Controller
 {
     public function index(Request $request) {
-        $apartments = Apartment::all()->where('visibility', '=', 1);
+        $apartments_per_page = $request->apartments_per_page ? $request->apartments_per_page : 100;
+
+        $apartments = Apartment::where('visibility', '=', 1)->paginate($apartments_per_page);
 
         foreach ($apartments as $apartment) {
             if (!str_contains($apartment->image, 'picsum')) {
