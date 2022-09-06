@@ -109,7 +109,7 @@ class ApartmentPolicy
      * @param  \App\Apartment  $apartment
      * @return mixed
      */
-    public function forceDelete(User $user, Apartment $apartment)
+    public function destroy(User $user, Apartment $apartment)
     {
         return $user->id === $apartment->user_id
             ? Response::allow()

@@ -6,13 +6,16 @@
 
 @section('content')
   @if(session('message'))
-      <div class="alert alert-success position-absolute top-50 start-50 translate-middle px-5">
-          {{ session('message') }}
-      </div>
+    <div class="alert alert-success position-absolute top-50 start-50 translate-middle px-5">
+      {{ session('message') }}
+    </div>
   @endif
   <div>
-    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="{{ $apartment->title }}">
-    <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
+    @if (str_contains($apartment->image, 'picsum'))
+      <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
+    @else
+      <img src="{{ asset('storage/' . $apartment->image ) }}" alt="{{ $apartment->title }}">
+    @endif
   </div>
   <h1>{{ $apartment->title }}</h1>
   <h2>{{ $apartment->slug }}</h2>
