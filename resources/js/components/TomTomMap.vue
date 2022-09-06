@@ -24,7 +24,7 @@ export default {
   methods: {
     createMap() {
       this.map = tt.map({
-        key: 'b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA',
+        key: 'H97FXaSDT7RHiYR8ApDuoF894E4WPAXv',
         container: 'map',
         center: [this.apartment.longitude, this.apartment.latitude],
         zoom: 10
