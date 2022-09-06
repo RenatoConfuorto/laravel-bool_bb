@@ -9,7 +9,7 @@
         <div class="card" style="width: 18rem;">
           <div class="card-body">
             {{-- <h5 class="card-title">{{ $message->apartment->address }}</h5> --}}
-            <h5 class="card-title">{{ $message->apartment_id }}</h5>
+            <h5 class="card-title">{{ $message->apartment->address }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">{{ $message->email }}</h6>
             <p class="card-text">{{ $message->text}}</p>
             <a href="{{ route('user.message.show', ['message' => $message->id]) }}" class="card-link">Leggi il messaggio completo</a>
