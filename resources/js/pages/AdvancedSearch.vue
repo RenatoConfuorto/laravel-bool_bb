@@ -3,7 +3,7 @@
     <main>
       <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
 
-        <SimpleSearchBar @searchResults="getResults"/>
+        <SearchBar @searchResults="getResults"/>
         <div v-if="loading">
           <LoadingComponent/>
         </div>
@@ -20,14 +20,14 @@
 <script>
 import ApartmentCard from '../components/ApartmentCard.vue';
 import LoadingComponent from'../components/LoadingComponent.vue';
-import SimpleSearchBar from'../components/SimpleSearchBar.vue';
+import SearchBar from'../components/SearchBar.vue';
 
 export default {
-  name: 'GuestHomepage',
+  name: 'AdvancedSearch',
   components: {
     ApartmentCard,
     LoadingComponent,
-    SimpleSearchBar
+    SearchBar
   },
   data() {
     return {
@@ -36,17 +36,17 @@ export default {
     }
   },
   created() {
-    this.getApartments();
+    // this.getApartments();
   },
   methods: {
-    getApartments() {
-      axios.get('http://127.0.0.1:8000/api/apartments')
-      .then((resp) => {
+    // getApartments() {
+    //   axios.get('http://127.0.0.1:8000/api/apartments')
+    //   .then((resp) => {
 
-        this.apartments = resp.data.results;
-        this.loading = false;
-      })
-    },
+    //     this.apartments = resp.data.results;
+    //     this.loading = false;
+    //   })
+    // },
     getResults(event){
       // console.log(event);
       this.apartments = event;

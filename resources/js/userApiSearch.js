@@ -73,6 +73,7 @@ export function search(){
     .then(resp => {
       // console.log(resp.data.data);
       if(resp.data.success){
+        this.searchResults = resp.data.data;
         this.$emit('searchResults', resp.data.data)
       }else{
         this.error = resp.data.error;

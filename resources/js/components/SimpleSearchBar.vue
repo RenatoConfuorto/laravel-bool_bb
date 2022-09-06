@@ -3,7 +3,7 @@
     <div class="input-wrapper">
       <div class="search">
         <input type="text" placeholder="Search" v-model="address">
-        <button @click="search">Cerca</button>
+        <button @click="() => {search(), redirect()}">Cerca</button>
       </div>
       <div class="alert alert-danger" v-if="error">{{ error }}</div>
       <div class="address-tips mb-3" v-if="addressResults">
@@ -24,6 +24,7 @@ export default {
     return {
       address: '',
       addressResults: [],
+      searchResults: [],
       searchTextCtrl: '',
       latitude: null,
       longitude: null,
@@ -35,11 +36,17 @@ export default {
     getAddressString,
     addressClick,
     search,
+    redirect(){
+      if(!this.error){
+        // console.log('redirect');
+        this.$router.push({name: 'advanced-search', params: {apartments: this.searchResults}});
+      }
+    }
   },
   created(){
     delete axios.defaults.headers.common['X-Requested-With'];
     setInterval(this.callApi, 500);
-  }
+  },
 }
 </script>
 
