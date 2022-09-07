@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Apartment;
+use App\ApartmentSponsorType;
 use App\ExtraService;
 use App\Http\Controllers\Controller;
 use Dotenv\Result\Success;
@@ -62,7 +63,7 @@ class ApartmentController extends Controller
         ){
             return response()->json([
                 'success' => false,
-                'error' => 'Errore nella ricerca',
+                'error' => 'Errore nella ricerca, selezionare un indirizzo valido e riprovare',
             ]);
         }
         $params = [];
@@ -115,6 +116,8 @@ class ApartmentController extends Controller
 
             if($distance <= $params['radius']){
                 $apartment->distance = $distance;
+                //stabilire se ha una sponsorizzazione attiva
+                $apartment->sponsored = $apartment->hasActiveSponsor() ? true : false;
                 $distanceFiltered[] = $apartment;
             }
         }
@@ -146,6 +149,31 @@ class ApartmentController extends Controller
         return response()->json([
             'success' => true,
             'data'=> $filteredApartments,
+        ]);
+    }
+
+    public function evidence(Request $request){
+        $page = $request['page'] ?? 1;
+        $apartments = Apartment::where('visibility', '1')->get();
+        $evidenced = $apartments->filter(function($apartment){
+            if($apartment->hasActiveSponsor())return true;
+        })->values();
+        $total_elements = $evidenced->count();
+        
+        $number = 25;
+        $c = $evidenced->filter(function($apartment, $key) use($page, $number){
+            $first_element = ($page - 1) * $number;
+            $last_element = ($page * $number) - 1;
+            if($key <= $last_element && $key >= $first_element)return true;
+        });
+        
+        $number_of_pages = ceil($total_elements / $number);
+        return response()->json([
+            'success' => true,
+            'total_elements' => $total_elements,
+            'number_of_pages' => $number_of_pages,
+            'page' => $page,
+            'data' => $c,
         ]);
     }
 }

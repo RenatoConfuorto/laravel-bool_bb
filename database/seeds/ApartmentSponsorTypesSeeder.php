@@ -24,7 +24,7 @@ class ApartmentSponsorTypesSeeder extends Seeder
         $apartments = Apartment::all();
         $sponsor_types = SponsorType::all();
 
-        $count = $apartments->count() / 1.75;
+        $count = $apartments->count() * 2;
         for ($i=0; $i < $count; $i++) { 
             $apartment_sponsor = new ApartmentSponsorType();
 
@@ -37,7 +37,7 @@ class ApartmentSponsorTypesSeeder extends Seeder
 
             
             // generiamo una data unix
-            $line_date_unix = strtotime('2005-01-01 12:00:00'); //non generare sponsorizzezioni precedenti a questa data
+            $line_date_unix = strtotime('2015-01-01 12:00:00'); //non generare sponsorizzezioni precedenti a questa data
             $current_date_unix = time();
 
             $date_start_unix = rand($line_date_unix, $current_date_unix);

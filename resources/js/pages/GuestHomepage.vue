@@ -10,37 +10,26 @@
 
         <!-- V-ELSE CONTAINER -->
         <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
-          <div class="container-fluid d-flex justify-content-center flex-wrap">
-            <!-- PAGINATION NAV -->
-            <nav aria-label="...">
-              <ul class="pagination">
-                <!-- PREVIUOS PAGE -->
-                <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                  <a class="page-link" href="#" @click="getApartments(currentPage - 1)">Previous</a>
-                </li>
-                <!-- /PREVIUOS PAGE -->
-
-                <!-- PAGES NUMBER -->
-                <li class="page-item" :class="{ active: currentPage === n }" v-for="n in lastPage" :key="n">
-                  <a class="page-link" href="#" @click="getApartments(currentPage = n)">{{ n }}</a>
-                </li>
-                <!-- /PAGES NUMBER -->
-
-                <!-- NEXT PAGE -->
-                <li class="page-item" :class="{ disabled: currentPage === lastPage }">
-                  <a class="page-link" href="#" @click="getApartments(currentPage + 1)">Next</a>
-                </li>
-                <!-- /NEXT PAGE -->
-              </ul>
-            </nav>
-            <!-- /PAGINATION NAV -->
-          </div>
+          <h1>In evidenza</h1>
+          <PageNavigation
+          :currentPage="currentPage"
+          :lastPage="lastPage"
+          :getApartments="getApartments"
+          v-if="lastPage > 1"
+          />
         
           <!-- APARTMENTS CONTAINER -->
           <div class="container-fluid d-flex justify-content-center flex-wrap">
           <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
           </div>
           <!-- /APARTMENTS CONTAINER -->
+
+          <PageNavigation
+          :currentPage="currentPage"
+          :lastPage="lastPage"
+          :getApartments="getApartments"
+          v-if="lastPage > 1"
+          />
         </div>
         <!-- /V-ELSE CONTAINER -->
       </div>
@@ -52,13 +41,15 @@
 import ApartmentCard from '../components/ApartmentCard.vue';
 import LoadingComponent from'../components/LoadingComponent.vue';
 import SimpleSearchBar from'../components/SimpleSearchBar.vue';
+import PageNavigation from '../components/PageNavigation.vue';
 
 export default {
   name: 'GuestHomepage',
   components: {
     ApartmentCard,
     LoadingComponent,
-    SimpleSearchBar
+    SimpleSearchBar,
+    PageNavigation,
   },
   data() {
     return {
@@ -72,18 +63,19 @@ export default {
     this.getApartments(1);
   },
   methods: {
-    getApartments(pageNumber) {
-      axios.get('http://127.0.0.1:8000/api/apartments', {
-        params: {
-          page: pageNumber,
+    getApartments(page) {
+      console.log(page)
+        axios.get('http://127.0.0.1:8000/api/search/apartments_evidence', {
+          params: {
+            page: page,
         }
       })
       .then((resp) => {
-
-        this.apartments = resp.data.results.data;
-        this.currentPage = resp.data.results.current_page;
-        this.lastPage = resp.data.results.last_page;
-        this.totalApartments = resp.data.results.total;
+        this.apartments = resp.data.data;
+        // console.log('apartments', this.apartments);
+        this.currentPage = page;
+        this.lastPage = resp.data.number_of_pages;
+        // this.totalApartments = resp.data.results.total;
         this.loading = false;
       })
     },

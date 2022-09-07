@@ -1,5 +1,6 @@
 <template>
   <div class="card" style="width: 18rem;">
+    <span class="badge badge-success" v-if="apartment.sponsored">In Evidenza</span>
     <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
     <div class="card-body">
       <h5 class="card-title">{{ apartment.title }}</h5>
@@ -26,6 +27,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.badge{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: #38c172;
+}
 
 </style>

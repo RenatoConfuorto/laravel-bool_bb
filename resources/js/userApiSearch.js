@@ -73,8 +73,10 @@ export function search(){
     .then(resp => {
       // console.log(resp.data.data);
       if(resp.data.success){
+        //ordinare l'array mettendo prima gli appartamneti in evidenza
         this.searchResults = resp.data.data;
-        this.$emit('searchResults', resp.data.data)
+        this.searchResults.sort((a, b) => Number(b.sponsored) - Number(a.sponsored))
+        this.$emit('searchResults', this.searchResults)
       }else{
         this.error = resp.data.error;
       }
