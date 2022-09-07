@@ -20,23 +20,33 @@ class MessageController extends Controller
     {
         $user = Auth::user();
         $user_apartments_id = DB::table('apartments')->where('user_id', $user->id)->pluck('id')->toArray();
-        // dd($user_apartments_id);
 
         foreach ($user_apartments_id as $id => $index) {
             $user_messages[] = Message::where('apartment_id', [$id => $index])->get();
         }
-        
-        // dd($user_messages);
 
         return view('user.message.index', compact('user_messages'));
     }
+
+    /**
+     * Display messages for a single apartment.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function apartmentMessages($id)
+    {
+        $messages = Message::where('apartment_id', $id)->get();
+
+        return view('user.message.apartment-messages', compact('messages'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         //
     }
@@ -60,6 +70,7 @@ class MessageController extends Controller
      */
     public function show($id)
     {
+
         $message = Message::findOrFail($id);
 
         $this->authorize('show', $message);

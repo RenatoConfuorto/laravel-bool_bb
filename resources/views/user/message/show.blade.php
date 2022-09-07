@@ -10,7 +10,7 @@
         @endif
         <h6 class="card-subtitle mb-2 text-muted">Email: {{ $message->email }}</h6>
         <p class="card-text">{{ $message->text}}</p>
-        <a href="#" class="card-link">Another link</a>
+        <a class="btn btn-primary" href="{{ route('user.message.apartment-messages', ['message' => $message->apartment->id]) }}">Torna ai messaggi per questo appartamento</a>
       </div>
     </div>
   </div>
