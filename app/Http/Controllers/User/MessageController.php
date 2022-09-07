@@ -28,6 +28,15 @@ class MessageController extends Controller
 
         return view('user.message.index', compact('user_messages', 'user_apartments'));
     }
+    // -----------------------------------------------------------------------
+    static function setIndexQuery($apartment_id)
+    {
+        $user_messages = Message::where('apartment_id', $apartment_id)->get();
+        // dd($user_messages);
+        return $user_messages;
+        
+    }
+    // -----------------------------------------------------------------------
 
     /**
      * Display messages for a single apartment.
