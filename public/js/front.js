@@ -6569,7 +6569,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
     staticClass: "container-fluid d-flex justify-content-center flex-wrap"
-  }, [_vm.lastPage > 1 ? _c("PaginationNav", {
+  }, [_c("h1", [_vm._v("In evidenza")]), _vm._v(" "), _vm.lastPage > 1 ? _c("PaginationNav", {
     attrs: {
       currentPage: _vm.currentPage,
       lastPage: _vm.lastPage,
@@ -59519,9 +59519,14 @@ function search() {
     }).then(function (resp) {
       // console.log(resp.data.data);
       if (resp.data.success) {
+        //ordinare l'array mettendo prima gli appartamneti in evidenza
         _this2.searchResults = resp.data.data;
 
-        _this2.$emit('searchResults', resp.data.data);
+        _this2.searchResults.sort(function (a, b) {
+          return Number(b.sponsored) - Number(a.sponsored);
+        });
+
+        _this2.$emit('searchResults', _this2.searchResults);
       } else {
         _this2.error = resp.data.error;
       }

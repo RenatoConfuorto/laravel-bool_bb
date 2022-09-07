@@ -10,6 +10,7 @@
 
         <!-- V-ELSE CONTAINER -->
         <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
+          <h1>In evidenza</h1>
           <PaginationNav
           :currentPage="currentPage"
           :lastPage="lastPage"

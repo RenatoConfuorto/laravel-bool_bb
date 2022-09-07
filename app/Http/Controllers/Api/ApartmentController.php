@@ -63,7 +63,7 @@ class ApartmentController extends Controller
         ){
             return response()->json([
                 'success' => false,
-                'error' => 'Errore nella ricerca',
+                'error' => 'Errore nella ricerca, selezionare un indirizzo valido e riprovare',
             ]);
         }
         $params = [];
@@ -116,6 +116,8 @@ class ApartmentController extends Controller
 
             if($distance <= $params['radius']){
                 $apartment->distance = $distance;
+                //stabilire se ha una sponsorizzazione attiva
+                $apartment->sponsored = $apartment->hasActiveSponsor() ? true : false;
                 $distanceFiltered[] = $apartment;
             }
         }
@@ -158,7 +160,7 @@ class ApartmentController extends Controller
         })->values();
         $total_elements = $evidenced->count();
         
-        $number = 100;
+        $number = 25;
         $c = $evidenced->filter(function($apartment, $key) use($page, $number){
             $first_element = ($page - 1) * $number;
             $last_element = ($page * $number) - 1;
