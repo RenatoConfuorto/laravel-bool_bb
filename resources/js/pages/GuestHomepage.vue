@@ -11,7 +11,7 @@
         <!-- V-ELSE CONTAINER -->
         <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
           <h1>In evidenza</h1>
-          <PaginationNav
+          <PageNavigation
           :currentPage="currentPage"
           :lastPage="lastPage"
           :getApartments="getApartments"
@@ -24,7 +24,7 @@
           </div>
           <!-- /APARTMENTS CONTAINER -->
 
-          <PaginationNav
+          <PageNavigation
           :currentPage="currentPage"
           :lastPage="lastPage"
           :getApartments="getApartments"
@@ -41,7 +41,7 @@
 import ApartmentCard from '../components/ApartmentCard.vue';
 import LoadingComponent from'../components/LoadingComponent.vue';
 import SimpleSearchBar from'../components/SimpleSearchBar.vue';
-import PaginationNav from '../components/PaginationNav.vue';
+import PageNavigation from '../components/PageNavigation.vue';
 
 export default {
   name: 'GuestHomepage',
@@ -49,7 +49,7 @@ export default {
     ApartmentCard,
     LoadingComponent,
     SimpleSearchBar,
-    PaginationNav,
+    PageNavigation,
   },
   data() {
     return {
