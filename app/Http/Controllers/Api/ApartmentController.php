@@ -151,12 +151,11 @@ class ApartmentController extends Controller
     }
 
     public function evidence(){
-        //fare la ricerca fra gli appartamenti
-        $current_date = date('Y-m-d H:i:s', time());
-        $sponsors = ApartmentSponsorType::where('sponsor_start', '<=', $current_date)->where('sponsor_end', '>=', $current_date)->with('apartment')->get();
-        return response()->json([
-            'success' => true,
-            'data' => $sponsors,
-        ]);
+        $apartments = Apartment::where('visibility', '1')->get();
+        $evidenced = $apartments->filter(function($apartment){
+            if($apartment->hasActiveSponsor())return true;
+        });
+
+        return $evidenced;
     }
 }
