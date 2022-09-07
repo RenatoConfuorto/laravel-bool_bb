@@ -150,12 +150,28 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function evidence(){
+    public function evidence(Request $request){
+        $page = $request['page'] ?? 1;
         $apartments = Apartment::where('visibility', '1')->get();
         $evidenced = $apartments->filter(function($apartment){
             if($apartment->hasActiveSponsor())return true;
+        })->values();
+        $total_elements = $evidenced->count();
+        
+        $number = 100;
+        $c = $evidenced->filter(function($apartment, $key) use($page, $number){
+            $first_element = ($page - 1) * $number;
+            $last_element = ($page * $number) - 1;
+            if($key <= $last_element && $key >= $first_element)return true;
         });
-
-        return $evidenced;
+        
+        $number_of_pages = ceil($total_elements / $number);
+        return response()->json([
+            'success' => true,
+            'total_elements' => $total_elements,
+            'number_of_pages' => $number_of_pages,
+            'page' => $page,
+            'data' => $c,
+        ]);
     }
 }
