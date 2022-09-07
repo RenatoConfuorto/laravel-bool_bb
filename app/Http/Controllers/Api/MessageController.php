@@ -18,8 +18,6 @@ class MessageController extends Controller
             'text' => 'required|string|max:20000'
         ]);
 
-
-
         $message = new Message();
 
         $message->fill($data);
