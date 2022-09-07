@@ -19,6 +19,7 @@
   </div>
   <h1>{{ $apartment->title }}</h1>
   <h2>{{ $apartment->slug }}</h2>
+  <h3>{{ $apartment->address }}</h3>
   <p>{{ $apartment->description }}</p>
 
   <p>   <strong>Servizi : </strong>
@@ -28,6 +29,10 @@
     Vuoto  
   @endforelse
   </p>
+
+  <div>
+    <a class="btn btn-primary" href="{{ route('user.message.apartment-messages', ['message' => $apartment->id]) }}">Leggi i messaggi per questo appartamento</a>
+  </div>
 
   <div>
     <a class="btn btn-primary" href="{{ route('user.apartment.index') }}">Torna alla lista dei tuoi appartamenti</a>

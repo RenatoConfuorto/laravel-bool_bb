@@ -23,6 +23,7 @@ Route::middleware('auth')
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('apartment', 'ApartmentController');
         Route::resource('message', 'MessageController');
+        Route::get('message/{message}/apartment-messages', 'MessageController@apartmentMessages')->name('message.apartment-messages');
     });
 
 // Route::get('{any?}', function(){
