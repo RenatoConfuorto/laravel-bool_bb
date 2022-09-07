@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Apartment;
+use App\ApartmentSponsorType;
 use App\ExtraService;
 use App\Http\Controllers\Controller;
 use Dotenv\Result\Success;
@@ -146,6 +147,16 @@ class ApartmentController extends Controller
         return response()->json([
             'success' => true,
             'data'=> $filteredApartments,
+        ]);
+    }
+
+    public function evidence(){
+        //fare la ricerca fra gli appartamenti
+        $current_date = date('Y-m-d H:i:s', time());
+        $sponsors = ApartmentSponsorType::where('sponsor_start', '<=', $current_date)->where('sponsor_end', '>=', $current_date)->with('apartment')->get();
+        return response()->json([
+            'success' => true,
+            'data' => $sponsors,
         ]);
     }
 }

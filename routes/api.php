@@ -23,3 +23,4 @@ Route::get('/apartments/{slug}', 'Api\ApartmentController@show')->name('api.apar
 Route::get('/extra_services', 'Api\ExtraServicesController@index')->name('api.services.index');
 Route::post('/message', 'Api\MessageController@store')->name('api.message.post');
 Route::get('/search/apartments', 'Api\ApartmentController@userSearch')->name('api.apartments.search');
+Route::get('/search/apartments_evidence', 'Api\ApartmentController@evidence')->name('api.apartments.search');
