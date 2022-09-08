@@ -25,6 +25,10 @@ export default {
     width: 250px;
     border-radius: 50%;
     perspective: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .orbit-spinner .orbit {

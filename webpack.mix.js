@@ -28,3 +28,6 @@ mix.sass('resources/sass/form.scss', 'public/css');
 
 //foglio di stile della nav bar dei messaggi
 mix.sass('resources/sass/apartment-messages-navbar.scss', 'public/css');
+
+// fontawesaome
+mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
