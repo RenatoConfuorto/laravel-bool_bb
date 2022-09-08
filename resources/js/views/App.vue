@@ -17,7 +17,6 @@
 
 <script>
 import AppHeader from '../components/AppHeader.vue';
-import GuestHomepage from '../pages/GuestHomepage.vue';
 
 export default {
   name: 'App',
@@ -28,7 +27,6 @@ export default {
   },
   components: {
     AppHeader,
-    GuestHomepage
   },
   props: {
     loggedIn: Boolean,

@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import GuestHomepage from "./pages/GuestHomepage.vue";
+import HomePage from "./pages/HomePage.vue";
 import AdvancedSearch from "./pages/AdvancedSearch.vue";
 import SingleApartment from "./pages/SingleApartment.vue";
 import ContactForm from "./pages/ContactForm.vue";
@@ -14,7 +14,7 @@ const router = new VueRouter({
     {
       path: "/",
       name: 'homepage',
-      component: GuestHomepage
+      component: HomePage
     },
     {
       path: "/search",
@@ -33,7 +33,7 @@ const router = new VueRouter({
     },
     {
       path: "/*", //link non riconosciuto
-      component: GuestHomepage,
+      component: HomePage,
     },
   ]
 });
