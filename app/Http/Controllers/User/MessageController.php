@@ -28,26 +28,15 @@ class MessageController extends Controller
 
         // -----------------------------------------------------------------------------------------
         $user = Auth::user();
+        
         $user_apartments = Apartment::where('user_id', $user->id)->get();
-        $user_apartments_id = DB::table('apartments')->where('user_id', $user->id)->pluck('id')->toArray();
+        $user_apartments_id = Apartment::where('user_id', $user->id)->pluck('id');
 
-        dd($user_apartments_id);
+        $user_messages = Message::whereIn('apartment_id', $user_apartments_id)->orderBy('created_at','DESC')->get();
 
-        $user_messages = Message::where('apartment_id', $user_apartments_id)->orderBy('created_at','DESC')->get();
-
-        dd($user_messages);
 
         return view('user.message.index', compact('user_messages', 'user_apartments'));
     }
-    // -----------------------------------------------------------------------
-    static function setIndexQuery($apartment_id)
-    {
-        $user_messages = Message::where('apartment_id', $apartment_id)->get();
-        // dd($user_messages);
-        return $user_messages;
-        
-    }
-    // -----------------------------------------------------------------------
 
     /**
      * Display messages for a single apartment.
