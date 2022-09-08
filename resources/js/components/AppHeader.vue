@@ -54,33 +54,6 @@ export default {
   
 </script>
 
-<style lang="scss" scoped>
-  nav {
-    width: 100%;
-    height: 50px;
-    background-color: #1d1d1d;
-    line-height: 50px;
-    vertical-align: middle;
-    padding: 0 2.5rem;
+<style>
 
-    ul {
-      list-style: none;
-      display: flex;
-      flex-grow: 1;
-      justify-content: flex-end;
-
-      :first-child {
-        margin-right: auto;
-      }
-
-      li  {
-        margin-right: 1rem;
-        font-size: 1rem;
-        a {
-          text-decoration: none;
-          color: #db0356;
-        }
-      }
-    }
-  }
 </style>

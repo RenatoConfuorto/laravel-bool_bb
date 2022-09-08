@@ -1,5 +1,5 @@
 <template>
-  <div class="search-bar mt-5">
+  <div class="search-bar">
     <div class="input-wrapper">
       <div class="search">
         <input type="text" placeholder="Search" v-model="address">
@@ -57,8 +57,6 @@ export default {
 <style lang="scss" scoped>
   .search-bar{
     width: 60%;
-    margin: auto;
-
 
     .search{
       width: 100%;

@@ -15,3 +15,12 @@
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
+
+// foglio stile form messaggi
+@import "form";
+
+// foglio stile navbar in index messaggi
+@import "apartment-messages-navbar";
+
+// foglio stile della card appartamento backend
+@import "apartment-card-backend";

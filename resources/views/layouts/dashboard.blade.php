@@ -19,6 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @stack('css')
+    <style>
+        body {
+            background-color: rgb(77, 77, 77)
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark d-flex justify-center flex-md-nowrap p-0">
@@ -70,7 +75,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <nav class="col-md-2 col-sm-3  d-none d-md-block">
+            <nav class="col-lg-1 col-md-2 d-none d-md-block">
                 <div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -102,7 +107,7 @@
                 </div>
             </nav>
 
-            <main role="main" class="col-md-10 col-sm-9 ">
+            <main role="main" class="col-lg-11 col-md-10">
                 @yield('content')
             </main>
             
