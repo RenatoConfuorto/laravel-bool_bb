@@ -18,17 +18,9 @@ class MessageController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $user_apartments = Apartment::where('user_id', $user->id)->get();
-        // $user_apartments_id = DB::table('apartments')->where('user_id', $user->id)->pluck('id')->toArray();
 
-        // foreach ($user_apartments_id as $id => $index) {
-        //     $user_messages[] = Message::where('apartment_id', [$id => $index])->orderBy('created_at','DESC')->get();
-        // }
-
-        // -----------------------------------------------------------------------------------------
         $user = Auth::user();
-        
+
         $user_apartments = Apartment::where('user_id', $user->id)->get();
         $user_apartments_id = Apartment::where('user_id', $user->id)->pluck('id');
 
@@ -45,9 +37,14 @@ class MessageController extends Controller
      */
     public function apartmentMessages($id)
     {
+
+        $user = Auth::user();
+
+        $user_apartments = Apartment::where('user_id', $user->id)->get();
+
         $messages = Message::where('apartment_id', $id)->orderBy('created_at','DESC')->get();
 
-        return view('user.message.apartment-messages', compact('messages'));
+        return view('user.message.apartment-messages', compact('messages', 'user_apartments'));
     }
 
 
