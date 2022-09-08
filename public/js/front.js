@@ -5947,10 +5947,31 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("footer", [_vm._v("\n  Footer\n")]);
+  return _vm._m(0);
 };
 
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("footer", [_c("div", {
+    staticClass: "info"
+  }, [_c("p", [_vm._v("\n    500 Terry Francois Street, "), _c("br"), _vm._v("\n    San Francisco, CA 94158  |  1-800-000-0000\n    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "socials"
+  }, [_c("i", {
+    staticClass: "fa-brands fa-twitter"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "fa-brands fa-facebook-f"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "fa-brands fa-instagram"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "fa-brands fa-tiktok"
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "copyright"
+  }, [_c("i", {
+    staticClass: "far fa-copyright"
+  }), _vm._v("\n    2022 Boolean class #62 - Team #7\n  ")])]);
+}];
 render._withStripped = true;
 
 
@@ -12025,7 +12046,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "ul[data-v-4ab6097e] {\n  list-style-type: none;\n}\nfooter[data-v-4ab6097e] {\n  padding: 1rem;\n  margin: 1rem 0.8rem;\n  border-top: 1px solid #282626;\n}\nfooter .info[data-v-4ab6097e] {\n  font-size: 0.8rem;\n}\nfooter .socials[data-v-4ab6097e] {\n  font-size: 1.3rem;\n  margin: 1.3rem 0 0.8rem;\n}\nfooter .socials i[data-v-4ab6097e] {\n  margin: 0 5px;\n}\nfooter .copyright[data-v-4ab6097e] {\n  font-size: 0.7rem;\n}", ""]);
 
 // exports
 
@@ -12044,7 +12065,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "nav[data-v-0851419a] {\n  padding: 1rem 0;\n  height: 6rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px;\n}\nnav .logo[data-v-0851419a] {\n  margin-left: 2.5rem;\n  padding: 0 0.3rem;\n  border-left: 1px solid #282626;\n}\nnav .logo h1[data-v-0851419a] {\n  margin: 0;\n  cursor: default;\n}\nnav ul[data-v-0851419a] {\n  margin-right: 1.5rem;\n  height: 100%;\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\nnav ul li[data-v-0851419a] {\n  margin: 0 0.5rem;\n}\nnav ul li a[data-v-0851419a] {\n  text-decoration: none;\n  color: #282626;\n  padding: 0.3rem 0.5rem;\n}\nnav ul li[data-v-0851419a]:hover {\n  border-bottom: 1px solid black;\n}", ""]);
+exports.push([module.i, "nav[data-v-0851419a] {\n  padding: 1rem 0.8rem;\n  height: 6rem;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px;\n}\nnav .logo[data-v-0851419a] {\n  padding: 0 0.3rem;\n  border-left: 1px solid #282626;\n}\nnav .logo h1[data-v-0851419a] {\n  margin: 0;\n  cursor: default;\n}\nnav ul[data-v-0851419a] {\n  margin-right: 1rem;\n  height: 100%;\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\nnav ul li[data-v-0851419a] {\n  margin: 0 0.5rem;\n}\nnav ul li a[data-v-0851419a] {\n  text-decoration: none;\n  color: #282626;\n  padding: 0.3rem 0.5rem;\n}\nnav ul li[data-v-0851419a]:hover {\n  border-bottom: 1px solid black;\n}", ""]);
 
 // exports
 

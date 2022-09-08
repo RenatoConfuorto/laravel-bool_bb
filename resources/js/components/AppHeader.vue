@@ -68,14 +68,13 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/_variables.scss';
 nav{
-  padding: 1rem 0;
+  padding: $main-padding;
   height: $header-height;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px;
   .logo{
-    margin-left: 2.5rem;
     padding: 0 0.3rem;
     border-left: 1px solid $text-primary-color;
 
@@ -86,7 +85,7 @@ nav{
   }
 
   ul{
-    margin-right: 1.5rem;
+    margin-right: 1rem;
     height: 100%;
     display: flex;
     justify-content: flex-end;
