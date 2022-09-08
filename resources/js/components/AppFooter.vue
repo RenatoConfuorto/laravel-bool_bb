@@ -1,16 +1,16 @@
 <template>
-  <h1>HomePage</h1>
+  <footer>
+    Footer
+  </footer>
 </template>
 
 <script>
 export default {
-  name: 'HomePage',
+  name: 'AppFooter',
 }
 </script>
 
 <style lang="scss" scoped>
 @import '../../sass/_variables.scss';
-h1{
-  // background-color: blue;
-}
+
 </style>

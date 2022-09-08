@@ -7,6 +7,7 @@ import HomePage from "./pages/HomePage.vue";
 import AdvancedSearch from "./pages/AdvancedSearch.vue";
 import SingleApartment from "./pages/SingleApartment.vue";
 import ContactForm from "./pages/ContactForm.vue";
+import SimpleSearch from './pages/SimpleSearch.vue';
 
 const router = new VueRouter({
   mode: "history",
@@ -18,6 +19,11 @@ const router = new VueRouter({
     },
     {
       path: "/search",
+      name: 'apartments',
+      component: SimpleSearch
+    },
+    {
+      path: "/advanced_search",
       name: 'advanced-search',
       component: AdvancedSearch
     },

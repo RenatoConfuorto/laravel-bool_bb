@@ -1,14 +1,19 @@
 <template>
+<header>
   <nav>
+    <div class="logo">
+      <h1>Bool B&B</h1>
+    </div>
     <ul>
       <li
       v-for="(link, index) in links"
       :key="index" v-if="link.visible">
         <a v-if="!link.router" :href="link.link">{{ link.text }}</a>
-        <router-link v-else :to="link.link">{{ link.text }}</router-link>
+        <router-link v-else :to="{ name: link.name }">{{ link.text }}</router-link>
       </li>
     </ul>
   </nav>
+</header>
 </template>
 
 <script>
@@ -17,6 +22,18 @@ export default {
   data(){
     return{
       links: [
+        {
+          text: 'Home',
+          name: 'homepage',
+          visible: true,
+          router: true,
+        },
+        {
+          text: 'Appartamenti',
+          name: 'apartments',
+          visible: true,
+          router: true,
+        },
         {
           text: 'Login', //testo del link
           link: this.loginRoute, //link
@@ -35,12 +52,6 @@ export default {
           visible: this.loggedIn,
           router: false,
         },
-        {
-          text: 'Home',
-          link: '/',
-          visible: true,
-          router: true,
-        },
       ],
     }
   },
@@ -54,6 +65,46 @@ export default {
   
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '../../sass/_variables.scss';
+nav{
+  padding: 1rem 0;
+  height: $header-height;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px;
+  .logo{
+    margin-left: 2.5rem;
+    padding: 0 0.3rem;
+    border-left: 1px solid $text-primary-color;
 
+    h1{
+      margin: 0;
+      cursor: default;
+    }
+  }
+
+  ul{
+    margin-right: 1.5rem;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    li{
+      margin: 0 0.5rem;
+
+      a{
+        text-decoration: none;
+        color: $text-primary-color;
+        padding: 0.3rem 0.5rem;
+      }
+
+      &:hover{
+        border-bottom: 1px solid black;
+      }
+    }
+  }
+}
 </style>

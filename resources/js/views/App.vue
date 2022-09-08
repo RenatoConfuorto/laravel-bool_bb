@@ -12,11 +12,13 @@
     :registerRoute="registerRoute"
     />
     <router-view></router-view>
+    <AppFooter/>
   </div>
 </template> 
 
 <script>
 import AppHeader from '../components/AppHeader.vue';
+import AppFooter from '../components/AppFooter.vue';
 
 export default {
   name: 'App',
@@ -27,6 +29,7 @@ export default {
   },
   components: {
     AppHeader,
+    AppFooter,
   },
   props: {
     loggedIn: Boolean,
@@ -43,6 +46,7 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+@import '../../sass/_variables.scss';
+@import '../../sass/frontOffice.scss';
 </style>
