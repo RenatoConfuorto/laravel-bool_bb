@@ -25,7 +25,7 @@
       </button>
       <nav class="mobile-menu" :class="{'is-active': hamburgerActive}">
         <ul>
-          <li v-for="(link, index) in links" :key="index" v-if="link.visible">
+          <li v-for="(link, index) in links" :key="index" v-if="link.visible"  @click="changeActive">
             <a v-if="!link.router" :href="link.link" class="header-link">{{
               link.text
             }}</a>

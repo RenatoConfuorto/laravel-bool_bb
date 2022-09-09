@@ -1,7 +1,7 @@
 <template>
   <div class="test">
     <main>
-      <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
+      <div class="container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap">
 
         <SimpleSearchBar @searchResults="getResults"/>
         <div v-if="loading">
@@ -10,7 +10,7 @@
 
         <!-- V-ELSE CONTAINER -->
         <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
-          <h1>In evidenza</h1>
+          <SearchJumbotron :text="'In Evidenza'"/>
           <PageNavigation
           :currentPage="currentPage"
           :lastPage="lastPage"
@@ -42,6 +42,7 @@ import ApartmentCard from '../components/ApartmentCard.vue';
 import LoadingComponent from'../components/LoadingComponent.vue';
 import SimpleSearchBar from'../components/SimpleSearchBar.vue';
 import PageNavigation from '../components/PageNavigation.vue';
+import SearchJumbotron from '../components/searchJumbotron.vue';
 
 export default {
   name: 'GuestHomepage',
@@ -50,6 +51,7 @@ export default {
     LoadingComponent,
     SimpleSearchBar,
     PageNavigation,
+    SearchJumbotron,
   },
   data() {
     return {
