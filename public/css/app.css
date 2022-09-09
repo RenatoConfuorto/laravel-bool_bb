@@ -23935,29 +23935,39 @@ div.address-tips p:hover {
   padding-left: 0.5rem;
 }
 
-li.list-group-item-action {
-  border-radius: 10px;
-  margin-bottom: 1rem;
+body {
+  -ms-overflow-style: none;
+  /* for Internet Explorer, Edge */
+  scrollbar-width: none;
+  /* for Firefox */
+  overflow-y: scroll;
 }
 
-li.list-group-item-action a {
-  text-decoration: none;
-  color: black;
+body ::-webkit-scrollbar {
+  display: none;
+  /* for Chrome, Safari, and Opera */
 }
 
-li.list-group-item-action .img-wrap {
-  width: 100%;
+.row.elements-container {
+  height: calc(100vh - 100px);
+}
+
+.row.elements-container .col-md-9 {
   height: 100%;
-  max-height: 100px;
-  border-radius: 25px;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
-li.list-group-item-action .img-wrap img {
-  width: 100%;
+.row.elements-container .col-md-3 {
   height: 100%;
-  -o-object-fit: center;
-     object-fit: center;
+  overflow-y: auto;
+}
+
+.row.elements-container .col-md-3 .apartment-list {
+  height: 100%;
+}
+
+.row.elements-container .col-md-3 .apartment-list ul {
+  height: 100%;
 }
 
 .card-wrapper {

@@ -28,6 +28,9 @@ import Vue from 'vue';
   */
  
  Vue.component('mainapp', require('./views/App.vue').default)
+ Vue.component('message-card', require('./components/backend/MessageCard').default);
+ Vue.component('messages-navbar', require('./components/backend/MessagesNavbar').default);
+
  const app = new Vue({
      el: '#root',
      router
