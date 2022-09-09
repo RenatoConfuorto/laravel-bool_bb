@@ -16,7 +16,7 @@ export default {
   name: 'MessageCard',
   props: {
     message: Object,
-    apartment: Object
+    apartments: Array
   },
   methods: {
     formatDate(date) {

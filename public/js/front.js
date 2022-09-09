@@ -5446,7 +5446,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'MessageCard',
   props: {
     message: Object,
-    apartment: Object
+    apartments: Array
   },
   methods: {
     formatDate: function formatDate(date) {
