@@ -4,7 +4,7 @@
     <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
     <div class="card-body">
       <h5 class="card-title">{{ apartment.title }}</h5>
-      <p class="card-text">{{ apartment.description }}</p>
+      <p class="card-text">{{ truncateText(100) }}</p>
       <span>{{ apartment.price }}  &euro;</span>
       <span></span>
     </div>
@@ -23,6 +23,14 @@ export default {
   name: 'ApartmentCard',
   props: {
     apartment: Object
+  },
+  methods: {
+    truncateText(maxCharNumber) {
+      if (this.apartment.description.length > maxCharNumber) {
+        return this.apartment.description.substr(0, maxCharNumber) + '...';
+      }
+      return this.apartment.description;
+    }
   }
 }
 </script>

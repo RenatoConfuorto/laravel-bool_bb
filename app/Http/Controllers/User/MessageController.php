@@ -22,10 +22,12 @@ class MessageController extends Controller
         $user = Auth::user();
 
         $user_apartments = Apartment::where('user_id', $user->id)->get();
+        // dd($user_apartments);
+
         $user_apartments_id = Apartment::where('user_id', $user->id)->pluck('id');
 
         $user_messages = Message::whereIn('apartment_id', $user_apartments_id)->orderBy('created_at','DESC')->get();
-
+        // dd($user_messages);
 
         return view('user.message.index', compact('user_messages', 'user_apartments'));
     }

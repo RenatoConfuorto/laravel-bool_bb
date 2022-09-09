@@ -18,6 +18,18 @@ export default {
     return{
       links: [
         {
+          text: 'Home',
+          link: '/',
+          visible: true,
+          router: true,
+        },
+        {
+          text: 'User',
+          link: this.userRoute,
+          visible: this.loggedIn,
+          router: false,
+        },
+        {
           text: 'Login', //testo del link
           link: this.loginRoute, //link
           visible: !this.loggedIn, //se il link può essere visto o meno
@@ -28,18 +40,6 @@ export default {
           link: this.registerRoute,
           visible: !this.loggedIn,
           router: false,
-        },
-        {
-          text: 'User',
-          link: this.userRoute,
-          visible: this.loggedIn,
-          router: false,
-        },
-        {
-          text: 'Home',
-          link: '/',
-          visible: true,
-          router: true,
         },
       ],
     }

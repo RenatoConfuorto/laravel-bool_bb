@@ -41469,6 +41469,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /***/ "./resources/sass/apartment-messages-navbar.scss":
 /*!*******************************************************!*\
@@ -41482,6 +41483,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ }),
 
 >>>>>>> master
+=======
+>>>>>>> inizio-bozza-stile
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -41493,28 +41496,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/sass/form.scss":
-/*!**********************************!*\
-  !*** ./resources/sass/form.scss ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
-/*!****************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/form.scss ./resources/sass/apartment-messages-navbar.scss ***!
-  \****************************************************************************************************************************************/
+/*!*************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
+  \*************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\form.scss */"./resources/sass/form.scss");
-module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\apartment-messages-navbar.scss */"./resources/sass/apartment-messages-navbar.scss");
+module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

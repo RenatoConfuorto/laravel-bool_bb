@@ -1,38 +1,36 @@
 <template>
   <div class="test">
     <main>
-      <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
+      <SimpleSearchBar @searchResults="getResults"/>
 
-        <SimpleSearchBar @searchResults="getResults"/>
-        <div v-if="loading">
-          <LoadingComponent/>
-        </div>
-
-        <!-- V-ELSE CONTAINER -->
-        <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
-          <h1>In evidenza</h1>
-          <PageNavigation
-          :currentPage="currentPage"
-          :lastPage="lastPage"
-          :getApartments="getApartments"
-          v-if="lastPage > 1"
-          />
-        
-          <!-- APARTMENTS CONTAINER -->
-          <div class="container-fluid d-flex justify-content-center flex-wrap">
-          <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
-          </div>
-          <!-- /APARTMENTS CONTAINER -->
-
-          <PageNavigation
-          :currentPage="currentPage"
-          :lastPage="lastPage"
-          :getApartments="getApartments"
-          v-if="lastPage > 1"
-          />
-        </div>
-        <!-- /V-ELSE CONTAINER -->
+      <div v-if="loading">
+        <LoadingComponent/>
       </div>
+
+      <!-- V-ELSE CONTAINER -->
+      <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
+        <h1>In evidenza</h1>
+        <PageNavigation
+        :currentPage="currentPage"
+        :lastPage="lastPage"
+        :getApartments="getApartments"
+        v-if="lastPage > 1"
+        />
+      
+        <!-- APARTMENTS CONTAINER -->
+        <div class="container-fluid d-flex justify-content-center flex-wrap">
+        <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
+        </div>
+        <!-- /APARTMENTS CONTAINER -->
+
+        <PageNavigation
+        :currentPage="currentPage"
+        :lastPage="lastPage"
+        :getApartments="getApartments"
+        v-if="lastPage > 1"
+        />
+      </div>
+      <!-- /V-ELSE CONTAINER -->
     </main>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="search-bar">
+  <div class="search-bar mt-5">
     <div class="input-wrapper">
       <div class="search">
         <input type="text" placeholder="Search" v-model="address">
