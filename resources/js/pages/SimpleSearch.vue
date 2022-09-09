@@ -15,7 +15,6 @@
           :currentPage="currentPage"
           :lastPage="lastPage"
           :getApartments="getApartments"
-          v-if="lastPage > 1"
           />
         
           <!-- APARTMENTS CONTAINER -->
@@ -28,7 +27,6 @@
           :currentPage="currentPage"
           :lastPage="lastPage"
           :getApartments="getApartments"
-          v-if="lastPage > 1"
           />
         </div>
         <!-- /V-ELSE CONTAINER -->

@@ -6892,13 +6892,13 @@ var render = function render() {
     attrs: {
       text: "In Evidenza"
     }
-  }), _vm._v(" "), _vm.lastPage > 1 ? _c("PageNavigation", {
+  }), _vm._v(" "), _c("PageNavigation", {
     attrs: {
       currentPage: _vm.currentPage,
       lastPage: _vm.lastPage,
       getApartments: _vm.getApartments
     }
-  }) : _vm._e(), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", {
     staticClass: "container-fluid d-flex justify-content-center flex-wrap"
   }, _vm._l(_vm.apartments, function (apartment) {
     return _c("ApartmentCard", {
@@ -6907,13 +6907,13 @@ var render = function render() {
         apartment: apartment
       }
     });
-  }), 1), _vm._v(" "), _vm.lastPage > 1 ? _c("PageNavigation", {
+  }), 1), _vm._v(" "), _c("PageNavigation", {
     attrs: {
       currentPage: _vm.currentPage,
       lastPage: _vm.lastPage,
       getApartments: _vm.getApartments
     }
-  }) : _vm._e()], 1)], 1)])]);
+  })], 1)], 1)])]);
 };
 
 var staticRenderFns = [];
@@ -12387,7 +12387,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-jumbotron[data-v-2ef1e12e] {\n  display: flex;\n  height: 300px;\n  width: 100%;\n  max-width: 900px;\n}\n.search-jumbotron .black[data-v-2ef1e12e] {\n  background-color: black;\n  color: white;\n  flex-grow: 1;\n  flex-basis: 0;\n}\n.search-jumbotron .img[data-v-2ef1e12e] {\n  margin-left: 10px;\n  flex-grow: 3;\n  flex-basis: 0;\n  overflow: hidden;\n}\n.search-jumbotron .img img[data-v-2ef1e12e] {\n  min-width: 100%;\n  min-height: 100%;\n}", ""]);
+exports.push([module.i, ".search-jumbotron[data-v-2ef1e12e] {\n  margin-bottom: 1rem;\n  display: flex;\n  height: 300px;\n  width: 100%;\n  max-width: 900px;\n}\n.search-jumbotron .black[data-v-2ef1e12e] {\n  font-size: 1.4rem;\n  display: flex;\n  align-items: flex-end;\n  background-color: black;\n  color: white;\n  flex-grow: 1;\n  flex-basis: 0;\n  padding: 1rem 0.8rem;\n}\n.search-jumbotron .img[data-v-2ef1e12e] {\n  margin-left: 10px;\n  flex-grow: 3;\n  flex-basis: 0;\n  overflow: hidden;\n}\n.search-jumbotron .img img[data-v-2ef1e12e] {\n  min-width: 100%;\n  min-height: 100%;\n}", ""]);
 
 // exports
 

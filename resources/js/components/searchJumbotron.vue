@@ -21,16 +21,21 @@ export default {
 <style lang="scss" scoped>
 @import '../../sass/_variables.scss';
 .search-jumbotron{
+  margin-bottom: 1rem;
   display: flex;
   height: 300px;
   width: 100%;
   max-width: $main-max-width;
 
   .black{
+    font-size: 1.4rem;
+    display: flex;
+    align-items: flex-end;
     background-color: black;
     color: white;
     flex-grow: 1;
     flex-basis: 0;
+    padding: $main-padding;
   }
 
   .img{
