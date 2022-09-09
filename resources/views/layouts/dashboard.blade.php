@@ -21,7 +21,7 @@
     @stack('css')
     <style>
         body {
-            background-color: rgb(77, 77, 77)
+            background-color: #6c757d;
         }
     </style>
 </head>
@@ -33,7 +33,7 @@
         </button>
         <ul class="navbar-nav px-3 ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('logout') }}"
+                <a class="nav-link text-primary" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                       document.getElementById('logout-form').submit();">
                     Logout
@@ -46,28 +46,28 @@
     </nav>
 
     <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-light p-1">
-            <a class="nav-link text-primary" href="{{ url('/') }}">
+        <div class="bg-secondary p-1">
+            <a class="nav-link text-info" href="{{ url('/') }}">
                 Home
             </a>
         </div>
-        <div class="bg-light p-1">
-            <a class="nav-link text-primary" href="{{ route('user.dashboard') }}">
+        <div class="bg-secondary p-1">
+            <a class="nav-link text-info" href="{{ route('user.dashboard') }}">
                 Dashboard
             </a>
         </div>
-        <div class="bg-light p-1">
-            <a class="nav-link text-primary" href="{{ route('user.apartment.index') }}">
+        <div class="bg-secondary p-1">
+            <a class="nav-link text-info" href="{{ route('user.apartment.index') }}">
                 I tuoi appartamenti
             </a>
         </div>
-        <div class="bg-light p-1">
-            <a class="nav-link text-primary" href="{{ route('user.apartment.create') }}">
+        <div class="bg-secondary p-1">
+            <a class="nav-link text-info" href="{{ route('user.apartment.create') }}">
                 Nuovo appartamento
             </a>
         </div>
-        <div class="bg-light p-1">
-            <a class="nav-link text-primary" href="{{ route('user.message.index') }}">
+        <div class="bg-secondary p-1">
+            <a class="nav-link text-info" href="{{ route('user.message.index') }}">
                 Messaggi ricevuti
             </a>
         </div>
@@ -79,27 +79,27 @@
                 <div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">
+                            <a class="nav-link text-info" href="{{ url('/') }}">
                                 Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.dashboard') }}">
+                            <a class="nav-link text-info" href="{{ route('user.dashboard') }}">
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.apartment.index') }}">
+                            <a class="nav-link text-info" href="{{ route('user.apartment.index') }}">
                                 I tuoi appartamenti
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.apartment.create') }}">
+                            <a class="nav-link text-info" href="{{ route('user.apartment.create') }}">
                                 Nuovo appartamento
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('user.message.index') }}">
+                            <a class="nav-link text-info" href="{{ route('user.message.index') }}">
                                 Messaggi ricevuti
                             </a>
                         </li>

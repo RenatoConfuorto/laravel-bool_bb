@@ -28,7 +28,7 @@
 
 
         @foreach ($apartments as $apartment)
-        <div class="card-wrapper">
+        <div class="card-wrapper shadow bg-body">
             <div class="img-wrapper">
                 @if (str_contains($apartment->image, 'picsum'))
                     <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
@@ -37,20 +37,16 @@
                 @endif
             </div>
             <div class="content-wrapper">
-                <h4>
-                    <span class="title">Titolo:</span>
+                <h4 class="mt-2">
+                    <div class="title text-primary">Titolo:</div>
                     {{$apartment->title}}
                 </h4>
                 <p>
-                    <span class="title">Indirizzo:</span>
+                    <div class="title text-primary">Indirizzo:</div>
                     {{$apartment->address}}
                 </p>
-                <p>
-                    <span class="title">Slug:</span>
-                    {{$apartment->slug}}
-                </p>
                 <div class="link-button mb-2">
-                    <a class="btn btn-primary" href="{{ route('user.apartment.show', ['apartment' => $apartment->id ]) }}">Dettagli</a>
+                    <a class="btn btn-primary text-light" href="{{ route('user.apartment.show', ['apartment' => $apartment->id ]) }}">Dettagli</a>
                 </div>
             </div>
         </div>
