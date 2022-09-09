@@ -47,6 +47,27 @@
     @csrf
       <button type="submit" class="btn btn-danger" onclick="return confirm('Vuoi davvero cancellare questo appartamento?')">Cancella questo appartamento</button>
   </form>
+  <div class="card-deck justify-content-around text-center">
+    @foreach ($sponsor_types as $sponsor_type)
+    <form action="{{route('makePayment')}}" method="post" enctype="multipart/form-data" class="card col-lg-4 mt-4 mb-5 border border-primary text-primary pt-3 pb-3">
+      {{-- <div class="card"> --}}
+        <h2 class="card-title">{{$sponsor_type->name}}</h2>
+        <h2 class="card-title">€ {{$sponsor_type->price}}</h2>
+        <hr>
+        <h5 class="card-title">Sponsorizza il tuo appartamento per {{$sponsor_type->duration_h}} ore!</h5>
+        <input type="hidden" name="apartment_id" value="{{$apartment->id}}">
+        <input type="hidden" name="costo" value="{{$sponsor_type->price}}">
+        <input type="hidden" name="sponsor_id" value="{{$sponsor_type->id}}">
+        @csrf
+        @method('GET')
+        <input type="submit" class="btn btn-success" value="Acquista">
+      {{-- </div> --}}
+    </form>
+    @endforeach
+    {{-- </form> --}}
+  </div>
+  <script>
+    const successMessage = document.querySelector('.alert.alert-success');
 
   <script>
     const successMessage = document.querySelector('.alert.alert-success');

@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Orders\PaymentController;
+use App\Http\Controllers\Api\Buy\BuySponsorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +27,8 @@ Route::get('/extra_services', 'Api\ExtraServicesController@index')->name('api.se
 Route::post('/message', 'Api\MessageController@store')->name('api.message.post');
 Route::get('/search/apartments', 'Api\ApartmentController@userSearch')->name('api.apartments.search');
 Route::get('/search/apartments_evidence', 'Api\ApartmentController@evidence')->name('api.apartments.search');
+
+
+Route::get('buy','Api\Buy\BuySponsorController@index' );
+Route::get('orders/generate','Api\Orders\PaymentController@tokenGenerate' )->name('tokenGenerate');
+Route::post('orders/make/payment','Api\Orders\PaymentController@makePayment')->name('makePayment');

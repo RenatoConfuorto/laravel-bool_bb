@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SponsorType extends Model
 {
-    public function apartments() {
-        return $this->belongsToMany('App\Apartment');
-    }
-    public function sponsorTypes() {
-        return $this->hasMany('App\SponsorType');
+   
+    public function apartmentSponsorTypes() {
+        return $this->hasMany('App\ApartmentSponsorType');
     }
 
     protected $fillable = [

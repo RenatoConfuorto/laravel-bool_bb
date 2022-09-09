@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\SponsorType;
+use App\Http\Controllers\Api\Buy\BuySponsorController;
 
 class ApartmentController extends Controller
 {
@@ -75,8 +77,9 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id, Request $request)
+    {   
+        $sponsors = SponsorType::all();
         $apartment = Apartment::findOrFail($id);
 
         $this->authorize('show', $apartment);
