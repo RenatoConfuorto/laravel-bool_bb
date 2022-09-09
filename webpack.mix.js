@@ -13,8 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
-<<<<<<< HEAD
-=======
 
 //script validazione dei form create-update e delle password di registrazione
 mix.copy([
@@ -26,20 +24,10 @@ mix.copy([
 mix.js('resources/js/front.js', 'public/js');
 
 // foglio di stile dei form create e edit
-mix.sass('resources/sass/form.scss', 'public/css');
+mix.sass('resources/sass/form-backend.scss', 'public/css');
 
 //foglio di stile della nav bar dei messaggi
 mix.sass('resources/sass/apartment-messages-navbar.scss', 'public/css');
->>>>>>> master
-
-//script validazione dei form create-update e delle password di registrazione
-mix.copy([
-    'resources/js/apartmentFormValidation.js',
-    'resources/js/registerFormValidation.js',
-    'resources/js/userApiSearch.js',
-], 'public/js');
-
-mix.js('resources/js/front.js', 'public/js');
 
 // fontawesaome
 mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
