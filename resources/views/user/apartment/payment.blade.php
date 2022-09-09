@@ -37,10 +37,10 @@
   </form>
 </div>
 
-  <script src="https://js.braintreegateway.com/web/dropin/1.25.0/js/dropin.min.js"></script>
-   <script>
-       let form = document.querySelector('#payment-form');
-       let client_token = "{{ $token }}";
+<script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"></script> 
+  <script>
+       var form = document.querySelector('#payment-form');
+       var client_token = "{{ $token }}";
        braintree.dropin.create({
          authorization: client_token,
          selector: '#bt-dropin',

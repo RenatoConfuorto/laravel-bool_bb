@@ -22,8 +22,10 @@ Route::middleware('auth')
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('apartment', 'ApartmentController');
+        // Route::get('apartment/{apartment}/payment', 'PaymentController@payment')->name('apartment.payment');
+        
     });
-
+    
 // Route::get('{any?}', function(){
 //     return view('welcome');
 // })->where('any', '.*');
