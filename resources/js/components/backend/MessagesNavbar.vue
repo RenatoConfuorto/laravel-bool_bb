@@ -1,7 +1,6 @@
 <template>
-  <div class="navbar">
-    <div @click="changeApartmentId(apartment.id), $emit('apartmentIdChanged', selectedApartmentId)">
-      <li class="list-group-item list-group-item-action mb-3">
+    <div class="nav-item" @click="changeApartmentId(apartment.id), $emit('apartmentIdChanged', selectedApartmentId)">
+      <li class="list-group-item list-group-item-action mb-3" :class="apartment.id === savedSelectedApartmentId ? 'active' : ''">
         <div class="row">
           <div class="col-md-8">
             <p>{{ apartment.title }}</p>
@@ -15,7 +14,6 @@
         </div>
       </li>
     </div>
-  </div>
 </template>
 
 <script>
@@ -23,10 +21,11 @@ export default {
   name: 'MessagesNavbar',
   props: {
     apartment: Object,
+    savedSelectedApartmentId: Number
   },
   data() {
     return {
-      selectedApartmentId: 0
+      selectedApartmentId: 0,
     }
   },
   methods: {
@@ -38,13 +37,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.navbar {
+.nav-item {
+  height: calc(100% / 6);
+  max-height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+
+  &.active {
+    background-color: #31d2f2;
+  }
 
   li.list-group-item-action {
-  height: calc(100vh / 5);
-  max-height: 250px;
-  border-radius: 10px;
-  margin-bottom: .5rem;
   cursor: pointer;
 
     a {

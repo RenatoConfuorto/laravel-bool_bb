@@ -29,8 +29,6 @@ class MessageController extends Controller
         $user_messages = Message::whereIn('apartment_id', $user_apartments_id)->orderBy('created_at','DESC')->get();
         // dd($user_messages);
 
-
-
         return view('user.message.index', compact('user_messages', 'user_apartments'));
     }
 

@@ -10,7 +10,7 @@
     </div>
     <div class="row elements-container">
       <div class="col-md-9">
-        <div class="container-fluid d-flex justify-content-around flex-wrap">
+        <div class="container-fluid d-flex justify-content-start flex-wrap">
           
             <message-card
               v-for="message in filteredMessages"
@@ -30,7 +30,8 @@
               v-for="apartment in userApartments"
               :key="apartment.id"
               :apartment="apartment"
-              @apartmentIdChanged="saveSelectedApartmentId">
+              @apartmentIdChanged="saveSelectedApartmentId"
+              :savedSelectedApartmentId="savedSelectedApartmentId">
             </messages-navbar>
   
           </ul>

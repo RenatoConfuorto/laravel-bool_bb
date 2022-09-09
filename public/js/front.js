@@ -5446,15 +5446,15 @@ __webpack_require__.r(__webpack_exports__);
   name: 'MessageCard',
   props: {
     message: Object,
-    routeToDetails: String
+    apartment: Object
   },
   methods: {
-    truncateText: function truncateText(maxCharNumber) {
-      if (this.message.text > maxCharNumber) {
-        return this.message.text.substr(0, maxCharNumber) + '...';
-      }
-
-      return this.message.text;
+    formatDate: function formatDate(date) {
+      var dateToFormat = date;
+      var firstSplit = dateToFormat.split('-');
+      var secondSplit = firstSplit[2].split('T');
+      var dateFormatted = secondSplit[0] + '-' + firstSplit[1] + '-' + firstSplit[0];
+      return dateFormatted;
     }
   }
 });
@@ -5522,7 +5522,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'MessagesNavbar',
   props: {
-    apartment: Object
+    apartment: Object,
+    savedSelectedApartmentId: Number
   },
   data: function data() {
     return {
@@ -6467,16 +6468,18 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "card-body"
-  }, [_c("p", [_vm._v("Messaggio ricevuto il: " + _vm._s(_vm.message.created_at))]), _vm._v(" "), _c("h6", {
+  }, [_c("p", [_vm._v("Messaggio ricevuto il: " + _vm._s(_vm.formatDate(_vm.message.created_at)))]), _vm._v(" "), _c("h6", {
     staticClass: "card-subtitle mb-2 text-muted"
-  }, [_vm._v(_vm._s(_vm.message.email))]), _vm._v(" "), _c("p", {
+  }, [_vm._v("Da: " + _vm._s(_vm.message.email))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
-  }, [_vm._v(_vm._s(_vm.truncateText(50)))]), _vm._v(" "), _c("a", {
-    staticClass: "card-link",
+  }, [_vm._v(_vm._s(_vm.message.text))]), _vm._v(" "), _c("div", {
+    staticClass: "text-center"
+  }, [_c("a", {
+    staticClass: "btn btn-primary text-light",
     attrs: {
-      href: _vm.routeToDetails
+      href: "/user/message/" + _vm.message.id
     }
-  }, [_vm._v("Leggi il messaggio completo")])])]);
+  }, [_vm._v("Leggi il messaggio completo")])])])]);
 };
 
 var staticRenderFns = [];
@@ -6507,7 +6510,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "col-md-9"
   }, [_c("div", {
-    staticClass: "container-fluid d-flex justify-content-around flex-wrap"
+    staticClass: "container-fluid d-flex justify-content-start flex-wrap"
   }, _vm._l(_vm.filteredMessages, function (message) {
     return _c("message-card", {
       key: message.id,
@@ -6525,7 +6528,8 @@ var render = function render() {
     return _c("messages-navbar", {
       key: apartment.id,
       attrs: {
-        apartment: apartment
+        apartment: apartment,
+        savedSelectedApartmentId: _vm.savedSelectedApartmentId
       },
       on: {
         apartmentIdChanged: _vm.saveSelectedApartmentId
@@ -6571,15 +6575,15 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "navbar"
-  }, [_c("div", {
+    staticClass: "nav-item",
     on: {
       click: function click($event) {
         _vm.changeApartmentId(_vm.apartment.id), _vm.$emit("apartmentIdChanged", _vm.selectedApartmentId);
       }
     }
   }, [_c("li", {
-    staticClass: "list-group-item list-group-item-action mb-3"
+    staticClass: "list-group-item list-group-item-action mb-3",
+    "class": _vm.apartment.id === _vm.savedSelectedApartmentId ? "active" : ""
   }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
@@ -6594,7 +6598,7 @@ var render = function render() {
       src: _vm.apartment.image,
       alt: _vm.apartment.title
     }
-  })])])])])])]);
+  })])])])])]);
 };
 
 var staticRenderFns = [];
@@ -12279,7 +12283,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".navbar li.list-group-item-action[data-v-1120b3fc] {\n  height: 20vh;\n  max-height: 250px;\n  border-radius: 10px;\n  margin-bottom: 0.5rem;\n  cursor: pointer;\n}\n.navbar li.list-group-item-action a[data-v-1120b3fc] {\n  text-decoration: none;\n  color: black;\n}\n.navbar li.list-group-item-action .img-wrap[data-v-1120b3fc] {\n  width: 100%;\n  border-radius: 25px;\n  overflow: hidden;\n}\n.navbar li.list-group-item-action .img-wrap img[data-v-1120b3fc] {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: center;\n     object-fit: center;\n}", ""]);
+exports.push([module.i, ".nav-item[data-v-1120b3fc] {\n  height: 16.6666666667%;\n  max-height: 200px;\n  overflow: hidden;\n  border-radius: 10px;\n}\n.nav-item.active[data-v-1120b3fc] {\n  background-color: #31d2f2;\n}\n.nav-item li.list-group-item-action[data-v-1120b3fc] {\n  cursor: pointer;\n}\n.nav-item li.list-group-item-action a[data-v-1120b3fc] {\n  text-decoration: none;\n  color: black;\n}\n.nav-item li.list-group-item-action .img-wrap[data-v-1120b3fc] {\n  width: 100%;\n  border-radius: 25px;\n  overflow: hidden;\n}\n.nav-item li.list-group-item-action .img-wrap img[data-v-1120b3fc] {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: center;\n     object-fit: center;\n}", ""]);
 
 // exports
 

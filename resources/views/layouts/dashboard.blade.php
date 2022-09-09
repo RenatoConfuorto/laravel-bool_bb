@@ -46,27 +46,27 @@
     </nav>
 
     <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-secondary p-1">
+        <div class="bg-secondary p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ url('/') }}">
                 Home
             </a>
         </div>
-        <div class="bg-secondary p-1">
+        <div class="bg-secondary p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.dashboard') }}">
                 Dashboard
             </a>
         </div>
-        <div class="bg-secondary p-1">
+        <div class="bg-secondary p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.apartment.index') }}">
                 I tuoi appartamenti
             </a>
         </div>
-        <div class="bg-secondary p-1">
+        <div class="bg-secondary p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.apartment.create') }}">
                 Nuovo appartamento
             </a>
         </div>
-        <div class="bg-secondary p-1">
+        <div class="bg-secondary p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.message.index') }}">
                 Messaggi ricevuti
             </a>
