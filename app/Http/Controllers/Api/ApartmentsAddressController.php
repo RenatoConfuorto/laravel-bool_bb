@@ -10,7 +10,7 @@ class ApartmentsAddressController extends Controller
 
     public static function index($prova) {
         $result = strstr($prova, ',', true);
-        $url = Http::get('https://api.tomtom.com/search/2/geocode/'. $result.'.json?storeResult=true&language=it-IT&view=Unified&key=b4J1e7HlWzyGPehDTXwH8o0kl7zyTSuA');
+        $url = Http::get('https://api.tomtom.com/search/2/geocode/'. $result.'.json?storeResult=true&language=it-IT&view=Unified&key=H97FXaSDT7RHiYR8ApDuoF894E4WPAXv');
         $coord = $url->getBody();
         $coord = json_decode($url, true);
         if($coord['results']!= []){

@@ -72,4 +72,25 @@ class Apartment extends Model
         return $distance;
     }
 
+    public function getServicesId(){
+        $services = $this->services;
+        $ids = [];
+        foreach($services as $service){
+            $ids[] = strval($service->id);
+        }
+        return $ids;
+    }
+
+    public function hasActiveSponsor(){
+        $apartment_id = $this->id;
+        $current_date = date('Y-m-d H:i:s', time());
+        $active_sponsor = ApartmentSponsorType::where('apartment_id', $apartment_id)
+            ->where('sponsor_start', '<=', $current_date)
+            ->where('sponsor_end', '>=', $current_date)
+            ->first();
+        
+        if($active_sponsor)return $active_sponsor;
+
+        return 0;
+    }
 }

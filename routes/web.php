@@ -22,16 +22,13 @@ Route::middleware('auth')
     ->group(function() {
         Route::get('/', 'DashboardController@index')->name('dashboard');
         Route::resource('apartment', 'ApartmentController');
-        // Route::get('apartment/{apartment}/payment', 'PaymentController@payment')->name('apartment.payment');
-        
+        Route::resource('message', 'MessageController');
+        Route::get('message/{message}/apartment-messages', 'MessageController@apartmentMessages')->name('message.apartment-messages');
     });
-    
+
 // Route::get('{any?}', function(){
 //     return view('welcome');
 // })->where('any', '.*');
 Route::get('{any?}', function(){
     return view('guest.home');
 })->where('any', '.*');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

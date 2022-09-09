@@ -66,7 +66,12 @@
                                 Nuovo appartamento
                             </a>
                         </li>
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.message.index') }}">
+                                <i class="fa-solid fa-file-lines"></i>
+                                Messaggi ricevuti
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>

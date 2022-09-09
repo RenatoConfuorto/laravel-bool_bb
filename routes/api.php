@@ -21,6 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/apartments', 'Api\ApartmentController@index')->name('api.apartments.index');
+Route::get('/apartments/{slug}', 'Api\ApartmentController@show')->name('api.apartments.show');
+Route::get('/extra_services', 'Api\ExtraServicesController@index')->name('api.services.index');
+Route::post('/message', 'Api\MessageController@store')->name('api.message.post');
+Route::get('/search/apartments', 'Api\ApartmentController@userSearch')->name('api.apartments.search');
+Route::get('/search/apartments_evidence', 'Api\ApartmentController@evidence')->name('api.apartments.search');
+
 
 Route::get('buy','Api\Buy\BuySponsorController@index' );
 Route::get('orders/generate','Api\Orders\PaymentController@tokenGenerate' )->name('tokenGenerate');

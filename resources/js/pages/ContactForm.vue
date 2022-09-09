@@ -77,14 +77,23 @@ export default {
       failMessage: '',
       successMessage: '',
       loading: true,
+      userData: this.$parent.userData,
     }
   },
   created() {
     this.getApartmentDetails();
+  },
+  mounted() {
+    this.addRegisteredUserEmail();
     this.validateEmail();
     this.validateText();
   },
   methods: {
+    addRegisteredUserEmail() {
+      if (this.userData !== null ) {
+        this.form.email = this.userData.email;
+      }
+    },
     getApartmentDetails() {
       const slug = this.$route.params.slug;
 
@@ -127,8 +136,10 @@ export default {
         console.log(resp);
         if (resp.status === 200) {
           this.successMessage = "Messaggio inviato correttamente, verrai riportato al dettaglio dell'appartamento.";
-          // this.$router.push({ name: 'single-apartment' });
+          this.form.email = '';
+          this.form.text = '';
           setTimeout( () => this.$router.push({name: 'single-apartment'}), 3000);
+          
         } else {
           this.failMessagge = 'Ops, qualcosa è andato storto. Per favore riprova..'
         }
