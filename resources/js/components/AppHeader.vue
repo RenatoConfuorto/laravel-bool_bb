@@ -1,18 +1,41 @@
 <template>
   <header>
-    <nav>
+    <div class="header-wrapper">
       <div class="logo">
         <h1>Bool B&B</h1>
       </div>
-      <ul>
-        <li v-for="(link, index) in links" :key="index" v-if="link.visible">
-          <a v-if="!link.router" :href="link.link">{{ link.text }}</a>
-          <router-link v-else :to="{ name: link.name }">{{
-            link.text
-          }}</router-link>
-        </li>
-      </ul>
-    </nav>
+      <nav class="menu">
+        <ul>
+          <li v-for="(link, index) in links" :key="index" v-if="link.visible">
+            <a v-if="!link.router" :href="link.link" class="header-link">{{
+              link.text
+            }}</a>
+            <router-link v-else :to="{ name: link.name }" class="header-link">{{
+              link.text
+            }}</router-link>
+          </li>
+        </ul>
+      </nav>
+      <button
+        class="hamburger"
+        :class="{ 'is-active': hamburgerActive }"
+        @click="changeActive"
+      >
+        <div class="bar"></div>
+      </button>
+      <nav class="mobile-menu" :class="{'is-active': hamburgerActive}">
+        <ul>
+          <li v-for="(link, index) in links" :key="index" v-if="link.visible">
+            <a v-if="!link.router" :href="link.link" class="header-link">{{
+              link.text
+            }}</a>
+            <router-link v-else :to="{ name: link.name }" class="header-link">{{
+              link.text
+            }}</router-link>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -53,6 +76,7 @@ export default {
           router: false,
         },
       ],
+      hamburgerActive: false,
     };
   },
   props: {
@@ -61,22 +85,41 @@ export default {
     loginRoute: String,
     registerRoute: String,
   },
+  methods: {
+    changeActive() {
+      this.hamburgerActive = !this.hamburgerActive;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "../../sass/_variables.scss";
+.header-link {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: $text-primary-color;
+  padding: 0.3rem 0.5rem;
+}
+
 header {
   width: 100%;
+  padding: $main-padding;
+  height: $header-height;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px;
-  nav {
-    max-width: $main-max-width;
-    margin: 0 auto;
-    padding: $main-padding;
-    height: $header-height;
+
+  .header-wrapper {
+    height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: $main-max-width;
+    margin: 0 auto;
+
+    .hamburger {
+      display: none;
+    }
+
     .logo {
       padding: 0 0.3rem;
       border-left: 1px solid $text-primary-color;
@@ -88,26 +131,112 @@ header {
         cursor: default;
       }
     }
+    .menu {
+      ul {
+        margin-right: 1rem;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
 
-    ul {
-      margin-right: 1rem;
-      height: 100%;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
+        li {
+          transition: 0.3s;
 
-      li {
-        margin: 0 0.5rem;
+          &:hover {
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid black;
+          }
+        }
+      }
+    }
 
-        a {
-          text-decoration: none;
-          color: $text-primary-color;
-          padding: 0.3rem 0.5rem;
+    .mobile-menu {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    .header-wrapper {
+      .menu {
+        display: none;
+      }
+
+      .hamburger {
+        position: relative;
+        z-index: 4;
+        display: block;
+        width: 70px;
+        cursor: pointer;
+        padding: 15px;
+        border-radius: 4px;
+
+        background: none;
+        outline: none;
+        appearance: none;
+        border: 1px solid black;
+      }
+
+      .hamburger .bar,
+      .hamburger::after,
+      .hamburger::before {
+        content: "";
+        width: 100%;
+        height: 5px;
+        background-color: black;
+        display: block;
+        transition: 0.4s;
+      }
+
+      .hamburger .bar {
+        margin: 6px 0;
+      }
+
+      .hamburger.is-active {
+        border: none;
+      }
+
+      .hamburger.is-active{
+        position: fixed;
+        right: $main-side;
+      }
+
+      .hamburger.is-active::before {
+        transform: rotate(-45deg) translate(0px, 4px);
+      }
+      .hamburger.is-active::after {
+        transform: rotate(45deg) translate(1px, -3px);
+      }
+      .hamburger.is-active .bar {
+        display: none;
+      }
+
+      .mobile-menu {
+        display: block;
+        position: fixed;
+        padding-top: $header-height;
+        top: 0;
+        right: 0;
+        left: 100%;
+        min-height: 100vh;
+        background-color: white;
+        z-index: 3;
+        transition: 0.4s;
+
+        &.is-active {
+          left: 20%;
         }
 
-        &:hover {
-          border-bottom: 1px solid black;
+        ul{
+          padding-left: 2.5rem;
+          font-size: 1.4rem;
+
+          li{
+            margin: 3rem 0;
+          }
         }
+
       }
     }
   }

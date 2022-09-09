@@ -40,7 +40,6 @@ footer {
     max-width: $main-max-width;
     margin: 1.4rem auto;
     padding: 1rem;
-    // margin: 1rem $main-side;
     border-top: 1px solid $text-primary-color;
 
     .info {
@@ -59,6 +58,12 @@ footer {
     .copyright {
       font-size: 0.7rem;
     }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  footer{
+    padding: 0;
   }
 }
 </style>
