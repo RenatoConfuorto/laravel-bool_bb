@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <a :href="routeToApartmentMessages">
+    <div @click="changeApartmentId(apartment.id), $emit('apartmentIdChanged', selectedApartmentId)">
       <li class="list-group-item list-group-item-action mb-3">
         <div class="row">
           <div class="col-md-8">
@@ -14,7 +14,7 @@
           </div>
         </div>
       </li>
-    </a>
+    </div>
   </div>
 </template>
 
@@ -23,7 +23,16 @@ export default {
   name: 'MessagesNavbar',
   props: {
     apartment: Object,
-    routeToApartmentMessages: String
+  },
+  data() {
+    return {
+      selectedApartmentId: 0
+    }
+  },
+  methods: {
+    changeApartmentId(id) {
+      this.selectedApartmentId = id;
+    }
   }
 }
 </script>
@@ -36,6 +45,7 @@ export default {
   max-height: 250px;
   border-radius: 10px;
   margin-bottom: .5rem;
+  cursor: pointer;
 
     a {
       text-decoration: none;
