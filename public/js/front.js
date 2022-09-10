@@ -5236,6 +5236,13 @@ __webpack_require__.r(__webpack_exports__);
     this.apartment.services.forEach(function (element) {
       _this.apartmentServices.push(element.id);
     });
+  },
+  methods: {
+    mobileTitle: function mobileTitle(title) {
+      var lenght = 20;
+      if (title.length <= length) return title;
+      return "".concat(title.substring(0, lenght), "...");
+    }
   }
 });
 
@@ -5409,16 +5416,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../userApiSearch.js */ "./resources/js/userApiSearch.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SearchBar',
+  name: "SearchBar",
   data: function data() {
     return {
-      address: '',
+      filters: false,
+      address: "",
       addressResults: [],
       searchResults: [],
-      searchTextCtrl: '',
+      searchTextCtrl: "",
       radius: 20,
-      rooms: '',
-      beds: '',
+      rooms: "",
+      beds: "",
       extraServices: [],
       latitude: null,
       longitude: null,
@@ -5434,7 +5442,13 @@ __webpack_require__.r(__webpack_exports__);
     callApi: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["callApi"],
     getAddressString: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["getAddressString"],
     addressClick: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["addressClick"],
-    search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["search"]
+    search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["search"],
+    changeActive: function changeActive() {
+      this.filters = !this.filters;
+    },
+    ActiveFalse: function ActiveFalse() {
+      this.filters = false;
+    }
   },
   created: function created() {
     var _this = this;
@@ -5444,11 +5458,11 @@ __webpack_require__.r(__webpack_exports__);
     this.searchTextCtrl = this.givenAddress;
     this.latitude = this.givenLatitude;
     this.longitude = this.givenLongitude;
-    delete axios.defaults.headers.common['X-Requested-With']; //impostare l'api
+    delete axios.defaults.headers.common["X-Requested-With"]; //impostare l'api
 
     setInterval(this.callApi, 500); //ottenere i servizi extra
 
-    axios.get('http://127.0.0.1:8000/api/extra_services').then(function (resp) {
+    axios.get("http://127.0.0.1:8000/api/extra_services").then(function (resp) {
       // console.log(resp.data);
       _this.extraServices = resp.data;
     });
@@ -5472,7 +5486,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "SimpleSearchBar",
   data: function data() {
     return {
-      address: " ",
+      address: "",
       addressResults: [],
       searchResults: [],
       searchTextCtrl: "",
@@ -5583,7 +5597,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ApartmentCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/ApartmentCard.vue */ "./resources/js/components/ApartmentCard.vue");
 /* harmony import */ var _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/LoadingComponent.vue */ "./resources/js/components/LoadingComponent.vue");
 /* harmony import */ var _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/SearchBar.vue */ "./resources/js/components/SearchBar.vue");
-/* harmony import */ var _userApiSearch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../userApiSearch.js */ "./resources/js/userApiSearch.js");
+/* harmony import */ var _components_searchJumbotron_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/searchJumbotron.vue */ "./resources/js/components/searchJumbotron.vue");
+/* harmony import */ var _userApiSearch_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../userApiSearch.js */ "./resources/js/userApiSearch.js");
+
 
 
 
@@ -5593,7 +5609,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ApartmentCard: _components_ApartmentCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     LoadingComponent: _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SearchBar: _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SearchBar: _components_SearchBar_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    SearchJumbotron: _components_searchJumbotron_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -5620,7 +5637,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_3__["search"],
+    search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_4__["search"],
     // getApartments() {
     //   axios.get('http://127.0.0.1:8000/api/search/apartments' )
     //   .then((resp) => {
@@ -5992,7 +6009,20 @@ var render = function render() {
         }
       }
     }
-  }, [_vm._v("Info")])], 1)]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Info")])], 1), _vm._v(" "), _c("div", {
+    staticClass: "mobile-info"
+  }, [_c("span", [_vm._v(_vm._s(_vm.mobileTitle(_vm.apartment.title)))]), _vm._v(" "), _c("router-link", {
+    attrs: {
+      to: {
+        name: "single-apartment",
+        params: {
+          slug: _vm.apartment.slug
+        }
+      }
+    }
+  }, [_c("span", [_vm._v("€" + _vm._s(_vm.apartment.price) + " ")]), _vm._v(" "), _c("span", [_c("i", {
+    staticClass: "fa-solid fa-chevron-right"
+  })])])], 1)]), _vm._v(" "), _c("div", {
     staticClass: "ms_card--description"
   }, [_c("div", {
     staticClass: "ms_card--description--text"
@@ -6438,9 +6468,23 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("button", {
     on: {
-      click: _vm.search
+      click: function click($event) {
+        _vm.search();
+
+        _vm.ActiveFalse();
+      }
     }
-  }, [_vm._v("Cerca")])]), _vm._v(" "), _vm.error ? _c("div", {
+  }, [_vm._v("Cerca")]), _vm._v(" "), _c("button", {
+    staticClass: "options",
+    "class": {
+      active: _vm.filters
+    },
+    on: {
+      click: _vm.changeActive
+    }
+  }, [_c("i", {
+    staticClass: "fa-solid fa-chevron-down"
+  })])]), _vm._v(" "), _vm.error ? _c("div", {
     staticClass: "alert alert-danger"
   }, [_vm._v(_vm._s(_vm.error))]) : _vm._e(), _vm._v(" "), _vm.addressResults ? _c("div", {
     staticClass: "address-tips mb-3"
@@ -6454,9 +6498,12 @@ var render = function render() {
       }
     }, [_vm._v("\n        " + _vm._s(_vm.getAddressString(address)) + "\n      ")]);
   }), 0) : _vm._e()]), _vm._v(" "), _c("div", {
-    staticClass: "filters"
+    staticClass: "filters",
+    "class": {
+      active: _vm.filters
+    }
   }, [_c("div", {
-    staticClass: "mb-3"
+    staticClass: "mb-3 mx-2"
   }, [_c("label", {
     staticClass: "form-label",
     attrs: {
@@ -6485,7 +6532,7 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), _c("div", {
-    staticClass: "mb-3"
+    staticClass: "mb-3 mx-2"
   }, [_c("label", {
     staticClass: "form-label",
     attrs: {
@@ -6514,7 +6561,7 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), _c("div", {
-    staticClass: "mb-3"
+    staticClass: "mb-3 mx-2"
   }, [_c("label", {
     staticClass: "form-label",
     attrs: {
@@ -6543,11 +6590,13 @@ var render = function render() {
       }
     }
   })]), _vm._v(" "), _vm.extraServices ? _c("div", {
-    staticClass: "services"
+    staticClass: "services container mb-3 mx-2"
+  }, [_c("h3", [_vm._v("Servizi extra")]), _vm._v(" "), _c("div", {
+    staticClass: "row"
   }, _vm._l(_vm.extraServices, function (service) {
     return _c("div", {
       key: service.id,
-      staticClass: "form-checked"
+      staticClass: "form-checked col-12 col-sm-6 col-md-4"
     }, [_c("input", {
       staticClass: "form-check-input extra_services",
       attrs: {
@@ -6562,8 +6611,8 @@ var render = function render() {
       attrs: {
         "for": "extra_service-".concat(service.id)
       }
-    }, [_vm._v("\n          " + _vm._s(service.name) + "\n        ")])]);
-  }), 0) : _vm._e()])]);
+    }, [_vm._v("\n            " + _vm._s(service.name) + "\n          ")])]);
+  }), 0)]) : _vm._e()])]);
 };
 
 var staticRenderFns = [];
@@ -6727,10 +6776,8 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
-    staticClass: "test"
-  }, [_c("main", [_c("div", {
-    staticClass: "container-fluid d-flex justify-content-center align-items-center flex-wrap"
+  return _c("main", [_c("div", {
+    staticClass: "ms_container"
   }, [_c("SearchBar", {
     attrs: {
       "given-address": _vm.address,
@@ -6741,7 +6788,13 @@ var render = function render() {
       searchResults: _vm.getResults
     }
   }), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
-    staticClass: "container-fluid d-flex justify-content-center flex-wrap"
+    staticClass: "ms_container"
+  }, [_c("SearchJumbotron", {
+    attrs: {
+      text: "Ricerca"
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "apartments-container"
   }, _vm._l(_vm.searchResults, function (apartment) {
     return _c("ApartmentCard", {
       key: apartment.id,
@@ -6749,7 +6802,7 @@ var render = function render() {
         apartment: apartment
       }
     });
-  }), 1)], 1)])]);
+  }), 1)], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -6970,16 +7023,14 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
-    staticClass: "test"
-  }, [_c("main", [_c("div", {
-    staticClass: "container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap"
+  return _c("main", [_c("div", {
+    staticClass: "ms_container"
   }, [_c("SimpleSearchBar", {
     on: {
       searchResults: _vm.getResults
     }
   }), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
-    staticClass: "container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap"
+    staticClass: "ms_container"
   }, [_c("SearchJumbotron", {
     attrs: {
       text: "In Evidenza"
@@ -7005,7 +7056,7 @@ var render = function render() {
       lastPage: _vm.lastPage,
       getApartments: _vm.getApartments
     }
-  }) : _vm._e()], 1)], 1)])]);
+  }) : _vm._e()], 1)], 1)]);
 };
 
 var staticRenderFns = [];
@@ -12327,7 +12378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".ms_card[data-v-13e9f807] {\n  display: flex;\n  margin-bottom: 1rem;\n}\n.ms_card .img[data-v-13e9f807] {\n  position: relative;\n  width: 240px;\n  height: 170px;\n  overflow: hidden;\n}\n.ms_card .img img[data-v-13e9f807] {\n  width: 100%;\n}\n.ms_card .img .more[data-v-13e9f807] {\n  position: absolute;\n  right: 0;\n  bottom: -50px;\n  transition: 0.4s;\n}\n.ms_card .img .more a[data-v-13e9f807] {\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: rgba(211, 211, 211, 0.6);\n  color: white;\n}\n.ms_card .img:hover .more[data-v-13e9f807] {\n  bottom: 0;\n}\n.ms_card .img .badge[data-v-13e9f807] {\n  position: absolute;\n  top: 5px;\n  left: 5px;\n  background-color: #38c172;\n}\n.ms_card--description[data-v-13e9f807] {\n  width: calc(100% - 170px - 150px);\n  padding: 0.4rem 1rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.ms_card--description--text h3[data-v-13e9f807] {\n  font-size: 1.2rem;\n  font-weight: bold;\n  margin-bottom: 1rem;\n}\n.ms_card--description--text ul[data-v-13e9f807] {\n  list-style-type: disc;\n  padding: 0 1rem;\n  font-size: 0.8rem;\n  font-weight: lighter;\n  margin-bottom: 1rem;\n}\n.ms_card--description--services[data-v-13e9f807] {\n  border-top: 1px solid black;\n  font-size: 1.6rem;\n  padding-top: 0.4rem;\n  width: 100%;\n  max-width: 100%;\n  overflow-x: auto;\n}\n.ms_card--description--services ul[data-v-13e9f807] {\n  display: flex;\n  padding: 0;\n}\n.ms_card--description--services ul li[data-v-13e9f807] {\n  margin-right: 1rem;\n}\n.ms_card--description--services[data-v-13e9f807]::-webkit-scrollbar {\n  display: none;\n}\n.ms_card--cta[data-v-13e9f807] {\n  width: 150px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.ms_card--cta h4[data-v-13e9f807] {\n  font-size: 1.3rem;\n  font-weight: light;\n  margin-bottom: 1.8rem;\n}\n.ms_card--cta a[data-v-13e9f807] {\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: black;\n  color: white;\n}\nhr[data-v-13e9f807] {\n  border-top: 1px solid black;\n  opacity: 1;\n  margin: 1.5rem 0;\n}", ""]);
+exports.push([module.i, ".ms_card[data-v-13e9f807] {\n  display: flex;\n  margin-bottom: 1rem;\n}\n.ms_card .img[data-v-13e9f807] {\n  position: relative;\n  width: 240px;\n  height: 170px;\n  overflow: hidden;\n}\n.ms_card .img img[data-v-13e9f807] {\n  width: 100%;\n}\n.ms_card .img .mobile-info[data-v-13e9f807] {\n  display: none;\n}\n.ms_card .img .more[data-v-13e9f807] {\n  position: absolute;\n  right: 0;\n  bottom: -50px;\n  transition: 0.4s;\n}\n.ms_card .img .more a[data-v-13e9f807] {\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: rgba(211, 211, 211, 0.6);\n  color: white;\n}\n.ms_card .img:hover .more[data-v-13e9f807] {\n  bottom: 0;\n}\n.ms_card .img .badge[data-v-13e9f807] {\n  position: absolute;\n  top: 5px;\n  left: 5px;\n  background-color: #38c172;\n}\n.ms_card--description[data-v-13e9f807] {\n  width: calc(100% - 170px - 150px);\n  padding: 0.4rem 1rem;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n.ms_card--description--text h3[data-v-13e9f807] {\n  font-size: 1.2rem;\n  font-weight: bold;\n  margin-bottom: 1rem;\n}\n.ms_card--description--text ul[data-v-13e9f807] {\n  list-style-type: disc;\n  padding: 0 1rem;\n  font-size: 0.8rem;\n  font-weight: lighter;\n  margin-bottom: 1rem;\n}\n.ms_card--description--services[data-v-13e9f807] {\n  border-top: 1px solid black;\n  font-size: 1.6rem;\n  padding-top: 0.4rem;\n  width: 100%;\n  max-width: 100%;\n  overflow-x: auto;\n}\n.ms_card--description--services ul[data-v-13e9f807] {\n  display: flex;\n  padding: 0;\n}\n.ms_card--description--services ul li[data-v-13e9f807] {\n  margin-right: 1rem;\n}\n.ms_card--description--services[data-v-13e9f807]::-webkit-scrollbar {\n  display: none;\n}\n.ms_card--cta[data-v-13e9f807] {\n  width: 150px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.ms_card--cta h4[data-v-13e9f807] {\n  font-size: 1.3rem;\n  font-weight: light;\n  margin-bottom: 1.8rem;\n}\n.ms_card--cta a[data-v-13e9f807] {\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: black;\n  color: white;\n}\nhr[data-v-13e9f807] {\n  border-top: 1px solid black;\n  opacity: 1;\n  margin: 1.5rem 0;\n}\n@media screen and (max-width: 630px) {\n.ms_card[data-v-13e9f807] {\n    margin-bottom: 0.4rem;\n}\n.ms_card .img[data-v-13e9f807] {\n    width: 100%;\n    height: 0;\n    padding-bottom: 75%;\n}\n.ms_card .img .more[data-v-13e9f807] {\n    display: none;\n}\n.ms_card .img .mobile-info[data-v-13e9f807] {\n    padding: 1rem 0.8rem;\n    display: block;\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    color: white;\n    display: flex;\n    justify-content: space-between;\n    align-items: flex-end;\n    font-size: 1.2rem;\n}\n.ms_card .img .mobile-info a[data-v-13e9f807] {\n    color: white;\n    text-decoration: none;\n}\n.ms_card--description[data-v-13e9f807] {\n    display: none;\n}\n.ms_card--cta[data-v-13e9f807] {\n    display: none;\n}\nhr[data-v-13e9f807] {\n    display: none;\n}\n}", ""]);
 
 // exports
 
@@ -12441,7 +12492,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-6849e9f0] {\n  width: 60%;\n}\n.search-bar .search[data-v-6849e9f0] {\n  width: 100%;\n  display: flex;\n}\n.search-bar .search input[data-v-6849e9f0] {\n  flex-grow: 1;\n}", ""]);
+exports.push([module.i, "input[data-v-6849e9f0] {\n  font-size: 1rem;\n  flex-grow: 1;\n  border: 1px solid black;\n  border-radius: 0;\n}\ninput[data-v-6849e9f0]:focus-visible {\n  border: 1px solid black;\n  outline: none;\n}\ninput[data-v-6849e9f0]:focus {\n  box-shadow: none;\n}\n.search-bar[data-v-6849e9f0] {\n  width: 70%;\n  position: relative;\n}\n.search-bar .input-wrapper[data-v-6849e9f0] {\n  position: relative;\n  z-index: 4;\n}\n.search-bar .input-wrapper .search[data-v-6849e9f0] {\n  width: 100%;\n  display: flex;\n  margin: 0.2rem 0 1.6rem;\n}\n.search-bar .input-wrapper .search button[data-v-6849e9f0] {\n  border: 0;\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: black;\n  color: white;\n}\n.search-bar .input-wrapper .search .options[data-v-6849e9f0] {\n  border-left: 1px solid white;\n}\n.search-bar .input-wrapper .search .options i[data-v-6849e9f0] {\n  transition: 0.4s;\n}\n.search-bar .input-wrapper .search .options.active i[data-v-6849e9f0] {\n  transform: rotate(180deg);\n}\n.search-bar .input-wrapper .error[data-v-6849e9f0] {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  top: 100%;\n}\n.search-bar .input-wrapper .alert[data-v-6849e9f0] {\n  border-radius: 0;\n}\n.search-bar .input-wrapper .address-tips[data-v-6849e9f0] {\n  position: absolute;\n  z-index: 3;\n  width: 100%;\n  top: 100%;\n  background-color: #ececec;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-6849e9f0] {\n  padding: 0.2rem 0.4rem;\n  margin: 0 0.8rem 0.4rem;\n  border-radius: 3px;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-6849e9f0]:first-child {\n  margin: 1rem 0.8rem;\n  margin-bottom: 0.4rem;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-6849e9f0]:hover {\n  cursor: pointer;\n  background-color: #dbdbdb;\n}\n.search-bar .filters[data-v-6849e9f0] {\n  position: absolute;\n  background-color: #ececec;\n  width: 100%;\n  top: 0;\n  z-index: 3;\n  height: 0;\n  transition: 1s;\n  overflow: hidden;\n  border-bottom-left-radius: 10px;\n  border-bottom-right-radius: 10px;\n}\n.search-bar .filters.active[data-v-6849e9f0] {\n  height: auto;\n  top: 61%;\n}\n@media screen and (max-width: 768px) {\n.search-bar[data-v-6849e9f0] {\n    width: 100%;\n}\n}", ""]);
 
 // exports
 
@@ -12460,7 +12511,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-2a381b9e] {\n  width: 60%;\n}\n.search-bar .input-wrapper[data-v-2a381b9e] {\n  position: relative;\n}\n.search-bar .input-wrapper .search[data-v-2a381b9e] {\n  width: 100%;\n  display: flex;\n  margin: 0.2rem 0 1.6rem;\n}\n.search-bar .input-wrapper .search input[data-v-2a381b9e] {\n  font-size: 1rem;\n  flex-grow: 1;\n  border: 1px solid black;\n  border-radius: 0;\n}\n.search-bar .input-wrapper .search input[data-v-2a381b9e]:focus-visible {\n  border: 1px solid black;\n  outline: none;\n}\n.search-bar .input-wrapper .search button[data-v-2a381b9e] {\n  border: 0;\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: black;\n  color: white;\n}\n.search-bar .input-wrapper .error[data-v-2a381b9e] {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  top: 100%;\n}\n.search-bar .input-wrapper .alert[data-v-2a381b9e] {\n  border-radius: 0;\n}\n.search-bar .input-wrapper .address-tips[data-v-2a381b9e] {\n  position: absolute;\n  z-index: 3;\n  width: 100%;\n  top: 100%;\n  background-color: #ececec;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e] {\n  padding: 0.2rem 0.4rem;\n  margin: 0 0.8rem 0.4rem;\n  border-radius: 3px;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e]:first-child {\n  margin: 1rem 0.8rem;\n  margin-bottom: 0.4rem;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e]:hover {\n  cursor: pointer;\n  background-color: #dbdbdb;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-2a381b9e] {\n  width: 70%;\n}\n.search-bar .input-wrapper[data-v-2a381b9e] {\n  position: relative;\n}\n.search-bar .input-wrapper .search[data-v-2a381b9e] {\n  width: 100%;\n  display: flex;\n  margin: 0.2rem 0 1.6rem;\n}\n.search-bar .input-wrapper .search input[data-v-2a381b9e] {\n  font-size: 1rem;\n  flex-grow: 1;\n  border: 1px solid black;\n  border-radius: 0;\n}\n.search-bar .input-wrapper .search input[data-v-2a381b9e]:focus-visible {\n  border: 1px solid black;\n  outline: none;\n}\n.search-bar .input-wrapper .search button[data-v-2a381b9e] {\n  border: 0;\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: black;\n  color: white;\n}\n.search-bar .input-wrapper .error[data-v-2a381b9e] {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  top: 100%;\n}\n.search-bar .input-wrapper .alert[data-v-2a381b9e] {\n  border-radius: 0;\n}\n.search-bar .input-wrapper .address-tips[data-v-2a381b9e] {\n  position: absolute;\n  z-index: 3;\n  width: 100%;\n  top: 100%;\n  background-color: #ececec;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e] {\n  padding: 0.2rem 0.4rem;\n  margin: 0 0.8rem 0.4rem;\n  border-radius: 3px;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e]:first-child {\n  margin: 1rem 0.8rem;\n  margin-bottom: 0.4rem;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e]:hover {\n  cursor: pointer;\n  background-color: #dbdbdb;\n}\n@media screen and (max-width: 768px) {\n.search-bar[data-v-2a381b9e] {\n    width: 100%;\n}\n}", ""]);
 
 // exports
 
@@ -12498,7 +12549,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-jumbotron[data-v-2ef1e12e] {\n  margin-bottom: 1rem;\n  display: flex;\n  height: 300px;\n  width: 100%;\n  max-width: 900px;\n}\n.search-jumbotron .black[data-v-2ef1e12e] {\n  font-size: 1.4rem;\n  display: flex;\n  align-items: flex-end;\n  background-color: black;\n  color: white;\n  flex-grow: 1;\n  flex-basis: 0;\n  padding: 1rem 0.8rem;\n}\n.search-jumbotron .img[data-v-2ef1e12e] {\n  margin-left: 10px;\n  flex-grow: 3;\n  flex-basis: 0;\n  overflow: hidden;\n}\n.search-jumbotron .img img[data-v-2ef1e12e] {\n  min-width: 100%;\n  min-height: 100%;\n}", ""]);
+exports.push([module.i, ".search-jumbotron[data-v-2ef1e12e] {\n  margin-bottom: 1rem;\n  display: flex;\n  height: 300px;\n  width: 100%;\n  max-width: 900px;\n}\n.search-jumbotron .black[data-v-2ef1e12e] {\n  font-size: 1.4rem;\n  display: flex;\n  align-items: flex-end;\n  background-color: black;\n  color: white;\n  flex-grow: 1;\n  flex-basis: 0;\n  padding: 1rem 0.8rem;\n}\n.search-jumbotron .img[data-v-2ef1e12e] {\n  margin-left: 10px;\n  flex-grow: 3;\n  flex-basis: 0;\n  overflow: hidden;\n}\n.search-jumbotron .img img[data-v-2ef1e12e] {\n  min-width: 100%;\n  min-height: 100%;\n}\n@media screen and (max-width: 630px) {\n.search-jumbotron[data-v-2ef1e12e] {\n    height: 175px;\n}\n.search-jumbotron .img[data-v-2ef1e12e] {\n    display: none;\n}\n.search-jumbotron .black[data-v-2ef1e12e] {\n    font-size: 2.4rem;\n}\n}", ""]);
 
 // exports
 
@@ -12517,7 +12568,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".test[data-v-0312e533] {\n  height: 100vh;\n}\n.test main[data-v-0312e533] {\n  height: 100%;\n}\n.test main .container-fluid[data-v-0312e533] {\n  height: 100%;\n}", ""]);
+exports.push([module.i, ".ms_container[data-v-0312e533] {\n  width: 100%;\n  max-width: 900px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: wrap;\n}\n.apartments-container[data-v-0312e533] {\n  margin: 0 auto;\n  padding: 1rem;\n  width: 100%;\n  max-width: 900px;\n}", ""]);
 
 // exports
 
@@ -12555,7 +12606,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".apartments-container[data-v-527dd9fa] {\n  padding: 1rem;\n  width: 100%;\n  max-width: 900px;\n}", ""]);
+exports.push([module.i, ".ms_container[data-v-527dd9fa] {\n  width: 100%;\n  max-width: 900px;\n  margin: 0 auto;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n  flex-wrap: center;\n}\n.apartments-container[data-v-527dd9fa] {\n  padding: 1rem;\n  width: 100%;\n  max-width: 900px;\n}", ""]);
 
 // exports
 

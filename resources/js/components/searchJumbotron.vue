@@ -50,4 +50,19 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 630px) {
+  .search-jumbotron{
+    height: 175px;
+
+    .img{
+
+      display: none;
+    }
+
+    .black{
+      font-size: 2.4rem;
+    }
+  }
+}
 </style>

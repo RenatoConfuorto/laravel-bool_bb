@@ -8,6 +8,13 @@
       <span class="more">
         <router-link :to="{ name: 'single-apartment', params: {slug: apartment.slug} }">Info</router-link>
       </span>
+      <div class="mobile-info">
+        <span>{{ mobileTitle(apartment.title) }}</span>
+        <router-link :to="{ name: 'single-apartment', params: {slug: apartment.slug} }">
+          <span>&euro;{{ apartment.price }} </span>
+          <span><i class="fa-solid fa-chevron-right"></i></span>
+        </router-link>
+      </div>
     </div>
 
     <div class="ms_card--description">
@@ -150,6 +157,13 @@ export default {
     this.apartment.services.forEach(element => {
       this.apartmentServices.push(element.id);
     });
+  },
+  methods: {
+    mobileTitle(title){
+      const lenght = 20;
+      if(title.length <= length)return title;
+      return `${title.substring(0, lenght)}...`
+    }
   }
 }
 </script>
@@ -171,6 +185,10 @@ $cta-width: 150px;
 
     img{
       width: 100%;
+    }
+
+    .mobile-info{
+      display: none;
     }
 
     .more{
@@ -270,5 +288,52 @@ hr{
   border-top: 1px solid black;
   opacity: 1;
   margin: 1.5rem 0;
+}
+
+@media screen and (max-width: 630px){
+  .ms_card{
+    margin-bottom: 0.4rem;
+    
+    .img{
+      width: 100%;
+      height: 0;
+      padding-bottom: 75%;
+
+      .more{
+        display: none;
+      }
+
+      .mobile-info{
+        padding: $main-padding;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-size: 1.2rem;
+
+        a{
+          color: white;
+          text-decoration: none;
+        }
+      }
+    }
+
+    &--description{
+      display: none;
+    }
+
+    &--cta{
+      display: none;
+    }
+  }
+  hr{
+    display: none;
+  }
 }
 </style>

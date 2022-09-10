@@ -1,7 +1,6 @@
 <template>
-  <div class="test">
     <main>
-      <div class="container-fluid d-flex justify-content-center align-items-center flex-wrap">
+      <div class="ms_container">
 
         <SearchBar @searchResults="getResults"
         :given-address="address"
@@ -12,19 +11,22 @@
           <LoadingComponent/>
         </div>
 
-        <div v-else class="container-fluid d-flex justify-content-center flex-wrap"> 
-          <ApartmentCard v-for="apartment in searchResults" :key="apartment.id" :apartment="apartment"/>
+        <div v-else class="ms_container"> 
+          <SearchJumbotron :text="'Ricerca'"/>
+          <div class="apartments-container">
+            <ApartmentCard v-for="apartment in searchResults" :key="apartment.id" :apartment="apartment"/>
+          </div>
         </div>
 
       </div>
     </main>
-  </div>
 </template>
 
 <script>
 import ApartmentCard from '../components/ApartmentCard.vue';
 import LoadingComponent from'../components/LoadingComponent.vue';
 import SearchBar from'../components/SearchBar.vue';
+import SearchJumbotron from '../components/searchJumbotron.vue';
 import {search} from '../userApiSearch.js';
 
 export default {
@@ -32,7 +34,8 @@ export default {
   components: {
     ApartmentCard,
     LoadingComponent,
-    SearchBar
+    SearchBar,
+    SearchJumbotron
   },
   data() {
     return {
@@ -77,16 +80,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.test {
-  height: 100vh;
-
-  main {
-    height: 100%;
-
-    .container-fluid {
-      height: 100%;
-    }
-  }
+@import '../../sass/_variables.scss';
+.ms_container{
+  width: 100%;
+  max-width: $main-max-width;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
-
+.apartments-container{
+  margin: 0 auto;
+  padding: 1rem;
+  width: 100%;
+  max-width: $main-max-width;
+}
 </style>

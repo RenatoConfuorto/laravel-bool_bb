@@ -40,7 +40,7 @@ export default {
   name: "SimpleSearchBar",
   data() {
     return {
-      address: " ",
+      address: "",
       addressResults: [],
       searchResults: [],
       searchTextCtrl: "",
@@ -81,7 +81,7 @@ export default {
 @import '../../sass/_variables.scss';
 
 .search-bar {
-  width: 60%;
+  width: 70%;
 
   .input-wrapper {
     position: relative;
@@ -147,6 +147,12 @@ export default {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search-bar{
+    width: 100%;
   }
 }
 </style>

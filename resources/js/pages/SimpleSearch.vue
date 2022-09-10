@@ -1,7 +1,6 @@
 <template>
-  <div class="test">
     <main>
-      <div class="container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap">
+      <div class="ms_container">
 
         <SimpleSearchBar @searchResults="getResults"/>
         <div v-if="loading">
@@ -9,7 +8,7 @@
         </div>
 
         <!-- V-ELSE CONTAINER -->
-        <div v-else class="container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap">
+        <div v-else class="ms_container">
           <SearchJumbotron :text="'In Evidenza'"/>
           <PageNavigation
           :currentPage="currentPage"
@@ -34,7 +33,6 @@
         <!-- /V-ELSE CONTAINER -->
       </div>
     </main>
-  </div>
 </template>
 
 <script>
@@ -91,7 +89,16 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../sass/_variables.scss';
-
+.ms_container{
+  width: 100%;
+  max-width: $main-max-width;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: center;
+}
 .apartments-container{
   padding: 1rem;
   width: 100%;

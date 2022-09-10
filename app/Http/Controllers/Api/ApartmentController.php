@@ -97,8 +97,8 @@ class ApartmentController extends Controller
         ]);
         
         //ricerca appartamenti per camere e posti letto
-        $apartments = Apartment::where('rooms_number', '>', $params['rooms'])
-        ->where('beds_number', '>', $params['beds'])
+        $apartments = Apartment::where('rooms_number', '>=', $params['rooms'])
+        ->where('beds_number', '>=', $params['beds'])
         ->with('services')
         ->get();
 
