@@ -6,13 +6,25 @@
   background: rgb(255, 255, 255);
 
   .img-wrapper-detailed {
-    width: 25%;
+    width: 100%;
     height: 100%;
+    
 
     img.detailed {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+}
+
+@media only all and (max-width: 992px) {
+  .img-wrapper-detailed {
+    max-height: 200px;
+    
+    img.detailed {
+      width: 100%;
+      height: 100%;
     }
   }
 }
