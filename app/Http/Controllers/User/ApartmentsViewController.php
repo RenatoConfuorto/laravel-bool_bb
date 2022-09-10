@@ -22,7 +22,7 @@ class ApartmentsViewController extends Controller
         foreach($c as $row) {
            $data['anno'][] = $row->year;
          }
-        dd($data);
+        // dd($data);
          $prova=$data['anno'];
         
         return view('user.visual.views',compact('prova'));
