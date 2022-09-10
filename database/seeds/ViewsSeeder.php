@@ -29,9 +29,13 @@ class ViewsSeeder extends Seeder
             $view->apartment_id = $apartment->id;
             $view->ip = $faker->ipv6();
             $timestamp = mt_rand(1, time());
-            $view->date = date('Y-m-d H:i:s', $timestamp);
-            // $view->date = $faker->dateTime('Y-m-d H:i:s');
+            // generiamo una data unix
+            $line_date_unix = strtotime('2015-01-01 12:00:00'); //non generare sponsorizzezioni precedenti a questa data
+            $current_date_unix = time();
+            $date_start_unix = rand($line_date_unix, $current_date_unix);
+            $date_start = date('Y-m-d H:i:s', $date_start_unix);
 
+            $view->date=$date_start;
             $view->save();
         }
     }
