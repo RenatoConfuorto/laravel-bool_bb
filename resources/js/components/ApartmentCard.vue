@@ -3,7 +3,7 @@
 
   <div class="ms_card">
     <div class="img">
-      <span class="badge badge-success" v-if="true">In Evidenza</span>
+      <span class="badge badge-success" v-if="apartment.sponsored">In Evidenza</span>
       <img :src="apartment.image" :alt="apartment.title">
       <span class="more">
         <router-link :to="{ name: 'single-apartment', params: {slug: apartment.slug} }">Info</router-link>

@@ -1,4 +1,5 @@
 export function callApi(){
+  if(this.address === '')this.addressResults = [];
   if(
     this.address !== this.searchTextCtrl &&
     this.address !== '' &&
@@ -29,6 +30,7 @@ export function addressClick(address){
   this.addressResults = [];
   // console.log(address)
   const addressString = this.getAddressString(address);
+  this.error = '';
   // console.log(this)
   this.address = addressString; //inserire indirizzo completo nell'imput
   this.searchTextCtrl = addressString; //non far partire una nuova richiesta al click del tip

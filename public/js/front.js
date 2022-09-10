@@ -5469,13 +5469,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../userApiSearch.js */ "./resources/js/userApiSearch.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SimpleSearchBar',
+  name: "SimpleSearchBar",
   data: function data() {
     return {
-      address: '',
+      address: " ",
       addressResults: [],
       searchResults: [],
-      searchTextCtrl: '',
+      searchTextCtrl: "",
       latitude: null,
       longitude: null,
       error: null
@@ -5487,10 +5487,12 @@ __webpack_require__.r(__webpack_exports__);
     addressClick: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["addressClick"],
     search: _userApiSearch_js__WEBPACK_IMPORTED_MODULE_0__["search"],
     redirect: function redirect() {
+      if (!this.latitude || !this.longitude) this.error = "Selezionare un indirizzo";
+
       if (!this.error) {
         // console.log('redirect');
         this.$router.push({
-          name: 'advanced-search',
+          name: "advanced-search",
           params: {
             address: this.address,
             latitude: this.latitude,
@@ -5501,7 +5503,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    delete axios.defaults.headers.common['X-Requested-With'];
+    delete axios.defaults.headers.common["X-Requested-With"];
     setInterval(this.callApi, 500);
   }
 });
@@ -5972,9 +5974,9 @@ var render = function render() {
     staticClass: "ms_card"
   }, [_c("div", {
     staticClass: "img"
-  }, [true ? _c("span", {
+  }, [_vm.apartment.sponsored ? _c("span", {
     staticClass: "badge badge-success"
-  }, [_vm._v("In Evidenza")]) : undefined, _vm._v(" "), _c("img", {
+  }, [_vm._v("In Evidenza")]) : _vm._e(), _vm._v(" "), _c("img", {
     attrs: {
       src: _vm.apartment.image,
       alt: _vm.apartment.title
@@ -6617,13 +6619,14 @@ var render = function render() {
         _vm.redirect();
       }
     }
-  }, [_vm._v("Cerca")])]), _vm._v(" "), _vm.error ? _c("div", {
-    staticClass: "alert alert-danger"
+  }, [_vm._v("\n        Cerca\n      ")])]), _vm._v(" "), _vm.error ? _c("div", {
+    staticClass: "alert alert-danger error"
   }, [_vm._v(_vm._s(_vm.error))]) : _vm._e(), _vm._v(" "), _vm.addressResults ? _c("div", {
     staticClass: "address-tips mb-3"
   }, _vm._l(_vm.addressResults, function (address, index) {
     return _c("div", {
       key: index,
+      staticClass: "tip",
       on: {
         click: function click($event) {
           return _vm.addressClick(address);
@@ -6976,7 +6979,7 @@ var render = function render() {
       searchResults: _vm.getResults
     }
   }), _vm._v(" "), _vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", {
-    staticClass: "container-fluid d-flex justify-content-center flex-wrap"
+    staticClass: "container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap"
   }, [_c("SearchJumbotron", {
     attrs: {
       text: "In Evidenza"
@@ -12400,7 +12403,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".orbit-spinner[data-v-8aebcde8], .orbit-spinner *[data-v-8aebcde8] {\n  box-sizing: border-box;\n}\n.orbit-spinner[data-v-8aebcde8] {\n  height: 250px;\n  width: 250px;\n  border-radius: 50%;\n  perspective: 800px;\n}\n.orbit-spinner .orbit[data-v-8aebcde8] {\n  position: absolute;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n}\n.orbit-spinner .orbit[data-v-8aebcde8]:nth-child(1) {\n  left: 0%;\n  top: 0%;\n  -webkit-animation: orbit-spinner-orbit-one-animation-8aebcde8 1200ms linear infinite;\n          animation: orbit-spinner-orbit-one-animation-8aebcde8 1200ms linear infinite;\n  border-bottom: 3px solid #ff1d5e;\n}\n.orbit-spinner .orbit[data-v-8aebcde8]:nth-child(2) {\n  right: 0%;\n  top: 0%;\n  -webkit-animation: orbit-spinner-orbit-two-animation-8aebcde8 1200ms linear infinite;\n          animation: orbit-spinner-orbit-two-animation-8aebcde8 1200ms linear infinite;\n  border-right: 3px solid #ff1d5e;\n}\n.orbit-spinner .orbit[data-v-8aebcde8]:nth-child(3) {\n  right: 0%;\n  bottom: 0%;\n  -webkit-animation: orbit-spinner-orbit-three-animation-8aebcde8 1200ms linear infinite;\n          animation: orbit-spinner-orbit-three-animation-8aebcde8 1200ms linear infinite;\n  border-top: 3px solid #ff1d5e;\n}\n@-webkit-keyframes orbit-spinner-orbit-one-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);\n}\n}\n@keyframes orbit-spinner-orbit-one-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);\n}\n}\n@-webkit-keyframes orbit-spinner-orbit-two-animation-8aebcde8 {\n0% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);\n}\n}\n@keyframes orbit-spinner-orbit-two-animation-8aebcde8 {\n0% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);\n}\n}\n@-webkit-keyframes orbit-spinner-orbit-three-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);\n}\n}\n@keyframes orbit-spinner-orbit-three-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);\n}\n}", ""]);
+exports.push([module.i, ".orbit-spinner[data-v-8aebcde8], .orbit-spinner *[data-v-8aebcde8] {\n  box-sizing: border-box;\n}\n.orbit-spinner[data-v-8aebcde8] {\n  height: 250px;\n  width: 250px;\n  border-radius: 50%;\n  perspective: 800px;\n}\n.orbit-spinner .orbit[data-v-8aebcde8] {\n  position: absolute;\n  box-sizing: border-box;\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n}\n.orbit-spinner .orbit[data-v-8aebcde8]:nth-child(1) {\n  left: 0%;\n  top: 0%;\n  -webkit-animation: orbit-spinner-orbit-one-animation-8aebcde8 1200ms linear infinite;\n          animation: orbit-spinner-orbit-one-animation-8aebcde8 1200ms linear infinite;\n  border-bottom: 3px solid black;\n}\n.orbit-spinner .orbit[data-v-8aebcde8]:nth-child(2) {\n  right: 0%;\n  top: 0%;\n  -webkit-animation: orbit-spinner-orbit-two-animation-8aebcde8 1200ms linear infinite;\n          animation: orbit-spinner-orbit-two-animation-8aebcde8 1200ms linear infinite;\n  border-right: 3px solid black;\n}\n.orbit-spinner .orbit[data-v-8aebcde8]:nth-child(3) {\n  right: 0%;\n  bottom: 0%;\n  -webkit-animation: orbit-spinner-orbit-three-animation-8aebcde8 1200ms linear infinite;\n          animation: orbit-spinner-orbit-three-animation-8aebcde8 1200ms linear infinite;\n  border-top: 3px solid black;\n}\n@-webkit-keyframes orbit-spinner-orbit-one-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);\n}\n}\n@keyframes orbit-spinner-orbit-one-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);\n}\n}\n@-webkit-keyframes orbit-spinner-orbit-two-animation-8aebcde8 {\n0% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);\n}\n}\n@keyframes orbit-spinner-orbit-two-animation-8aebcde8 {\n0% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);\n}\n}\n@-webkit-keyframes orbit-spinner-orbit-three-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);\n}\n}\n@keyframes orbit-spinner-orbit-three-animation-8aebcde8 {\n0% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);\n}\n100% {\n    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);\n}\n}", ""]);
 
 // exports
 
@@ -12457,7 +12460,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".search-bar[data-v-2a381b9e] {\n  width: 60%;\n}\n.search-bar .search[data-v-2a381b9e] {\n  width: 100%;\n  display: flex;\n}\n.search-bar .search input[data-v-2a381b9e] {\n  flex-grow: 1;\n}", ""]);
+exports.push([module.i, ".search-bar[data-v-2a381b9e] {\n  width: 60%;\n}\n.search-bar .input-wrapper[data-v-2a381b9e] {\n  position: relative;\n}\n.search-bar .input-wrapper .search[data-v-2a381b9e] {\n  width: 100%;\n  display: flex;\n  margin: 0.2rem 0 1.6rem;\n}\n.search-bar .input-wrapper .search input[data-v-2a381b9e] {\n  font-size: 1rem;\n  flex-grow: 1;\n  border: 1px solid black;\n  border-radius: 0;\n}\n.search-bar .input-wrapper .search input[data-v-2a381b9e]:focus-visible {\n  border: 1px solid black;\n  outline: none;\n}\n.search-bar .input-wrapper .search button[data-v-2a381b9e] {\n  border: 0;\n  text-decoration: none;\n  padding: 0.3rem 1.6rem;\n  background-color: black;\n  color: white;\n}\n.search-bar .input-wrapper .error[data-v-2a381b9e] {\n  position: absolute;\n  z-index: 2;\n  width: 100%;\n  top: 100%;\n}\n.search-bar .input-wrapper .alert[data-v-2a381b9e] {\n  border-radius: 0;\n}\n.search-bar .input-wrapper .address-tips[data-v-2a381b9e] {\n  position: absolute;\n  z-index: 3;\n  width: 100%;\n  top: 100%;\n  background-color: #ececec;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e] {\n  padding: 0.2rem 0.4rem;\n  margin: 0 0.8rem 0.4rem;\n  border-radius: 3px;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e]:first-child {\n  margin: 1rem 0.8rem;\n  margin-bottom: 0.4rem;\n}\n.search-bar .input-wrapper .address-tips .tip[data-v-2a381b9e]:hover {\n  cursor: pointer;\n  background-color: #dbdbdb;\n}", ""]);
 
 // exports
 
@@ -68243,6 +68246,8 @@ __webpack_require__.r(__webpack_exports__);
 function callApi() {
   var _this = this;
 
+  if (this.address === '') this.addressResults = [];
+
   if (this.address !== this.searchTextCtrl && this.address !== '' && this.address.length > 3) {
     this.searchTextCtrl = this.address; // console.log('far partire api', this.searchTextCtrl);
 
@@ -68266,7 +68271,8 @@ function getAddressString(address) {
 function addressClick(address) {
   this.addressResults = []; // console.log(address)
 
-  var addressString = this.getAddressString(address); // console.log(this)
+  var addressString = this.getAddressString(address);
+  this.error = ''; // console.log(this)
 
   this.address = addressString; //inserire indirizzo completo nell'imput
 

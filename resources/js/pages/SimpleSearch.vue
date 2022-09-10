@@ -9,7 +9,7 @@
         </div>
 
         <!-- V-ELSE CONTAINER -->
-        <div v-else class="container-fluid d-flex justify-content-center flex-wrap">
+        <div v-else class="container-fluid d-flex flex-column justify-content-center align-items-center flex-wrap">
           <SearchJumbotron :text="'In Evidenza'"/>
           <PageNavigation
           :currentPage="currentPage"
