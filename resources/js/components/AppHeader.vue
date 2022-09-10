@@ -6,14 +6,16 @@
       </div>
       <nav class="menu">
         <ul>
-          <li v-for="(link, index) in links" :key="index" v-if="link.visible">
-            <a v-if="!link.router" :href="link.link" class="header-link">{{
-              link.text
-            }}</a>
-            <router-link v-else :to="{ name: link.name }" class="header-link">{{
-              link.text
-            }}</router-link>
-          </li>
+          <template v-for="(link, index) in links">
+            <li :key="index" v-if="link.visible">
+              <a v-if="!link.router" :href="link.link" class="header-link">{{
+                link.text
+              }}</a>
+              <router-link v-else :to="{ name: link.name }" class="header-link">{{
+                link.text
+              }}</router-link>
+            </li>
+          </template>
         </ul>
       </nav>
       <button
@@ -25,14 +27,16 @@
       </button>
       <nav class="mobile-menu" :class="{'is-active': hamburgerActive}">
         <ul>
-          <li v-for="(link, index) in links" :key="index" v-if="link.visible"  @click="changeActive">
-            <a v-if="!link.router" :href="link.link" class="header-link">{{
-              link.text
-            }}</a>
-            <router-link v-else :to="{ name: link.name }" class="header-link">{{
-              link.text
-            }}</router-link>
-          </li>
+          <template v-for="(link, index) in links">
+            <li :key="index" v-if="link.visible"  @click="changeActive">
+              <a v-if="!link.router" :href="link.link" class="header-link">{{
+                link.text
+              }}</a>
+              <router-link v-else :to="{ name: link.name }" class="header-link">{{
+                link.text
+              }}</router-link>
+            </li>
+          </template>
         </ul>
       </nav>
     </div>

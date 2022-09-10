@@ -15,10 +15,11 @@
           :currentPage="currentPage"
           :lastPage="lastPage"
           :getApartments="getApartments"
+          v-if="lastPage > 1"
           />
         
           <!-- APARTMENTS CONTAINER -->
-          <div class="container-fluid d-flex justify-content-center flex-wrap">
+          <div class="apartments-container">
           <ApartmentCard v-for="apartment in apartments" :key="apartment.id" :apartment="apartment"/>
           </div>
           <!-- /APARTMENTS CONTAINER -->
@@ -27,6 +28,7 @@
           :currentPage="currentPage"
           :lastPage="lastPage"
           :getApartments="getApartments"
+          v-if="lastPage > 1"
           />
         </div>
         <!-- /V-ELSE CONTAINER -->
@@ -88,5 +90,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../sass/_variables.scss';
 
+.apartments-container{
+  padding: 1rem;
+  width: 100%;
+  max-width: $main-max-width;
+}
 </style>
