@@ -33,6 +33,10 @@
   <div>
     <a class="btn btn-primary" href="{{ route('user.message.apartment-messages', ['message' => $apartment->id]) }}">Leggi i messaggi per questo appartamento</a>
   </div>
+  
+  <div>
+    <a class="btn btn-primary" href="{{ route('user.visual.views', ['apartment' => $apartment->id]) }}">Visual</a>
+  </div>
 
   <div>
     <a class="btn btn-primary" href="{{ route('user.apartment.index') }}">Torna alla lista dei tuoi appartamenti</a>
