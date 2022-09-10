@@ -5491,6 +5491,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveSelectedApartmentId: function saveSelectedApartmentId(selectedApartmentId) {
       this.savedSelectedApartmentId = selectedApartmentId;
+    },
+    backToAllMessages: function backToAllMessages() {
+      this.savedSelectedApartmentId = 0;
     }
   },
   computed: {
@@ -6505,7 +6508,25 @@ var render = function render() {
 
   return _c("div", {
     staticClass: "container-fluid d-flex flex-column"
+  }, [_c("div", {
+    staticClass: "row"
   }, [_vm._m(0), _vm._v(" "), _c("div", {
+    staticClass: "col-md-3"
+  }, [_c("h4", {
+    staticClass: "text-light text-center mt-2"
+  }, [_vm._v("Filtra i messaggi per appartamento")]), _vm._v(" "), _c("div", {
+    staticClass: "text-center my-2"
+  }, [_c("button", {
+    staticClass: "btn btn-outline-dark",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.backToAllMessages();
+      }
+    }
+  }, [_vm._v("Tutti i messaggi")])])])]), _vm._v(" "), _c("div", {
     staticClass: "row elements-container"
   }, [_c("div", {
     staticClass: "col-md-9"
@@ -6543,16 +6564,10 @@ var staticRenderFns = [function () {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "row"
-  }, [_c("div", {
     staticClass: "col-md-9"
   }, [_c("h3", {
     staticClass: "text-light text-center mt-2"
-  }, [_vm._v("Messaggi ricevuti")])]), _vm._v(" "), _c("div", {
-    staticClass: "col-md-3"
-  }, [_c("h4", {
-    staticClass: "text-light text-center mt-2"
-  }, [_vm._v("Filtra i messaggi per appartamento")])])]);
+  }, [_vm._v("Messaggi ricevuti")])]);
 }];
 render._withStripped = true;
 

@@ -6,6 +6,9 @@
       </div>
       <div class="col-md-3">
         <h4 class="text-light text-center mt-2">Filtra i messaggi per appartamento</h4>
+        <div class="text-center my-2">
+          <button @click="backToAllMessages()" type="button" class="btn btn-outline-dark">Tutti i messaggi</button>
+        </div>
       </div>
     </div>
     <div class="row elements-container">
@@ -64,6 +67,9 @@ export default {
     },
     saveSelectedApartmentId(selectedApartmentId) {
       this.savedSelectedApartmentId = selectedApartmentId;
+    },
+    backToAllMessages() {
+      this.savedSelectedApartmentId = 0;
     }
   },
   computed: {

@@ -29,6 +29,9 @@
             font-family: 'Roboto', sans-serif;
             font-weight: 500; 
         }
+        li > a > i {
+            font-size: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -52,27 +55,27 @@
     </nav>
 
     <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-secondary p-1 d-block d-md-none">
+        <div class="p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ url('/') }}">
                 Home
             </a>
         </div>
-        <div class="bg-secondary p-1 d-block d-md-none">
+        <div class="p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.dashboard') }}">
                 Dashboard
             </a>
         </div>
-        <div class="bg-secondary p-1 d-block d-md-none">
+        <div class="p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.apartment.index') }}">
                 I tuoi appartamenti
             </a>
         </div>
-        <div class="bg-secondary p-1 d-block d-md-none">
+        <div class="p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.apartment.create') }}">
                 Nuovo appartamento
             </a>
         </div>
-        <div class="bg-secondary p-1 d-block d-md-none">
+        <div class="p-1 d-block d-md-none">
             <a class="nav-link text-info" href="{{ route('user.message.index') }}">
                 Messaggi ricevuti
             </a>
@@ -84,29 +87,35 @@
             <nav class="col-lg-1 col-md-2 d-none d-md-block">
                 <div>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
+                        <li class="nav-item mt-2">
                             <a class="nav-link text-info" href="{{ url('/') }}">
-                                Home
+                                {{-- Home --}}
+                                <i class="fa-solid fa-house"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mt-2">
                             <a class="nav-link text-info" href="{{ route('user.dashboard') }}">
-                                Dashboard
+                                {{-- Dashboard --}}
+                                <i class="fa-solid fa-list-ul"></i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-info" href="{{ route('user.apartment.index') }}">
-                                I tuoi appartamenti
+                                {{-- I tuoi appartamenti --}}
+                                <i class="fa-solid fa-building"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mt-2">
                             <a class="nav-link text-info" href="{{ route('user.apartment.create') }}">
-                                Nuovo appartamento
+                                {{-- Nuovo appartamento --}}
+                                <i class="fa-solid fa-building"></i>
+                                <i class="fa-solid fa-plus"></i>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item mt-2">
                             <a class="nav-link text-info" href="{{ route('user.message.index') }}">
-                                Messaggi ricevuti
+                                {{-- Messaggi ricevuti --}}
+                                <i class="fa-solid fa-envelope"></i>
                             </a>
                         </li>
                     </ul>

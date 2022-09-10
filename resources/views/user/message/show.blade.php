@@ -1,10 +1,10 @@
 @extends('layouts.dashboard')
 
 @section('content')
-  <div class="conteiner d-flex justify-content-center flex-wrap">
+  <div class="container d-flex justify-content-center flex-wrap">
     <div class="card mt-5">
       <div class="card-body">
-        <h5 class="card-title">{{ $message->apartment->address }}</h5>
+        <h5 class="card-title">Indirizzo appartemento: {{ $message->apartment->address }}</h5>
         @if ($message->user_name)
             <h6 class="card-title">Messaggio da: {{ $message->user_name . ' ' . $message->user_lastname }}</h6>
         @endif
