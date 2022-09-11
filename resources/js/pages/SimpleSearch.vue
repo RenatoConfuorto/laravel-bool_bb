@@ -30,6 +30,7 @@
         v-if="lastPage > 1"
         />
       </div>
+      </div>
       <!-- /V-ELSE CONTAINER -->
     </main>
 </template>
