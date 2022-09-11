@@ -97,8 +97,8 @@ class ApartmentController extends Controller
         ]);
         
         //ricerca appartamenti per camere e posti letto
-        $apartments = Apartment::where('rooms_number', '>', $params['rooms'])
-        ->where('beds_number', '>', $params['beds'])
+        $apartments = Apartment::where('rooms_number', '>=', $params['rooms'])
+        ->where('beds_number', '>=', $params['beds'])
         ->with('services')
         ->get();
 
@@ -154,13 +154,13 @@ class ApartmentController extends Controller
 
     public function evidence(Request $request){
         $page = $request['page'] ?? 1;
-        $apartments = Apartment::where('visibility', '1')->get();
+        $apartments = Apartment::where('visibility', '1')->with('services')->get();
         $evidenced = $apartments->filter(function($apartment){
             if($apartment->hasActiveSponsor())return true;
         })->values();
         $total_elements = $evidenced->count();
         
-        $number = 25;
+        $number = 100;
         $c = $evidenced->filter(function($apartment, $key) use($page, $number){
             $first_element = ($page - 1) * $number;
             $last_element = ($page * $number) - 1;

@@ -24,7 +24,8 @@ Route::middleware('auth')
         Route::resource('apartment', 'ApartmentController');
         Route::resource('message', 'MessageController');
         Route::get('message/{message}/apartment-messages', 'MessageController@apartmentMessages')->name('message.apartment-messages');
-        Route::get('visual/{apartment}/views', 'ApartmentsViewController@index')->name('viusal.views');
+        Route::get('visual/{apartment}/views', 'ApartmentsViewController@index')->name('visual.views');
+        Route::get('sponsor/{apartment}', 'SponsorController@index')->name('sponsor.index');
     });
 
 // Route::get('{any?}', function(){

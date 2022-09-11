@@ -3,10 +3,12 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import GuestHomepage from "./pages/GuestHomepage.vue";
+import HomePage from "./pages/HomePage.vue";
 import AdvancedSearch from "./pages/AdvancedSearch.vue";
 import SingleApartment from "./pages/SingleApartment.vue";
 import ContactForm from "./pages/ContactForm.vue";
+import SimpleSearch from './pages/SimpleSearch.vue';
+import Page404 from './pages/Page404.vue';
 
 const router = new VueRouter({
   mode: "history",
@@ -14,26 +16,31 @@ const router = new VueRouter({
     {
       path: "/",
       name: 'homepage',
-      component: GuestHomepage
+      component: HomePage
     },
     {
       path: "/search",
+      name: 'apartments',
+      component: SimpleSearch
+    },
+    {
+      path: "/advanced_search",
       name: 'advanced-search',
       component: AdvancedSearch
     },
     {
-      path: "/:slug",
+      path: "/apartment/:slug",
       name: "single-apartment",
       component: SingleApartment
     },
     {
-      path: "/:slug/contact",
+      path: "/apartment/:slug/contact",
       name: "contact-form",
       component: ContactForm
     },
     {
       path: "/*", //link non riconosciuto
-      component: GuestHomepage,
+      component: Page404,
     },
   ]
 });

@@ -1,29 +1,20 @@
 <template>
+<main>
+
   <!-- GENERAL CONTAINER -->
-  <div class="container d-flex justify-content-center">
+  <div class="ms_container">
     <div v-if="loading">
       <LoadingComponent/>
     </div>
 
     <div v-else>
       <!-- CONTAINER FLUID -->
-      <div class="container-fluid d-flex flex-column align-items-center">
-        <div class="text-center">
-          <h4 class="bg-info p-1 rounded-top rounded-bottom">Stai inviando un messaggio al proprietario di questo appartmento</h4>
-        </div>
+      <div class="container-fluid d-flex flex-column">
+        
         <!-- APARTMENT DETAILS -->
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" :src="apartment.image" :alt="apartment.title">
-          <div class="card-body">
-            <h5 class="card-title">{{ apartment.title }}</h5>
-            <p class="card-text">{{ apartment.address }}</p>
-          </div>
-        </div>
+        <ApartmentCard :apartment="apartment" class="mt-5"/>
         <!-- /APARTMENT DETAILS -->
       </div>
-
-      <!-- CONTAINER FLUID -->
-      <div class="container-fluid">
         <!-- MESSAGGI ERRORE - SUCCESSO -->
         <div class="fail-message alert alert-danger mt-3 p-2" :v-model="failMessage" v-show="failMessage !== '' ">{{ failMessage }}</div>
         <div class="success-message alert alert-success mt-3 p-2" :v-model="successMessage" v-show="successMessage !== '' ">{{ successMessage }}</div>
@@ -44,23 +35,24 @@
           </div>
           <div class="text-danger" :v-model="textMessage">{{ textMessage }}</div>
 
-          <button type="submit" class="btn btn-primary mt-3" :disabled="(emailValid && textValid) !== true">Submit</button>
+          <button type="submit" class="main-btn mt-3" :disabled="(emailValid && textValid) !== true">Submit</button>
         </form>
         <!-- /CONTACT FORM -->
-      </div>
-      <!-- /CONTAINER FLUID -->
     </div>
   </div>
   <!-- /GENERAL CONTAINER -->
+</main>
 </template>
 
 <script>
 import LoadingComponent from'../components/LoadingComponent.vue';
+import ApartmentCard from '../components/ApartmentCard.vue';
 
 export default {
   name: 'ContactForm',
   components: {
-    LoadingComponent
+    LoadingComponent,
+    ApartmentCard
   },
   data() {
     return {
@@ -152,6 +144,34 @@ export default {
 }
 </script>
 
-<style lang="sccss" scoped>
+<style lang="scss" scoped>
+@import '../../sass/_variables.scss';
 
+main {
+  padding: $main-padding;
+
+  .ms_container {
+    width: 100%;
+    max-width: $main-max-width;
+    margin: 0 auto;
+  }
+
+  form{
+    padding: 0 0.8rem;
+
+    div input,
+    div textarea{
+      border-radius: 0;
+
+      &:focus-visible {
+        border: 1px solid black;
+        outline: none;
+      }
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
 </style>

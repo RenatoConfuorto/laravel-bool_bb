@@ -25,15 +25,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         
-        // $this->app->singleton(Gateway::class, function($app) {
-        //     return new Gateway(
-        //         [
-        //             'environment' => 'sandbox',
-        //             'merchantId' => 'kndtf8s6d96wf6by',
-        //             'publicKey' => 'qf542ywh7g9pbbwx',
-        //             'privateKey' => 'e2345a9fb6df209d922fa692fb471b16'
-        //         ]
-        //         );
-        // });
+        $this->app->singleton(Gateway::class, function($app) {
+            return new Gateway(
+                [
+                    'environment' => 'sandbox',
+                    'merchantId' => 'bs7nm6w55j3t96bv',
+                    'publicKey' => 'mdrs8n6fb2zpsw76',
+                    'privateKey' => 'e4c5d914151bbe1f36a039ec816c304d'
+                ]
+                );
+        });
     }
 }
