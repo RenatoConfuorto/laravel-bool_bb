@@ -42,10 +42,10 @@
                 <span class="text-primary">Prezzo: </span>
                 <div class="d-inline-block">{{ $apartment->price }} &euro;</div>
               </div>
-              @if ($apartment->description > 0)
+              @if ($apartment->description)
                 <p>
                   <span class="text-primary">Descrizione:</span>
-                  {{ $apartment->descritpion }}
+                  {{ $apartment->description }}
                 </p>
               @endif
               <div>
