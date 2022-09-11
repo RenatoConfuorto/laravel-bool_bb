@@ -8,6 +8,7 @@ import AdvancedSearch from "./pages/AdvancedSearch.vue";
 import SingleApartment from "./pages/SingleApartment.vue";
 import ContactForm from "./pages/ContactForm.vue";
 import SimpleSearch from './pages/SimpleSearch.vue';
+import Page404 from './pages/Page404.vue';
 
 const router = new VueRouter({
   mode: "history",
@@ -28,18 +29,18 @@ const router = new VueRouter({
       component: AdvancedSearch
     },
     {
-      path: "/:slug",
+      path: "/apartment/:slug",
       name: "single-apartment",
       component: SingleApartment
     },
     {
-      path: "/:slug/contact",
+      path: "/apartment/:slug/contact",
       name: "contact-form",
       component: ContactForm
     },
     {
       path: "/*", //link non riconosciuto
-      component: HomePage,
+      component: Page404,
     },
   ]
 });
