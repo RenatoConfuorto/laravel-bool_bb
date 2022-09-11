@@ -4,6 +4,7 @@
       <div class="search">
         <input type="text" placeholder="Search" v-model="address" />
         <button
+        class="main-btn"
           @click="
             () => {
               redirect();
@@ -101,14 +102,6 @@ export default {
           border: 1px solid black;
           outline: none;
         }
-      }
-
-      button {
-        border: 0;
-        text-decoration: none;
-        padding: 0.3rem 1.6rem;
-        background-color: black;
-        color: white;
       }
     }
 

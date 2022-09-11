@@ -3,9 +3,9 @@
     <div class="input-wrapper">
       <div class="search">
         <input type="text" placeholder="Search" v-model="address" />
-        <button @click="search(); ActiveFalse()">Cerca</button>
+        <button @click="search(); ActiveFalse()" class="main-btn">Cerca</button>
         <button
-          class="options"
+          class="options main-btn"
           :class="{ active: filters }"
           @click="changeActive"
         >
@@ -179,13 +179,6 @@ input {
       display: flex;
       margin: 0.2rem 0 1.6rem;
 
-      button {
-        border: 0;
-        text-decoration: none;
-        padding: 0.3rem 1.6rem;
-        background-color: black;
-        color: white;
-      }
 
       .options {
         border-left: 1px solid white;

@@ -39,7 +39,7 @@
 
     <div class="ms_card--cta">
       <h4>&euro;{{apartment.price}}</h4>
-      <router-link :to="{ name: 'single-apartment', params: {slug: apartment.slug} }">Info</router-link>
+      <router-link :to="{ name: 'single-apartment', params: {slug: apartment.slug} }" class="main-btn">Info</router-link>
     </div>
   </div>
 
