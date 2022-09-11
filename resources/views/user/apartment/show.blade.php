@@ -96,11 +96,11 @@
 
             <div class="buttons-wrapper">
               <span>
-                <a class="btn btn-outline-success" href="{{ route('user.apartment.edit', ['apartment' => $apartment->id]) }}">Modifica dettagli</a>
+                <a class="btn btn-warning" href="{{ route('user.sponsor.index', ['apartment' => $apartment->id]) }}">Sponsorizza</a>
               </span>
 
               <span>
-                <a class="btn btn-primary" href="{{ route('user.sponsor.index', ['apartment' => $apartment->id]) }}">Sponsorizza</a>
+                <a class="btn btn-outline-success" href="{{ route('user.apartment.edit', ['apartment' => $apartment->id]) }}">Modifica dettagli</a>
               </span>
 
               <span>
