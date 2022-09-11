@@ -5369,32 +5369,27 @@ __webpack_require__.r(__webpack_exports__);
     return {
       links: [{
         text: "Home",
-        name: "homepage",
-        visible: true,
-        router: true
+        link: "/",
+        visible: true
       }, {
         text: "Appartamenti",
-        name: "apartments",
-        visible: true,
-        router: true
+        link: "/search",
+        visible: true
       }, {
         text: "Login",
         //testo del link
         link: this.loginRoute,
         //link
-        visible: !this.loggedIn,
-        //se il link può essere visto o meno
-        router: false
+        visible: !this.loggedIn //se il link può essere visto o meno
+
       }, {
         text: "Register",
         link: this.registerRoute,
-        visible: !this.loggedIn,
-        router: false
+        visible: !this.loggedIn
       }, {
         text: "User",
         link: this.userRoute,
-        visible: this.loggedIn,
-        router: false
+        visible: this.loggedIn
       }],
       hamburgerActive: false
     };
@@ -6325,19 +6320,12 @@ var render = function render() {
   }, [_c("ul", [_vm._l(_vm.links, function (link, index) {
     return [link.visible ? _c("li", {
       key: index
-    }, [!link.router ? _c("a", {
+    }, [_c("a", {
       staticClass: "header-link",
       attrs: {
         href: link.link
       }
-    }, [_vm._v(_vm._s(link.text))]) : _c("router-link", {
-      staticClass: "header-link",
-      attrs: {
-        to: {
-          name: link.name
-        }
-      }
-    }, [_vm._v(_vm._s(link.text))])], 1) : _vm._e()];
+    }, [_vm._v(_vm._s(link.text))])]) : _vm._e()];
   })], 2)]), _vm._v(" "), _c("button", {
     staticClass: "hamburger",
     "class": {
@@ -6359,19 +6347,12 @@ var render = function render() {
       on: {
         click: _vm.changeActive
       }
-    }, [!link.router ? _c("a", {
+    }, [_c("a", {
       staticClass: "header-link",
       attrs: {
         href: link.link
       }
-    }, [_vm._v(_vm._s(link.text))]) : _c("router-link", {
-      staticClass: "header-link",
-      attrs: {
-        to: {
-          name: link.name
-        }
-      }
-    }, [_vm._v(_vm._s(link.text))])], 1) : _vm._e()];
+    }, [_vm._v(_vm._s(link.text))])]) : _vm._e()];
   })], 2)])])]);
 };
 

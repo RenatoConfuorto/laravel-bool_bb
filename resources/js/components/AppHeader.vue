@@ -8,12 +8,9 @@
         <ul>
           <template v-for="(link, index) in links">
             <li :key="index" v-if="link.visible">
-              <a v-if="!link.router" :href="link.link" class="header-link">{{
+              <a :href="link.link" class="header-link">{{
                 link.text
               }}</a>
-              <router-link v-else :to="{ name: link.name }" class="header-link">{{
-                link.text
-              }}</router-link>
             </li>
           </template>
         </ul>
@@ -29,12 +26,9 @@
         <ul>
           <template v-for="(link, index) in links">
             <li :key="index" v-if="link.visible"  @click="changeActive">
-              <a v-if="!link.router" :href="link.link" class="header-link">{{
+              <a :href="link.link" class="header-link">{{
                 link.text
               }}</a>
-              <router-link v-else :to="{ name: link.name }" class="header-link">{{
-                link.text
-              }}</router-link>
             </li>
           </template>
         </ul>
@@ -51,33 +45,28 @@ export default {
       links: [
         {
           text: "Home",
-          name: "homepage",
+          link: "/",
           visible: true,
-          router: true,
         },
         {
           text: "Appartamenti",
-          name: "apartments",
+          link: "/search",
           visible: true,
-          router: true,
         },
         {
           text: "Login", //testo del link
           link: this.loginRoute, //link
           visible: !this.loggedIn, //se il link può essere visto o meno
-          router: false,
         },
         {
           text: "Register",
           link: this.registerRoute,
           visible: !this.loggedIn,
-          router: false,
         },
         {
           text: "User",
           link: this.userRoute,
           visible: this.loggedIn,
-          router: false,
         },
       ],
       hamburgerActive: false,
