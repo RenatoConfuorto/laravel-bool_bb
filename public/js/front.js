@@ -6933,18 +6933,16 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
+  return _c("main", [_c("div", {
     staticClass: "ms_container"
   }, [_vm.loading ? _c("div", [_c("LoadingComponent")], 1) : _c("div", [_c("div", {
-    staticClass: "container-fluid d-flex flex-row justify-content-center"
+    staticClass: "container-fluid d-flex flex-column"
   }, [_c("ApartmentCard", {
     staticClass: "mt-5",
     attrs: {
       apartment: _vm.apartment
     }
   })], 1), _vm._v(" "), _c("div", {
-    staticClass: "container-fluid"
-  }, [_c("div", {
     directives: [{
       name: "show",
       rawName: "v-show",
@@ -12692,7 +12690,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "main[data-v-90ca07ea] {\n  padding: 1rem 1.4rem;\n}\nmain .ms_container[data-v-90ca07ea] {\n  width: 100%;\n  max-width: 900px;\n  margin: 0 auto;\n}", ""]);
+exports.push([module.i, "main[data-v-90ca07ea] {\n  padding: 1rem 1.4rem;\n}\nmain .ms_container[data-v-90ca07ea] {\n  width: 100%;\n  max-width: 900px;\n  margin: 0 auto;\n}\nmain form[data-v-90ca07ea] {\n  padding: 0 0.8rem;\n}\nmain form div input[data-v-90ca07ea],\nmain form div textarea[data-v-90ca07ea] {\n  border-radius: 0;\n}\nmain form div input[data-v-90ca07ea]:focus-visible,\nmain form div textarea[data-v-90ca07ea]:focus-visible {\n  border: 1px solid black;\n  outline: none;\n}\nmain form div input[data-v-90ca07ea]:focus,\nmain form div textarea[data-v-90ca07ea]:focus {\n  box-shadow: none;\n}", ""]);
 
 // exports
 
