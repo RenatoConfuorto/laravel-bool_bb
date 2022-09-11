@@ -19,20 +19,32 @@
   <form method="post" id="payment-form" action="{{ route('api.orders.payment', ['apartment' => $apartment->id]) }}">
     @csrf
     @method("POST")
-      <section>
+      <section class="mt-5">
 
+        <div class="container-fluid d-flex flex-wrap justify-content-around">
         @foreach($sponsor_types as $sponsor )
-          <span class="input-label">Sponsor {{ $sponsor->name }}</span>
-          <span class="input-label">Durata {{ $sponsor->duration }}</span>
-          <span class="input-label">Sponsor {{ $sponsor->price }}</span>
-          <div class="input-wrapper amount-wrapper">
-              <input id="{{$sponsor->id}}" name="amount" type="radio" placeholder="Amount" value="{{$sponsor->price}}">
+        <div class="card m-5" style="width: 18rem;">
+          <div class="row">
+            <div class="col-1">
+              <div class="input-wrapper amount-wrapper">
+                <input id="{{$sponsor->id}}" name="amount" type="radio" placeholder="Amount" value="{{$sponsor->price}}">
+              </div>
+              <div>
+                <input id="{{ $sponsor->id }}" type="number" name="sponsor_id" class="d-none"
+                  value="{{$sponsor->id}}">
+              </div>
+            </div>
+            <div class="col-11">
+              <div class="p-3">
+              <div class="input-label">Sponsor: {{ $sponsor->name }}</div>
+              <div class="input-label">Durata: {{ $sponsor->duration_h }} ore</div>
+              <div class="input-label">Prezzo: {{ $sponsor->price }}</div>
+            </div>
+            </div>
           </div>
-          <div>
-            <input id="{{ $sponsor->id }}" type="number" name="sponsor_id" class="d-none"
-              value="{{$sponsor->id}}" >
-          </div>
+        </div>
         @endforeach
+        </div>
 
         <div class="bt-drop-in-wrapper">
             <div id="bt-dropin"></div>
@@ -40,7 +52,7 @@
       </section>
 
       <input id="nonce" name="payment_method_nonce" type="hidden" />
-      <button class="button" type="submit"><span>Test Transaction</span></button>
+      <button class="button btn btn-success mt-3" type="submit"><span>Acquista sponsorizzazione</span></button>
   </form>
 </div>
 
@@ -52,9 +64,9 @@
        braintree.dropin.create({
          authorization: client_token,
          selector: '#bt-dropin',
-         paypal: {
-           flow: 'vault'
-         }
+        //  paypal: {
+        //    flow: 'vault'
+        //  }
        }, function (createErr, instance) {
          if (createErr) {
            console.log('Create Error', createErr);
