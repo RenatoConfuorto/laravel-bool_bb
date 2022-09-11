@@ -21,7 +21,7 @@
     @method("POST")
       <section class="mt-5">
 
-        <div class="container-fluid d-flex justify-content-around">
+        <div class="container-fluid d-flex flex-wrap justify-content-around">
         @foreach($sponsor_types as $sponsor )
         <div class="card m-5" style="width: 18rem;">
           <div class="row">
@@ -31,13 +31,15 @@
               </div>
               <div>
                 <input id="{{ $sponsor->id }}" type="number" name="sponsor_id" class="d-none"
-                  value="{{$sponsor->id}}" >
+                  value="{{$sponsor->id}}">
               </div>
             </div>
             <div class="col-11">
+              <div class="p-3">
               <div class="input-label">Sponsor: {{ $sponsor->name }}</div>
               <div class="input-label">Durata: {{ $sponsor->duration_h }} ore</div>
               <div class="input-label">Prezzo: {{ $sponsor->price }}</div>
+            </div>
             </div>
           </div>
         </div>
@@ -62,9 +64,9 @@
        braintree.dropin.create({
          authorization: client_token,
          selector: '#bt-dropin',
-         paypal: {
-           flow: 'vault'
-         }
+        //  paypal: {
+        //    flow: 'vault'
+        //  }
        }, function (createErr, instance) {
          if (createErr) {
            console.log('Create Error', createErr);
