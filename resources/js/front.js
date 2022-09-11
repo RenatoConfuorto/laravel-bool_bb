@@ -28,6 +28,8 @@ import Vue from 'vue';
   */
  
  Vue.component('mainapp', require('./views/App.vue').default)
+ Vue.component('app-header', require('./components/AppHeader.vue').default)
+ Vue.component('app-footer', require('./components/AppFooter.vue').default)
  const app = new Vue({
      el: '#root',
      router
