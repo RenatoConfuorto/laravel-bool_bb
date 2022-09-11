@@ -43,21 +43,21 @@ export default {
     left: 0%;
     top: 0%;
     animation: orbit-spinner-orbit-one-animation 1200ms linear infinite;
-    border-bottom: 3px solid #ff1d5e;
+    border-bottom: 3px solid black;
   }
 
   .orbit-spinner .orbit:nth-child(2) {
     right: 0%;
     top: 0%;
     animation: orbit-spinner-orbit-two-animation 1200ms linear infinite;
-    border-right: 3px solid #ff1d5e;
+    border-right: 3px solid black;
   }
 
   .orbit-spinner .orbit:nth-child(3) {
     right: 0%;
     bottom: 0%;
     animation: orbit-spinner-orbit-three-animation 1200ms linear infinite;
-    border-top: 3px solid #ff1d5e;
+    border-top: 3px solid black;
   }
 
   @keyframes orbit-spinner-orbit-one-animation {

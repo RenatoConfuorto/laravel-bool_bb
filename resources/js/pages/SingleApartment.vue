@@ -1,12 +1,12 @@
 <template>
   <!-- CONTAINER E ROOT ELEMENT -->
-  <div class="container d-flex justify-content-center alig-items-center flex-wrap">
+  <div class="ms_container">
 
     <div v-if="loading">
       <LoadingComponent/>
     </div>
 
-    <div v-else class="container-fluid d-flex justify-content-center">
+    <div v-else class="ms_container">
       <ApartmentCardDetailed :apartment="apartment"/>
       <TomTomMap :apartment="apartment"/>
     </div>
@@ -55,5 +55,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@import '../../sass/_variables.scss';
+.ms_container{
+  width: 100%;
+  max-width: $main-max-width;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: center;
+}
 </style>

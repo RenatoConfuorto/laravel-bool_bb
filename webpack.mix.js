@@ -29,5 +29,8 @@ mix.sass('resources/sass/form-backend.scss', 'public/css');
 //foglio di stile della nav bar dei messaggi
 mix.sass('resources/sass/apartment-messages-navbar.scss', 'public/css');
 
-// fontawesaome
+//foglio di stile per le pagine di autenticazione
+mix.sass('resources/sass/auth.scss', 'public/css');
+
+//fontawesome
 mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');

@@ -12,7 +12,7 @@
     }
 
 ?>
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="container">
@@ -123,7 +123,7 @@
                         {{-- SUBMIT BUTTON --}}
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button id="submit-button" type="submit" class="btn btn-primary">
+                                <button id="submit-button" type="submit" class="main-btn">
                                     {{ __('Register') }}
                                 </button>
                             </div>

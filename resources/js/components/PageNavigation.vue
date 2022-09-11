@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid d-flex justify-content-center flex-wrap">
+  <div class="container-fluid d-flex justify-content-center flex-wrap navigation">
     <!-- PAGINATION NAV -->
     <nav aria-label="...">
       <ul class="pagination">
@@ -51,5 +51,21 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '../../sass/_variables.scss';
+
+.navigation{
+  margin-bottom: 1rem;
+
+  .page-link.active, .active > .page-link{
+    color: white;
+    background-color: $text-primary-color;
+    border-color: $text-primary-color;
+  }
+
+  .page-link{
+    color: $text-primary-color;
+    border-radius: 0;
+  }
+}
 </style>
