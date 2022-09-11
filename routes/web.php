@@ -27,6 +27,7 @@ Route::middleware('auth')
         Route::get('visual/{apartment}/views', 'ApartmentsViewController@create')->name('visual.views');
         Route::resource('visual', 'ApartmentsViewController');
         Route::get('visual','ApartmentsViewController@anni');
+        Route::get('sponsor/{apartment}', 'SponsorController@index')->name('sponsor.index');
     });
 
 // Route::get('{any?}', function(){
