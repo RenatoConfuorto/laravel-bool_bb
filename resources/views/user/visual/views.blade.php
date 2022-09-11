@@ -1,8 +1,12 @@
 @extends('layouts.dashboard')
 
+@push('css')
+  <link rel="stylesheet" href="{{ asset('css/stats.css') }}">
+@endpush
+
 @section('content')
   <h1>Visualizzazioni</h1>
-  <div class="conteiner d-flex justify-content-left flex-wrap my-4">
+  <div class="container-fluid d-flex justify-content-left flex-wrap my-4">
     <div>
     <div>
       <label for="data">Seleziona anno:</label>

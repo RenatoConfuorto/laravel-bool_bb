@@ -34,3 +34,6 @@ mix.sass('resources/sass/auth.scss', 'public/css');
 
 //fontawesome
 mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts', 'public/webfonts');
+
+// foglio stile pagina statistiche
+mix.sass('resources/sass/stats.scss', 'public/css');

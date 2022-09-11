@@ -41498,10 +41498,21 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/stats.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/stats.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/form-backend.scss ./resources/sass/apartment-messages-navbar.scss ./resources/sass/auth.scss ***!
-  \***************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/form-backend.scss ./resources/sass/apartment-messages-navbar.scss ./resources/sass/auth.scss ./resources/sass/stats.scss ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -41509,7 +41520,8 @@ __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\js\
 __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\app.scss */"./resources/sass/app.scss");
 __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\form-backend.scss */"./resources/sass/form-backend.scss");
 __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\apartment-messages-navbar.scss */"./resources/sass/apartment-messages-navbar.scss");
-module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\auth.scss */"./resources/sass/auth.scss");
+__webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\auth.scss */"./resources/sass/auth.scss");
+module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\sass\stats.scss */"./resources/sass/stats.scss");
 
 
 /***/ })
