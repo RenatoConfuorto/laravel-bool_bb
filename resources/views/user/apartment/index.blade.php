@@ -10,11 +10,7 @@
         @foreach ($apartments as $apartment)
         <div class="card-wrapper shadow bg-body">
             <div class="img-wrapper">
-                @if (str_contains($apartment->image, 'picsum'))
-                    <img src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
-                @else
-                    <img src="{{ asset('storage/' . $apartment->image ) }}" alt="{{ $apartment->title }}">
-                @endif
+                <img src="{{ asset('storage/' . $apartment->image ) }}" alt="{{ $apartment->title }}">
             </div>
             <div class="content-wrapper">
                 <h4 class="mt-2">

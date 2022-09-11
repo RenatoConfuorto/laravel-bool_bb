@@ -19,7 +19,7 @@
         <div class="col-xl-3 col-lg-4 col-md-12">
 
           <div class="img-wrapper-detailed">
-            <img class="detailed" src="{{ $apartment->image }}" alt="{{ $apartment->title }}">
+            <img class="detailed" src="{{ asset('storage/' . $apartment->image) }}" alt="{{ $apartment->title }}">
           </div>
 
         </div>
@@ -96,28 +96,30 @@
 
             <div class="buttons-wrapper">
               <span>
+                <a class="btn btn-outline-success" href="{{ route('user.apartment.edit', ['apartment' => $apartment->id]) }}">Modifica dettagli</a>
+              </span>
+
+              <span>
+                <a class="btn btn-primary" href="{{ route('user.sponsor.index', ['apartment' => $apartment->id]) }}">Sponsorizza</a>
+              </span>
+
+              <span>
                 <a class="btn btn-outline-secondary" href="{{ route('user.message.apartment-messages', ['message' => $apartment->id]) }}">Messaggi</a>
               </span>
               
               <span>
                 <a class="btn btn-outline-info" href="{{ route('user.visual.views', ['apartment' => $apartment->id]) }}">Statistiche</a>
               </span>
-            
-              <span>
-                <a class="btn btn-outline-success" href="{{ route('user.apartment.edit', ['apartment' => $apartment->id]) }}">Modifica dettagli</a>
-              </span>
-
-              <span>
-                <a class="btn btn-danger text-white" href="{{ route('user.apartment.destroy', ['apartment' => $apartment->id]) }}">Elimina</a>
-              </span>
               
               <span>
                 <a class="btn btn-outline-primary" href="{{ route('user.apartment.index') }}">Lista appartamenti</a>
               </span>
 
-              <span>
-                <a class="btn btn-primary" href="{{ route('user.sponsor.index', ['apartment' => $apartment->id]) }}">Sponsorizza</a>
-              </span>
+              <form action="{{ route('user.apartment.destroy', ['apartment' => $apartment->id]) }}" method="POST" class="mt-3">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+              </form>
             </div>
 
           </div>
