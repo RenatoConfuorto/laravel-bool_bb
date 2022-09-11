@@ -24,9 +24,7 @@ Route::middleware('auth')
         Route::resource('apartment', 'ApartmentController');
         Route::resource('message', 'MessageController');
         Route::get('message/{message}/apartment-messages', 'MessageController@apartmentMessages')->name('message.apartment-messages');
-        Route::get('visual/{apartment}/views', 'ApartmentsViewController@create')->name('visual.views');
-        Route::resource('visual', 'ApartmentsViewController');
-        Route::get('visual','ApartmentsViewController@anni');
+        Route::get('visual/{apartment}/views', 'ApartmentsViewController@index')->name('viusal.views');
     });
 
 // Route::get('{any?}', function(){
