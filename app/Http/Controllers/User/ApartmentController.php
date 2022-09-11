@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\SponsorType;
-use App\Http\Controllers\Api\Buy\BuySponsorController;
+use App\Http\Controllers\User\Buy\BuySponsorController;
 
 class ApartmentController extends Controller
 {
