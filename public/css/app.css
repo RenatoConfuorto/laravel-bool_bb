@@ -34348,8 +34348,7 @@ body ::-webkit-scrollbar {
   margin: 1rem;
   border-radius: 20px;
   overflow: hidden;
-  background: rgb(255, 255, 255);
-  background: radial-gradient(circle, rgb(255, 255, 255) 0%, rgb(82, 82, 82) 100%);
+  background-color: bisque;
   text-align: center;
 }
 

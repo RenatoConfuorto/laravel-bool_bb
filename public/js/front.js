@@ -69496,7 +69496,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\Boolean Progetto Finale\laravel-bool_bb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\boolean\progetto-finale\laravel-bool_bb\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
