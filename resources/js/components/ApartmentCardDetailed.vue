@@ -7,7 +7,7 @@
   </div>
 
   <div class="img">
-    <img :src="apartment.image" :alt="apartment.title">
+    <img :src="`/storage/${apartment.image}`" :alt="apartment.title">
   </div>
 
   <div class="ms_card--body">
